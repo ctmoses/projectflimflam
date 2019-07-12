@@ -1,0 +1,103 @@
+$primary-dark: #1976D2;
+$primary-light: #BBDEFB;
+$primary: #2196F3;
+$accent: #FF5252;
+$text: #212121;
+$text-secondary: #757575;
+$divider: #BDBDBD;
+
+$block-size: 8px;
+$navsize: $block-size * 5;
+
+// mixins
+@mixin button($bg, $text) {
+    background: $bg;
+    color: $text;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+
+    &:hover {
+        background: lighten($bg, 15%);
+        cursor: pointer;
+    }
+
+    &:focus {
+        border: none;
+        outline: none;
+    }
+
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+        background-repeat: no-repeat;
+        background-position: 50%;
+        transform: scale(10, 10);
+        opacity: 0;
+        transition: transform .5s, opacity 1s;
+    }
+
+    &:active:after {
+        transform: scale(0, 0);
+        opacity: .3;
+        transition: 0s;
+    }
+}
+
+@mixin modal {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: darkgray;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    .inner {
+        height: 500px;
+        width: 75vw;
+        background: #fff;
+        border-radius: 4px;    
+    }
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
