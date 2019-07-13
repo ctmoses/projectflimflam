@@ -56,10 +56,7 @@ enum Tiers {
 export interface IRace {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
-    abilityrefresh: AbilityRefresh,
-    abilitytype: AbilityType,
-    abilitytrigger: AbilityTrigger,
-    abilitytext: string
+    power: ISpells
 
 };
 export interface IBackground {
@@ -75,7 +72,7 @@ export interface ISpells {
     refresh: AbilityRefresh,
     trigger: AbilityTrigger,
     type: AbilityType,
-    power: string,
+    powertext: string,
     calcdamage(attributemod: number,level:number): string  //SM: Just return a string like xdx+x?
 }
 export interface IClass {
@@ -94,29 +91,26 @@ export interface IClass {
     calcmeleehit():number,
     calcrangedhit():number,
     calcmeleedmg():number,
-    calcrangeddmg():number,
-    feats: IFeats[],   //SM: Need to think through feats, they can affect base character stats, specific spells, races, etc..
+    calcrangeddmg():number,   
     spells: ISpells[]
 }
 
 class dwarf implements IRace {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
-    abilityrefresh: AbilityRefresh;
-    abilitytype: AbilityType;
-    abilitytrigger: AbilityTrigger;
-    abilitytext: string;
+    //SM: This is broken. How does one construct an object within an object?
+    power: ISpells;
     constructor(){
         this.bonusstat1 = Attributes.WISDOM;
         this.bonusstat2 =Attributes.CONSTITUTION;
-        this.abilityrefresh = AbilityRefresh.BATTLE;
-        this.abilitytrigger = AbilityTrigger.DAMAGETAKEN;
-        this.abilitytype = AbilityType.FREE;
-        this.abilitytext = "Once per battle as a free action after you have been hit by an enemy attack, you can heal using a recovery. If the escalation die is less than 2, you only get half the usual healing from the recovery. Unlike other recoveries that might allow you to take an average result, you have to roll this one! Note that you can’t use this ability if the attack drops you to 0 hp or below. You’ve got to be on your feet to sneer at their attack and recover.";
+        this.power.refresh = AbilityRefresh.BATTLE;
+        this.power.trigger = AbilityTrigger.DAMAGETAKEN;
+        this.power.type = AbilityType.FREE;
+        this.power.powertext = "Once per battle as a free action after you have been hit by an enemy attack, you can heal using a recovery. If the escalation die is less than 2, you only get half the usual healing from the recovery. Unlike other recoveries that might allow you to take an average result, you have to roll this one! Note that you can’t use this ability if the attack drops you to 0 hp or below. You’ve got to be on your feet to sneer at their attack and recover.";
     }
 }
 
-// This probably belongs in some utility folder
+// This probably belongs in the player class
 function calculatebasemodifier(abilityscore: number) {
     return Math.floor((abilityscore - 10) / 2);
 }
