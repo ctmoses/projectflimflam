@@ -1,3 +1,5 @@
+import { IRace, IClass, IBackground, IFeats } from './model/race';
+
 export interface IUser {
     id: number | null,
     name: string,
@@ -10,8 +12,8 @@ export interface IIcon {
 
 export interface ICharacter {
     name: string,
-    class: string,
-    race: string,
+    class: IClass,
+    race: IRace,
     level: number,
     str: number,
     con: number,
@@ -19,6 +21,7 @@ export interface ICharacter {
     int: number,
     wis: number,
     cha: number,
+    initiative: number,
     ac: number,
     pd: number,
     md: number,
@@ -34,11 +37,8 @@ export interface ICharacter {
     hitRanged: number,
     missRanged: number,
     unique: string,
-    racialPower: string,
     icon: IIcon[],
-    backgrounds: string,
-    powersAndSpells: string[] | null,
-    magicItems: string[] | null,
-    talents: string[] | null,
-    feats: string[] | null,
+    feats: IFeats[], //SM: Need to think through feats, they can affect base character stats, specific spells, races, etc..  moved them here and out of class b/c of that
+    backgrounds: IBackground[],
+    magicItems: string[] | null, 
 };

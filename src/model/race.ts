@@ -24,6 +24,35 @@ enum AbilityTrigger {
     DAMAGETAKEN,
     MISS,
 };
+enum ArmorTypes {
+    NONE,
+    LIGHT,
+    HEAVY,
+    SHIELD
+};
+enum MeleeWeapons {
+    ONEHSMALL,
+    ONEHLIGHT,
+    ONEHHEAVY,
+    TWOHSMALL,
+    TWOHLIGHT,
+    TWOHHEAVY
+};
+enum RangedWeapons {
+    THROWNSMALL,
+    THROWNLIGHT,
+    THROWNHEAVY,
+    XBOWSMALL,
+    XBOWLIGHT,
+    XBOWHEAVY,
+    BOWLIGHT,
+    BOWHEAVY
+};
+enum Tiers {
+    ADVENTURER,
+    CHAMPION,
+    EPIC
+}
 export interface IRace {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
@@ -33,6 +62,42 @@ export interface IRace {
     abilitytext: string
 
 };
+export interface IBackground {
+    backgroundtitle : string,
+    backgroundmod : number
+}
+export interface IFeats {
+    tier: Tiers,
+    prereq: string,
+    power: string
+}
+export interface ISpells {
+    refresh: AbilityRefresh,
+    trigger: AbilityTrigger,
+    type: AbilityType,
+    power: string,
+    calcdamage(attributemod: number,level:number): string  //SM: Just return a string like xdx+x?
+}
+export interface IClass {
+    bonusstat1: Attributes,
+    bonusstat2: Attributes,
+    armor: ArmorTypes,
+    weapon: MeleeWeapons,
+    ranged: RangedWeapons,
+    calchp(con:number,level:number): number,
+    calcinitiative(dex:number, level:number): number,
+    calcac(con:number, dex:number,wis:number, level:number): number,
+    calcpd(str:number, con:number,dex:number,level:number): number,
+    calcmd(int:number, wis:number, cha:number, level:number): number,
+    calcrecoveries(): number,
+    calcrecoveryroll(con:number, level:number): string,  //SM: Not sure what we want to return here...just something like 4d8+4?
+    calcmeleehit():number,
+    calcrangedhit():number,
+    calcmeleedmg():number,
+    calcrangeddmg():number,
+    feats: IFeats[],   //SM: Need to think through feats, they can affect base character stats, specific spells, races, etc..
+    spells: ISpells[]
+}
 
 class dwarf implements IRace {
     bonusstat1: Attributes;
