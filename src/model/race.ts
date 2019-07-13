@@ -73,7 +73,6 @@ export interface ISpells {
     trigger: AbilityTrigger,
     type: AbilityType,
     powertext: string,
-    calcdamage(attributemod: number,level:number): string  //SM: Just return a string like xdx+x?
 }
 export interface IClass {
     bonusstat1: Attributes,
@@ -94,19 +93,27 @@ export interface IClass {
     calcrangeddmg():number,   
     spells: ISpells[]
 }
-
+class spell implements ISpells{
+    refresh: AbilityRefresh;
+    trigger: AbilityTrigger;
+    type: AbilityType;
+    powertext: string;
+    constructor(refresh: AbilityRefresh, trigger: AbilityTrigger, type: AbilityType, powertext: string){
+        this.refresh = refresh;
+        this.trigger = trigger;
+        this.type = type;
+        this.powertext = powertext;
+    }
+}
 class dwarf implements IRace {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
-    //SM: This is broken. How does one construct an object within an object?
     power: ISpells;
     constructor(){
         this.bonusstat1 = Attributes.WISDOM;
-        this.bonusstat2 =Attributes.CONSTITUTION;
-        this.power.refresh = AbilityRefresh.BATTLE;
-        this.power.trigger = AbilityTrigger.DAMAGETAKEN;
-        this.power.type = AbilityType.FREE;
-        this.power.powertext = "Once per battle as a free action after you have been hit by an enemy attack, you can heal using a recovery. If the escalation die is less than 2, you only get half the usual healing from the recovery. Unlike other recoveries that might allow you to take an average result, you have to roll this one! Note that you can’t use this ability if the attack drops you to 0 hp or below. You’ve got to be on your feet to sneer at their attack and recover.";
+        this.bonusstat2 = Attributes.CONSTITUTION;
+        var text = "Once per battle as a free action after you have been hit by an enemy attack, you can heal using a recovery. If the escalation die is less than 2, you only get half the usual healing from the recovery. Unlike other recoveries that might allow you to take an average result, you have to roll this one! Note that you can’t use this ability if the attack drops you to 0 hp or below. You’ve got to be on your feet to sneer at their attack and recover.";
+        this.power = new spell(AbilityRefresh.BATTLE, AbilityTrigger.DAMAGETAKEN, AbilityType.FREE, text);
     }
 }
 
