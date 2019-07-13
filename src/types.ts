@@ -12,7 +12,7 @@ export interface IIcon {
 
 export interface ICharacter {
     name: string,
-    class: IClass,
+    class: IClass,  //reset spells when rolling initiative or you do a full rest
     race: IRace,
     level: number,
     str: number,
@@ -22,6 +22,7 @@ export interface ICharacter {
     wis: number,
     cha: number,
     initiative: number,
+    escalationdie: number,  //probably increments after each "to-hit" input, reset to zero when rolling initiative
     ac: number,
     pd: number,
     md: number,
