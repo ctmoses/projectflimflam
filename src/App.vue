@@ -1,16 +1,16 @@
 <template>
     <div id="app">
-        <Navbar></Navbar>
+        <Navbar />
         <div class="viewer">
-            <router-view/>
+            <router-view />
         </div>
-        <vue-modal></vue-modal>
-  </div>
+        <vue-modal />
+    </div>
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import Navbar from '@/components/Navbar';
+    import Navbar from '@/components/Navbar.vue';
 
     @Component({
         components: {
@@ -30,7 +30,7 @@
         right: 0;
         height: 100%;
         width: 100%;
-        
+
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

@@ -5,8 +5,12 @@
                 <md-card>
                     <md-card-header>
                         <md-card-header-text>
-                            <div class="md-title">Test Card</div>
-                            <div class="md-subhead">Test sub</div>
+                            <div class="md-title">
+                                Test Card
+                            </div>
+                            <div class="md-subhead">
+                                Test sub
+                            </div>
                         </md-card-header-text>
                     </md-card-header>
 
@@ -16,17 +20,20 @@
                 </md-card>
             </div>
 
-            <div class="card-container" 
-                id="add-char-card" 
-                @click="addCharacter">
+            <div class="card-container"
+                 id="add-char-card"
+                 @click="addCharacter">
                 <md-card>
                     <md-ripple>
                         <md-card-header>
                             <md-card-header-text>
-                                <div class="md-title">Add new character</div>
+                                <div class="md-title">
+                                    Add new character
+                                </div>
                             </md-card-header-text>
                             <md-card-media>
-                                <i class="material-icons" id="add-char">
+                                <i class="material-icons"
+                                   id="add-char">
                                     account_circle
                                 </i>
                             </md-card-media>
@@ -40,25 +47,26 @@
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import NewCharacter from '@/components/modals/NewCharacter';
+    import NewCharacter from '@/components/modals/NewCharacter.vue';
 
     @Component({
         components: {
             NewCharacter,
-        }
+        },
     })
     export default class Home extends Vue {
         showNewChar = false;
 
         addCharacter() {
             this.$modal.show(
-                true, 
+                true,
                 NewCharacter,
                 {
                     title: 'Add a new character',
                     useHeader: false,
                     message: 'something',
-                });
+                },
+);
             this.showNewChar = !this.showNewChar;
         }
     }
@@ -92,4 +100,3 @@
         font-size: 56px;
     }
 </style>
-

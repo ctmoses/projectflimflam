@@ -1,12 +1,12 @@
 export interface IUser {
     id: number | null,
     name: string,
-};
+}
 
 export interface IIcon {
     name: string,
     level: number,
-};
+}
 
 export interface ICharacter {
     name: string,
@@ -41,4 +41,4 @@ export interface ICharacter {
     magicItems: string[] | null,
     talents: string[] | null,
     feats: string[] | null,
-};
+}
