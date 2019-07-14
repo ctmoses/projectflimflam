@@ -1,4 +1,4 @@
-import { IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells } from '@/types';
+import { IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityTrigger, AbilityType } from '@/types';
 import { spell } from './spell';
 
 
@@ -15,7 +15,11 @@ export class barbarian implements IClass {
         this.armor = armor;
         this.weapon = weapon;
         this.ranged = ranged;
-        this.spells[] = new spell();  //SM: What is the easiest way to shove a bunch of spell data in here?
+        this.spells = [ new spell(AbilityRefresh.BATTLE, AbilityTrigger.MONDEATH, AbilityType.FREE, "Barbaric Cleave", "Once per battle, as a free action, you can make a standard melee attack after having dropped any enemy to 0 hp with a standard melee attack. Mooks do not count for this, unless the mook you dropped was the last of its mook mob.") ,
+                        new spell(AbilityRefresh.DAILY, AbilityTrigger.MISS, AbilityType.FREE, "Building Frenzy", "One battle per day, as a free action after you have missed an attack, gain +1d4 damage to each successful melee attack until the end of the battle. For each missed attack following this, add another +1d4 damage, up to a maximum of +4d4 damage.")
+                        ]; 
+        //SM: What is the easiest way to shove a bunch of spell data in here?
+        //SM: Some spells are innate, but some have to be chosen...need a way to distinguish between the two.
     }
     
     

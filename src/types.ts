@@ -107,7 +107,9 @@ export enum AbilityTrigger {
     HIT,
     DAMAGETAKEN,
     MISS,
-    NONE
+    NONE,
+    MONDEATH,
+    STAGGER
 };
 export enum ArmorTypes {
     NONE,
