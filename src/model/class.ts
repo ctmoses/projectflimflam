@@ -6,15 +6,18 @@ export class barbarian implements IClass {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
     armor: ArmorTypes;
+    shield: boolean;
     weapon: MeleeWeapons;
     ranged: RangedWeapons;
     spells: ISpells[];
-    constructor(armor: ArmorTypes, weapon: MeleeWeapons, ranged: RangedWeapons){
+
+    constructor(armor: ArmorTypes, shield: boolean, weapon: MeleeWeapons, ranged: RangedWeapons){
         this.bonusstat1 = Attributes.STRENGTH;
         this.bonusstat2 = Attributes.CONSTITUTION;
         this.armor = armor;
         this.weapon = weapon;
         this.ranged = ranged;
+        this.shield = shield;
         this.spells = [ new spell(AbilityRefresh.BATTLE, AbilityTrigger.MONDEATH, AbilityType.FREE, "Barbaric Cleave", "Once per battle, as a free action, you can make a standard melee attack after having dropped any enemy to 0 hp with a standard melee attack. Mooks do not count for this, unless the mook you dropped was the last of its mook mob.") ,
                         new spell(AbilityRefresh.DAILY, AbilityTrigger.MISS, AbilityType.FREE, "Building Frenzy", "One battle per day, as a free action after you have missed an attack, gain +1d4 damage to each successful melee attack until the end of the battle. For each missed attack following this, add another +1d4 damage, up to a maximum of +4d4 damage.")
                         ]; 
@@ -47,6 +50,8 @@ export class barbarian implements IClass {
                 armor=12;
                 break;
         }
+        if(this.shield)
+            armor+=1;
         return calculatebasemodifier(array[1])+level+armor;
     }
     calcpd(str:number, con:number,dex:number,level:number): number{
@@ -65,16 +70,16 @@ export class barbarian implements IClass {
     calcrecoveryroll(con:number, level:number): string{
         return level+"d10"+calculatebasemodifier(con);
     }
-    calcmeleehit(attr:number, level:number):number{
-        return calculatebasemodifier(attr)+level;
+    calcmeleehit(str:number, level:number):number{
+        return calculatebasemodifier(str)+level;
     }
-    calcrangedhit(attr:number, level:number):number{
+    calcrangedhit(dex:number, level:number):number{
         var mod=0;
         if(this.ranged==RangedWeapons.XBOWHEAVY||this.ranged==RangedWeapons.XBOWLIGHT||this.ranged==RangedWeapons.XBOWSMALL)
             mod=-5;
-        return calculatebasemodifier(attr)+level+mod;
+        return calculatebasemodifier(dex)+level+mod;
     }
-    calcmeleedmg(attr:number, level:number):string{
+    calcmeleedmg(str:number, level:number):string{
         var dice;
         switch(this.weapon){
             case MeleeWeapons.ONEHSMALL:
@@ -99,9 +104,9 @@ export class barbarian implements IClass {
                 dice="d8"
                 break;
         }
-        return level+dice+calculatebasemodifier(attr);
+        return level+dice+calculatebasemodifier(str);
     }
-    calcrangeddmg(attr:number, level:number):string{
+    calcrangeddmg(dex:number, level:number):string{
         var dice;
         switch(this.ranged){
             case RangedWeapons.THROWNSMALL:
@@ -129,8 +134,9 @@ export class barbarian implements IClass {
                 dice="d6"
                 break;
         }
-        return level+dice+calculatebasemodifier(attr);
+        return level+dice+calculatebasemodifier(dex);
     } 
+    //SM: TODO.  Probably need a way to return how many spells/talents/feats the class has available at each level as well
     
 }
 function calculatebasemodifier(abilityscore: number) {

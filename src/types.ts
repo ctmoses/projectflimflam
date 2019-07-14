@@ -32,6 +32,7 @@ export interface IClass {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
     armor: ArmorTypes,
+    shield: boolean,
     weapon: MeleeWeapons,
     ranged: RangedWeapons,
     calchp(con:number,level:number): number,
@@ -109,13 +110,13 @@ export enum AbilityTrigger {
     MISS,
     NONE,
     MONDEATH,
-    STAGGER
+    MONSTAGGER,
+    PCSTAGGER,
 };
 export enum ArmorTypes {
     NONE,
     LIGHT,
     HEAVY,
-    SHIELD
 };
 export enum MeleeWeapons {
     ONEHSMALL,
