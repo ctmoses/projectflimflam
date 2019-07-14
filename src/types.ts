@@ -26,6 +26,17 @@ export interface ISpells {
     refresh: AbilityRefresh,
     trigger: AbilityTrigger,
     type: AbilityType,
+    level: number,
+    name: string,
+    powertext: string,
+}
+export interface ITalents {
+    refresh: AbilityRefresh,
+    trigger: AbilityTrigger,
+    type: AbilityType,
+    tier: Tiers,
+    innate: boolean,
+    name: string,
     powertext: string,
 }
 export interface IClass {
@@ -45,8 +56,11 @@ export interface IClass {
     calcmeleehit(attr:number, level:number):number,
     calcrangedhit(attr:number, level:number):number,
     calcmeleedmg(attr:number, level:number):string,
-    calcrangeddmg(attr:number, level:number):string,   
-    spells: ISpells[]
+    calcrangeddmg(attr:number, level:number):string, 
+    calctalents(level:number):number,
+    calcspells(level:number):number,  
+    spells: ISpells[],
+    talents: ITalents[]
 }
 export interface ICharacter {
     name: string,
