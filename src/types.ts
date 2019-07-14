@@ -1,5 +1,3 @@
-import { IRace, IClass, IBackground, IFeats } from './model/race';
-
 export interface IUser {
     id: number | null,
     name: string,
@@ -9,7 +7,46 @@ export interface IIcon {
     name: string,
     level: number,
 };
+export interface IRace {
+    bonusstat1: Attributes,
+    bonusstat2: Attributes,
+    power: ISpells
 
+};
+export interface IBackground {
+    backgroundtitle : string,
+    backgroundmod : number
+}
+export interface IFeats {
+    tier: Tiers,
+    prereq: string,
+    power: string
+}
+export interface ISpells {
+    refresh: AbilityRefresh,
+    trigger: AbilityTrigger,
+    type: AbilityType,
+    powertext: string,
+}
+export interface IClass {
+    bonusstat1: Attributes,
+    bonusstat2: Attributes,
+    armor: ArmorTypes,
+    weapon: MeleeWeapons,
+    ranged: RangedWeapons,
+    calchp(con:number,level:number): number,
+    calcinitiative(dex:number, level:number): number,
+    calcac(con:number, dex:number,wis:number, level:number): number,
+    calcpd(str:number, con:number,dex:number,level:number): number,
+    calcmd(int:number, wis:number, cha:number, level:number): number,
+    calcrecoveries(): number,
+    calcrecoveryroll(con:number, level:number): string,  //SM: Not sure what we want to return here...just something like 4d8+4?
+    calcmeleehit(attr:number, level:number):number,
+    calcrangedhit(attr:number, level:number):number,
+    calcmeleedmg(attr:number, level:number):string,
+    calcrangeddmg(attr:number, level:number):string,   
+    spells: ISpells[]
+}
 export interface ICharacter {
     name: string,
     class: IClass,  //reset spells when rolling initiative or you do a full rest
@@ -43,3 +80,61 @@ export interface ICharacter {
     backgrounds: IBackground[],
     magicItems: string[] | null, 
 };
+
+export enum Attributes {
+    STRENGTH,
+    DEXTERITY,
+    INTELLIGENCE,
+    WISDOM,
+    CONSTITUTION,
+    CHARISMA,
+    ALL
+};
+
+export enum AbilityRefresh {
+    ATWILL,
+    BATTLE,
+    DAILY
+};
+export enum AbilityType {
+    STANDARD,
+    MOVE,
+    QUICK,
+    INTERRUPT,
+    FREE
+};
+export enum AbilityTrigger {
+    HIT,
+    DAMAGETAKEN,
+    MISS,
+    NONE
+};
+export enum ArmorTypes {
+    NONE,
+    LIGHT,
+    HEAVY,
+    SHIELD
+};
+export enum MeleeWeapons {
+    ONEHSMALL,
+    ONEHLIGHT,
+    ONEHHEAVY,
+    TWOHSMALL,
+    TWOHLIGHT,
+    TWOHHEAVY
+};
+export enum RangedWeapons {
+    THROWNSMALL,
+    THROWNLIGHT,
+    THROWNHEAVY,
+    XBOWSMALL,
+    XBOWLIGHT,
+    XBOWHEAVY,
+    BOWLIGHT,
+    BOWHEAVY
+};
+export enum Tiers {
+    ADVENTURER,
+    CHAMPION,
+    EPIC
+}
