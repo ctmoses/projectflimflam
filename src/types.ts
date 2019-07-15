@@ -20,7 +20,8 @@ export interface IBackground {
 export interface IFeats {
     tier: Tiers,
     prereq: string,
-    power: string
+    power: string,
+    name: string
 }
 export interface ISpells {
     refresh: AbilityRefresh,

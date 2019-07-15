@@ -1,0 +1,431 @@
+﻿Name,Pre-Req,Tier,Power
+Further Backgrounding,General,Adventurer,"A: Add 2 total points to your backgrounds, or 2 new points of backgrounds."
+Further Backgrounding,General,Champion,"C: Add 3 total points to your backgrounds, or 3 new points of backgrounds."
+Further Backgrounding,General,Epic,"E: Add 2 total points to your backgrounds, or 2 new points of backgrounds. You can raise one background to 7."
+Imp. Initiative,General,Adventurer,A: +4 to initiative checks.
+Linguist,General,Adventurer,A: Speak all normal humanoid languages well enough.
+Linguist,General,Champion,"C: Speak, read, and write normal languages fluently; and speak bizarre languages no one else can deal with."
+Precise Shot,General,Adventurer,A: Ranged attacks won’t hit engaged allies.
+Rapid Reload,General,Adventurer,A: Quick action to reload heavy crossbow; free action to reload light or hand crossbow.
+Reach Tricks,General,Adventurer,"A: Once per battle, use a reach weapon in a special way."
+Ritual Casting,General,Adventurer,A: Cast spells you know as rituals.
+Skill Escalation,General,Adventurer,A: Add the escalation die to your skill checks after seeing roll; 2/day.
+Strong Recovery,General,Adventurer,"A: Reroll one die when rolling recovery dice. At 5th level, reroll 2 dice. At 8th level, reroll three dice."
+Toughness,General,Adventurer,A: Gain bonus hp equal to half your class baseline hp; improves at 5th and 8th level.
+Cruel,Dark Elf,Champion,"C: Once per day, use cruel to deal 5 ongoing damage per level against a target you miss or you roll a natural odd attack roll against (even a 1)."
+Breath Weapon,Dragonic,Champion,C: Breath weapon now targets 1d3 enemies in a nearby group.
+That’s Your Best Shot?,Dwarf,Champion,"C: If escalation die is 2+, the best shot recovery is free."
+Heritage of the Sword,Elf,Adventurer,"A: Use d6 and d8 swords without penalties; or if already able to use such swords without penalties, +2 melee damage."
+Confounding,Gnome,Champion,C: Target of confounding is weakened instead of dazed.
+Surprising,Half-Elf,Champion,"C: Use surprising an extra time, but only to change a nearby ally’s d20 roll."
+Evasive,Halfling,Champion,C: The foe’s reroll when you use evasive takes a –5 penalty.
+Lethal,Half-Orc,Champion,"C: If lethal attack reroll is 16+, use lethal again that battle."
+Highblood Teleport,High Elf,Champion,"C: When you teleport, deal damage equal to twice your level to engaged enemy."
+Halo,Holy One,Champion,C: Halo now activates whenever you heal using a recovery.
+Quick to Fight,Human,Champion,C: Increase escalation die by +1 when you roll natural 19 or 20 for initiative.
+Never Say Die,Forgeborn,Champion,"C: When you roll 16+ on your never say die save, take an extra standard action next turn."
+Curse of Chaos,Tiefling,Champion,C: Use curse of chaos for free when a nearby enemy gets a natural 1 attack roll.
+Elven Grace,Wood Elf,Champion,C: Start your elven grace rolls with a d4 instead of a d6.
+Barbarian Rage,Barbarian,Adventurer,"A: When esc die is 4+, start raging for free as a quick action."
+Barbarian Rage,Barbarian,Champion,C: Now start raging for free when esc. die is 3+.
+Barbarian Rage,Barbarian,Epic,E: Now start raging for free when esc. die is 2+.
+Anc.Warband,Barbarian,Epic,E: The warband fights for 1 round even after you are unconscious.
+Barbaric Cleave,Barbarian,Adventurer,"A: Gain +2 bonus to Barbaric Cleave attacks, and on a hit with Barbaric Cleave, you can heal using a recovery."
+Barbaric Cleave,Barbarian,Champion,C: You can move for free before using a Barbaric Cleave attack.
+Barbaric Cleave,Barbarian,Epic,E: Use Barbaric Cleave as often as you want in one battle.
+Building Frenzy,Barbarian,Adventurer,A: The bonus damage dice are now d6s instead of d4s.
+Building Frenzy,Barbarian,Champion,C: The bonus damage dice are now d10s instead of d6s.
+Building Frenzy,Barbarian,Epic,E: Use Building Frenzy twice per day now.
+Natural Will,Barbarian,Adventurer,A: Use Natural Will twice per day now.
+Natural Will,Barbarian,Champion,C: Bonus increases to +4 MD.
+Natural Will,Barbarian,Epic,"E: Use Natural Will as a free action, even as a reaction to an attack."
+Relentless,Barbarian,Epic,E: Gain resist damage 12+ until next turn after you crit.
+Slayer,Barbarian,Adventurer,A: Gain +2 bonus to Slayer attacks.
+Slayer,Barbarian,Champion,"C: Once per battle, deal Slayer damage on a miss."
+Slayer,Barbarian,Epic,E: Gain 20 temp hp when your Slayer attack drops a non-mook enemy.
+Strongheart,Barbarian,Adventurer,A: Increase your maximum recoveries by 1.
+Strongheart,Barbarian,Champion,"C: You gain +1 PD and when you heal using a recovery, you can roll a save."
+Strongheart,Barbarian,Epic,E: Increase your maximum recoveries by 1 (2 total).
+Unstoppable,Barbarian,Adventurer,A: The recovery from your Unstoppable attack is free.
+Unstoppable,Barbarian,Champion,C: Add 2 x Con mod to the total healing from the Unstoppable recovery.
+Unstoppable,Barbarian,Epic,E: Use Unstoppable twice per battle now.
+Violence,Barbarian,Champion,C: Deal half damage with missed attacks when you use Violence.
+Violence,Barbarian,Epic,E: Attack roll bonus using Violence increases to +1d6 from +1d4.
+Whirlwind,Barbarian,Adventurer,A: Deal normal miss damage with missed Whirlwind attacks.
+Whirlwind,Barbarian,Champion,C: Penalty to AC and PD from Whirlwind is now –2. Disengage attempts after using Whirlwind succeed automatically.
+Whirlwind,Barbarian,Epic,E: Use Whirlwind anytime during your turn now.
+Bardic Songs,Bard,Adventurer,"A: Songs continue for one round when you are silenced, stunned, or unconscious."
+Battle Cries,Bard,Adventurer,A: Use your 1st or 3rd level battle cries without making a melee attack.
+Balladeer,Bard,Adventurer,"A: First time you use the ballad-created relationship, 5s become 6s. +2 to Balladeer checks."
+Balladeer,Bard,Champion,C: Sing two ballads a day.
+Balladeer,Bard,Epic,E: Gain 3 or 4 bonus dice at the cost of an equal number of cursed dice with each enemy.
+Battle Skald,Bard,Adventurer,"A: Once per day, use battle cries on yourself."
+Battle Skald,Bard,Champion,C: Battle cries used on yourself also help an ally.
+Battle Skald,Bard,Epic,"E: Once per battle, reroll an attack meant to trigger a battle cry."
+Jack of Spells,Bard,Adventurer,A: Gain 3 cantrips if you choose wizard; gain dancing lights if you choose sorcerer. Also use Charisma for attack and damage bonuses with the spell you’ve jacked.
+Jack of Spells,Bard,Champion,C: Jack another spell from a second other spell-casting class.
+Jack of Spells,Bard,Epic,E: Jack another spell from a third other spell-casting class.
+Hang Tough!,Bard,Adventurer,"A: If the ally is staggered, double hang tough temporary hp."
+Hang Tough!,Bard,Champion,C: Add your level to the temporary hp (before any doubling for being staggered).
+Hang Tough!,Bard,Epic,E: You can be the target of hang tough.
+It’s All Yours!,Bard,Adventurer,A: Your ally’s attack also deals +1d6 damage.
+It’s All Yours!,Bard,Champion,C: Damage bonus increases to +3d6.
+It’s All Yours!,Bard,Epic,E: Damage bonus increases to +3d12.
+Move It!,Bard,Adventurer,A: Your allies gain a +2 bonus to move it disengage checks.
+Move It!,Bard,Champion,C: Bonus increases to +5.
+Move It!,Bard,Epic,E: Ally can pop free of one enemy automatically before rolling disengage.
+Pull It Together!,Bard,Adventurer,A: Target ally also heals +1d4 hp per point of escalation die.
+Pull It Together!,Bard,Champion,C: Battle cry now triggers on any natural even roll; healing increases to +1d6 per point.
+Pull It Together!,Bard,Epic,E: Use the battle cry 3 times per battle; healing increases to +1d10 per point.
+Stay Strong!,Bard,Adventurer,A: The AC bonus also applies to PD.
+Stay Strong!,Bard,Champion,C: The AC bonus also applies to MD.
+Stay Strong!,Bard,Epic,E: Bonus increases to +4.
+The Time Is Now,Bard,Epic,E: The battle cry now triggers on a natural 18+ instead of 19+.
+They Fall Before Us!,Bard,Epic,E: The battle cry now triggers on a natural 19+ instead of 20+.
+Victory is Ours!,Bard,Champion,C: Trigger is now 3+ on the escalation die instead of 5+.
+Victory is Ours!,Bard,Epic,E: Allies’ damage bonus is now +3d12.
+We Need You!,Bard,Adventurer,A: The battle cry save now gets a +1 bonus.
+We Need You!,Bard,Champion,C: Save bonus increases to +2.
+We Need You!,Bard,Epic,"E: If escalation die is 3+, two allies can roll a save."
+Arrow of Verse,Bard,Champion,C: Recharge after battle is now 11+.
+Arrow of Verse,Bard,Epic,E: Bonus dice and miss dice are now d12s.
+Battle Chant,Bard,Adventurer,A: Use d6s instead of d4s for battle chant damage.
+Battle Chant,Bard,Champion,"C: Once per day, expend a recovery to reroll a battle chant attack."
+Battle Chant,Bard,Epic,"E: One battle per day, use d10s instead of d6s for battle chant damage."
+Befuddle,Bard,Adventurer,A: Recharge check for befuddle now 6+.
+Befuddle,Bard,Champion,C: Target of befuddle now only needs to be in sight.
+Befuddle,Bard,Epic,"E: On a hit, the confusion effect is now save ends."
+Overworld Two-Step,Bard,Champion,C: Recharge check is 11+.
+Overworld Two-Step,Bard,Epic,E: Far away allies can now also have their positions swapped.
+Song of Thunder,Bard,Champion,C: Number of targets increases to 2d4.
+Song of Thunder,Bard,Epic,E: Two of the targets can now be far away.
+Soundburst,Bard,Adventurer,"A: On a natural even hit, the dazed effect is now save ends."
+Soundburst,Bard,Champion,C: Spell is now recharge 16+ after battle.
+Soundburst,Bard,Epic,E: Spell now targets 1d4 + 1 enemies in a group.
+Vicious Mockery,Bard,Adventurer,A: Hit effect is now a save ends effect.
+Vicious Mockery,Bard,Champion,C: Recharge check for vicious mockery now 6+.
+Vicious Mockery,Bard,Epic,E: Natural even miss doesn’t expend vicious mockery.
+Wild Heal,Bard,Adventurer,A: Wild heal is now recharge 16+ after battle.
+Wild Heal,Bard,Champion,C: Add a third random target.
+Wild Heal,Bard,Epic,E: Wild heal effect now provides free recoveries.
+Heal,Cleric,Adventurer,A: Target can now be nearby instead of ally you’re next to.
+Heal,Cleric,Champion,"C: If target is unconscious, add 1d10 x your Cha mod to recovery."
+Heal,Cleric,Epic,E: Add +30 hp to recovery if you’re next to target.
+Domain: Healing,Cleric,Adventurer,A: Allies you heal can use your recoveries instead.
+Domain: Healing,Cleric,Champion,C: Invocation of healing provides 2 extra uses of heal that battle.
+Domain: Healing,Cleric,Epic,E: Allies you heal add triple your level hp instead of double.
+Domain: Justice OR Vengeance,Cleric,Adventurer,A: You can give the reroll blessing to yourself.
+Domain: Justice OR Vengeance,Cleric,Champion,"C: When you gain a reroll blessing, gain two blessings instead of one."
+Domain: Justice OR Vengeance,Cleric,Epic,E: Gain a +4 bonus to the rerolled attack.
+Dom: Knowledge OR Lore,Cleric,Adventurer,"A: Once per day, change knowledge skill roll to natural 20."
+Dom: Knowledge OR Lore,Cleric,Champion,C: Now use a d4 for invocation instead of d6.
+Dom: Knowledge OR Lore,Cleric,Epic,E: Gain a positive relationship point with different random icon each day.
+Domain: Life OR Death,Cleric,Adventurer,A: The death save bonus is now +2.
+Domain: Life OR Death,Cleric,Champion,"C: Each battle, the first nearby ally that becomes staggered gains hit points equal to double your level."
+Domain: Life OR Death,Cleric,Epic,E: You gain one free use of resurrection.
+Domain: Love OR Beauty,Cleric,Champion,C: You gain a two-dice conflicted icon relationship instead.
+Dom: Protection OR Community,Cleric,Adventurer,A: One ally can roll a save each time you target allies with a spell.
+Domain: Strength,Cleric,Adventurer,"A: Once per battle, deal bonus damage with melee attack, d4s equal to Strength modifier or level, whichever is higher."
+Domain: Strength,Cleric,Champion,C: Damage bonus dice are now d8s instead of d4s.
+Domain: Strength,Cleric,Epic,"E: Once per day, the damage bonus dice are d20s instead of d8s."
+Domain: Sun or Anti-Undead,Cleric,Adventurer,A: Your attacks dealing holy damage gain a +1 damage bonus per tier.
+Domain: Sun or Anti-Undead,Cleric,Champion,C: Gain a +2 bonus to all defenses against attacks by undead.
+Domain: Sun or Anti-Undead,Cleric,Epic,E: The Sun/Anti-Undead invocation also affects your allies’ spells.
+Domain: Trickery OR Illusion,Cleric,Champion,C: Your trick die can now be used for any d20 roll.
+Domain: Trickery OR Illusion,Cleric,Epic,E: You get a free use of the trick die when the escalation die reaches 3+.
+Domain: War OR Leadership,Cleric,Adventurer,A: The domain power works with any attack now.
+Domain: War OR Leadership,Cleric,Champion,C: The attack bonus can now apply to multiple enemies you attack.
+Domain: War OR Leadership,Cleric,Epic,E: Your allies also get a damage bonus against the enemies you attack equal to double your Cha mod.
+Circle of Prot,Cleric,Epic,E: Spell is now recharge 16+ after battle instead of daily.
+Combat Boon,Cleric,Adventurer,A: The combat boon save automatically succeeds if the attack is a crit.
+Combat Boon,Cleric,Champion,C: Ally can roll a save even if attack misses.
+Javelin of Faith,Cleric,Adventurer,A: Deals +1d6 damage vs. undamaged target. Increases at each tier.
+Javelin of Faith,Cleric,Champion,C: Spell can now target far away enemy with –2 attack penalty.
+Javelin of Faith,Cleric,Epic,E: Make the spell’s attack a second time when roll a natural 18+.
+Judgment,Cleric,Champion,C: Spell now deals half damage on a miss.
+Judgment,Cleric,Epic,E: Spell is now recharge 16+ after battle instead of daily.
+Mighty Healing,Cleric,Champion,C: This spell is now a close-quarters spell.
+Prayer for Readiness,Cleric,Epic,E: This spell is now a quick action to cast.
+Spirits of the Righteous,Cleric,Champion,C: You also gain the AC bonus.
+Turn Undead,Cleric,Adventurer,A: You can expend turn undead to gain an extra use of heal for one battle.
+Turn Undead,Cleric,Champion,C: Target demons or undead with turn undead.
+Turn Undead,Cleric,Epic,E: Increase target hp limit by 100 hp.
+Extra Tough,Fighter,Adventurer,A: Gain an additional recovery.
+Threatening,Fighter,Adventurer,A: Deal damage to enemies that fail to disengage from you equal to your Dex or Con mod; increases at 5th and 8th level.
+Threatening,Fighter,Champion,C: Non-mook enemies that fail to disengage from you are vulnerable.
+Cleave,Fighter,Adventurer,A: You can move to reach a new target before using your Cleave attack.
+Cleave,Fighter,Champion,C: Use Cleave twice each battle now (but only once per round).
+Cleave,Fighter,Epic,E: Gain a +4 bonus with Cleave attacks.
+Comeback Strike,Fighter,Adventurer,A: You don’t take the –2 penalty for Comeback Strike attacks.
+Comeback Strike,Fighter,Champion,"C: Once per day, use Comeback Strike twice in a battle."
+Comeback Strike,Fighter,Epic,E: Gain a +4 bonus with Comeback Strike attacks.
+Counter-Attack,Fighter,Adventurer,A: Counter-Attack attack now deals full damage.
+Counter-Attack,Fighter,Champion,C: Use Counter-Attack once per turn instead of per round.
+Counter-Attack,Fighter,Epic,E: Use Counter-Attack when escalation die is 3+.
+Deadeye Archer,Fighter,Adventurer,A: Spend a quick action before attack to add your Dex mod to the damage if you miss.
+Deadeye Archer,Fighter,Champion,"C: Once per battle, your crit range with a ranged attack expands by +4."
+Deadeye Archer,Fighter,Epic,E: Your crit range with ranged weapon attacks expands by +1.
+Heavy Warrior,Fighter,Adventurer,"A: Once per day, use Heavy Warrior twice in a battle."
+Heavy Warrior,Fighter,Champion,C: Heavy Warrior now works against an attack vs. PD.
+Heavy Warrior,Fighter,Epic,"E: Once per day, reroll a recharge roll for a magic armor power."
+Power Attack,Fighter,Adventurer,A: Deal Power Attack damage even if you miss.
+Power Attack,Fighter,Champion,"C: One battle per day, use Power Attack twice in a battle."
+Power Attack,Fighter,Epic,E: Power Attack damage dice increase to 1d6 (1-H) or 1d8 (2-H).
+Skilled Intercept,Fighter,Adventurer,A: You can pop free from up to 2 enemies when using Skilled Intercept.
+Skilled Intercept,Fighter,Champion,C: Add escalation die to Skilled Intercept saves.
+Skilled Intercept,Fighter,Epic,E: You do not take opportunity attacks while using Skilled Intercept.
+Tough as Iron,Fighter,Adventurer,"A: Once per day, rally a second time in the same battle using a quick action."
+Tough as Iron,Fighter,Champion,C: Increase your total recoveries by 2.
+Tough as Iron,Fighter,Epic,E: Gain another use of Tough As Iron when you roll a natural 20 with an attack.
+A Dozen Cuts,Fighter,Champion,"C: Once per battle, trigger a dozen cuts with a natural odd hit."
+Brace for It,Fighter,Adventurer,A: Brace for it now works against any type of attack.
+Brace for It,Fighter,Champion,C: Brace for it now works any number of times before your next turn.
+Carve an Opening,Fighter,Champion,C: Crit range expands by +2 instead of +1.
+Combat Mastery,Fighter,Epic,E: Combat mastery now triggers on any natural even hit.
+Deadly Assault,Fighter,Adventurer,A: Effect now let’s you reroll 1s and 2s for damage.
+Deadly Assault,Fighter,Champion,C: Deadly assault now triggers on any natural 17+.
+Defensive Fighting,Fighter,Adventurer,A: AC bonus also applies to PD.
+Defensive Fighting,Fighter,Champion,C: Bonus increases to +3.
+Defensive Fighting,Fighter,Epic,E: AC bonus also applies to MD.
+Heavy Blows,Fighter,Champion,C: Triggers on any miss if using two-handed weapon.
+Heavy Blows,Fighter,Epic,E: Add double (1-H) or triple (2-H) the escalation die to miss damage.
+Hero’s Skill,Fighter,Champion,C: Add +4 instead of +2.
+Hero’s Skill,Fighter,Epic,E: The damage is no longer halved if the attack hits.
+Never Surrender,Fighter,Epic,E: Gain a +2 bonus to your never surrender save.
+Precision Attack,Fighter,Adventurer,A: Precision attack now works with ranged attacks.
+Punish Them,Fighter,Adventurer,A: Stop the movement of the target of your punish them attack.
+Punish Them,Fighter,Champion,C: Dazed effect is now a save ends effect (11+).
+Punish Them,Fighter,Epic,E: Dazed effect is now weakened (11+ save ends).
+Second Shot,Fighter,Champion,C: The second shot attack only takes a –2 penalty.
+Set ’em Up,Fighter,Epic,E: The crit range bonus now also applies to any ally who attacks the target while you are engaged with the target.
+Shield Bash,Fighter,Adventurer,A: Can pop the target free of your allies.
+Shield Bash,Fighter,Champion,"C: Once per battle, daze your shield bash target if it’s staggered."
+Spinning Charge,Fighter,Epic,E: Your spinning charge attack deals full damage is esc die is 3+.
+Steady Now,Fighter,Champion,C: Gain temporary hp equal to double your Con mod instead.
+Strong Guard,Fighter,Champion,C: AC bonus also applies to PD.
+Strong Guard,Fighter,Epic,E: Bonus increases to +3.
+Sword of Destiny,Fighter,Epic,E: Now trigger sword of destiny with a natural 18+ if the esc die is 3+.
+Two-Weapon Pressure,Fighter,Champion,C: The attack bonus increases to +4.
+Smite Evil,Paladin,Adventurer,A: Gain a +4 attack bonus with Smite Evil attacks.
+Smite Evil,Paladin,Champion,C: Add a total of +2d12 damage with Smith Evil.
+Smite Evil,Paladin,Epic,E: Add a total of +4d12 damage with Smite Evil.
+Bastion,Paladin,Adventurer,A: Increase your total recoveries by 1.
+Bastion,Paladin,Champion,"C: Once per day, use Bastion twice in a battle."
+Bastion,Paladin,Epic,E: Your ally takes no damage; you still take half.
+Cleric Training,Paladin,Adventurer,A: Use your Charisma as the attack ability for cleric spells.
+Cleric Training,Paladin,Champion,C: Cast the cleric’s heal spell twice per day.
+Cleric Training,Paladin,Epic,E: Choose 2 cleric spells to gain instead of one.
+Fearless,Paladin,Adventurer,A: Gain a +1 bonus to death saves.
+Fearless,Paladin,Champion,C: Gain a +1 bonus to all saves except death saves.
+Fearless,Paladin,Epic,E: Nearby allies gain a +1 bonus to death saves.
+Implacable,Paladin,Adventurer,A: You gain a +1 bonus to saves.
+Implacable,Paladin,Champion,"C: Once per turn, you can take damage equal to your level to reroll a save."
+Implacable,Paladin,Epic,E: You gain a +1 bonus to Physical Defense and a +1 bonus to Mental Defense.
+Lay on Hands,Paladin,Adventurer,A: Add twice your Cha mod to Lay on Hands healing.
+Lay on Hands,Paladin,Champion,C: Lay on Hands healing uses a free recovery instead of one of your own.
+Lay on Hands,Paladin,Epic,E: Two additional uses of Lay on Hands each day.
+Paladin’s Chal,Paladin,Adventurer,"A: The attack and disengage penalty is equal to –4 or to the esc. die, whichever is higher"
+Paladin’s Chal,Paladin,Champion,C: You can have two enemies challenged at same time.
+Paladin’s Chal,Paladin,Epic,E: Enemies you challenge are vulnerable to your attacks.
+Path of URE,Paladin,Adventurer,"A: Once per day, reroll relationship dice with a good or ambiguous icon."
+Path of URE,Paladin,Champion,C: Your melee and ranged attacks deal holy damage.
+Path of URE,Paladin,Epic,E: Gain 1 relationship point with a good or ambiguous icon.
+Way of Evil Basd,Paladin,Adventurer,"A: Once per day, reroll relationship dice with evil or ambiguous icon."
+Way of Evil Basd,Paladin,Champion,"C: When your Smite Evil attack kills 3 or more mooks, you don’t expend it."
+Way of Evil Basd,Paladin,Epic,E: Gain 1 relationship point with an evil or ambiguous icon.
+Archery,Ranger,Adventurer,A: Gain +2 attack bonus and +1 crit range to Archery rerolls.
+Archery,Ranger,Champion,"C: Once per day, use Archery twice in a battle."
+Archery,Ranger,Epic,"E: Once per day, turn a hit with a ranged attack into a crit."
+Double Melee Attack,Ranger,Adventurer,"A: Gain a +2 bonus with your second attack, if it’s against a different target."
+Double Melee Attack,Ranger,Champion,"C: Once per battle, use Double Melee Attack after an odd attack roll."
+Double Melee Attack,Ranger,Epic,E: Pop free of one enemy before a Double Melee Attack roll. Use your move action in between attacks.
+Double Ranged Attack,Ranger,Adventurer,"A: Gain a +2 bonus with your second attack, if it’s against a different target."
+Double Ranged Attack,Ranger,Champion,"C: Once per battle, use Double Ranged Attack after an odd attack roll."
+Double Ranged Attack,Ranger,Epic,E: Pop free of one enemy before a Double Ranged Attack roll. Use your move action in between attacks.
+Favored Enemy,Ranger,Adventurer,A: Change your favored enemy during a full heal-up.
+Favored Enemy,Ranger,Champion,C: Your crit range vs. favored enemies expands by 1.
+Favored Enemy,Ranger,Epic,E: Choose a second non-humanoid type as favored enemy.
+Fey Queen’s Enchantments,Ranger,Adventurer,A: Choose which ability score to use for sorcerer spells you cast.
+Fey Queen’s Enchantments,Ranger,Champion,C: You can choose from sorcerer at-will spells.
+Fey Queen’s Enchantments,Ranger,Epic,E: Gain an additional sorcerer spell.
+First Strike,Ranger,Adventurer,A: The crit range of your First Strike attacks expands by 1.
+First Strike,Ranger,Champion,"C: Once per day, deal triple damage with a First Strike crit."
+First Strike,Ranger,Epic,"E: Whenever you hit with a First Strike attack, you can reroll damage and take the best result."
+Lethal Hunter,Ranger,Adventurer,A: Your crit range of Lethal Hunter attacks expands by 1.
+Lethal Hunter,Ranger,Champion,"C: Once per day, use Lethal Hunter against two enemies."
+Lethal Hunter,Ranger,Epic,"E: If the escalation die is 3+, your Lethal Hunter crits deal triple damage."
+Ranger ex Cathedral,Ranger,Adventurer,A: Cast the cleric class feature heal spell once per battle.
+Ranger ex Cathedral,Ranger,Champion,C: You can choose from cleric at-will spells.
+Ranger ex Cathedral,Ranger,Epic,E: Gain an additional cleric spell.
+Ranger’s Pet,Ranger,Adventurer,A: Your pet gains a third ability.
+Ranger’s Pet,Ranger,Champion,C: Your pet gains a fourth ability.
+Ranger’s Pet,Ranger,Epic,E: Your pet gains a fifth ability.
+Tracker,Ranger,Adventurer,A: Use terrain stunt now in urban environments.
+Tracker,Ranger,Champion,C: You can now track equally well in urban areas.
+Tracker,Ranger,Epic,"E: You can now track flying, teleporting, and other difficult to find creatures."
+2-Weap Mastery,Ranger,Adventurer,A: Add your level to damage with missed melee attacks.
+2-Weap Mastery,Ranger,Champion,C: Make an opportunity attack against an enemy who rolls a natural 1 against you with a melee attack.
+2-Weap Mastery,Ranger,Epic,"E: One battle per day, add twice your level to damage with missed attacks."
+Animal Comp,Ranger,Adventurer,"A: Once per day, companion can attack twice in a round."
+Animal Comp,Ranger,Adventurer,"A: Once per day, companion can make an enemy disengage check fail."
+Animal Comp,Ranger,Adventurer,"A: Once per day, reroll a companion’s missed attack."
+Animal Comp,Ranger,Adventurer,A: Your companion adds the escalation die to its attacks.
+Animal Comp,Ranger,Champion,"C: Once per day, companion can force a reroll that hits it."
+Animal Comp,Ranger,Champion,C: Your Lethal Hunter talent also applies to companion.
+Animal Comp,Ranger,Champion,C: Increase companion’s PD and MD by +1.
+Animal Comp,Ranger,Epic,E: Increase companion’s damage die by one size.
+Animal Comp,Ranger,Epic,E: Increase companion’s AC by +1.
+Bear,Ranger,Champion,C: Gains twice its level in temporary hp with each hit.
+Snake,Ranger,Champion,C: Companion’s ongoing damage increases to 3 x your level.
+Snake,Ranger,Epic,E: Companion’s ongoing damage increases to 4 x your level.
+Sneak Attack,Rogue,Adventurer,A: Sneak Attack now works against lower initiative enemies in first round.
+Sneak Attack,Rogue,Champion,"C: Sneak Attack now works against confused, dazed or weakened enemies."
+Sneak Attack,Rogue,Epic,"E: Once per battle, replace normal miss damage with Sneak Attack damage."
+Trap Sense,Rogue,Adventurer,A: The attack reroll option can also apply to a nearby ally of the rogue.
+Trap Sense,Rogue,Champion,C: Gain a +3 bonus to skill check rerolls against traps.
+Trap Sense,Rogue,Epic,E: Take only half damage from trap attacks.
+Cunning,Rogue,Adventurer,A: Gain a +1 bonus to MD.
+Cunning,Rogue,Champion,"C: Once per battle, reroll a save against an effect that hit you by overcoming your MD."
+Cunning,Rogue,Epic,"E: As champion feat, but now reroll saves once per save."
+Imp. Sneak Atk,Rogue,Adventurer,"A: Once per day, you can use Sneak Attack vs. an invalid target."
+Imp. Sneak Atk,Rogue,Champion,"C: Once per day, roll d20s for your Sneak Attack damage instead of d8s."
+Imp. Sneak Atk,Rogue,Epic,"E: One battle per day, ignore the once-per-round limitation for Sneak Attack damage."
+Murderous,Rogue,Adventurer,A: Gain +2 attack bonus vs. staggered enemies.
+Murderous,Rogue,Champion,C: Your crit range vs. staggered enemies expands by 2.
+Murderous,Rogue,Epic,E: Staggered enemies that make melee attacks against you and miss are vulnerable to your attacks.
+Shadow Walk,Rogue,Adventurer,"A: On a miss, you can still use your move action normally."
+Shadow Walk,Rogue,Champion,"C: Twice per day, reroll an attack following use of shadow walk."
+Shadow Walk,Rogue,Epic,"E: Twice per day, return from shadow walk somewhere you wouldn’t have been able to reach."
+Smooth Talk,Rogue,Adventurer,A: Add your Cha mod to your Smooth Talk save.
+Smooth Talk,Rogue,Champion,C: Success with Smooth Talk yields a 3-point positive relationship now.
+Smooth Talk,Rogue,Epic,"E: On failed Smooth Talk save, you a get 2-point conflicted relationship."
+Thievery,Rogue,Adventurer,A: Gain thief’s strike as a bonus power.
+Thievery,Rogue,Champion,"C: Once per day, deal full damage with a thief’s strike attack instead of half damage."
+Thievery,Rogue,Epic,"E: Twice per level, steal with thief’s strike things that can’t normally be stolen."
+Tumble,Rogue,Adventurer,A: Ignore the penalty for disengaging from more than one enemy.
+Tumble,Rogue,Champion,"C: One battle per day, succeed on first disengage check each turn."
+Tumble,Rogue,Epic,"E: Roll a hard save (16+) to tumble out of critical hits, taking damage equal to attacker’ level instead."
+Assassin’s Gambit,Rogue,Epic,"E: Once per turn, gain extra standard action with power if you drop a mook."
+Bleeding Strike,Rogue,Adventurer,A: Ongoing damage to large or huge targets is 1d6 per level instead.
+Bleeding Strike,Rogue,Champion,C: A natural even miss deals ongoing damage equal to your level.
+Bleeding Strike,Rogue,Epic,E: Can use bleeding strike against enemies taking ongoing damage.
+Deadly Thrust,Rogue,Adventurer,A: Add your Str mod to miss damage.
+Deadly Thrust,Rogue,Champion,C: You can now target mooks with deadly thrust attacks.
+Deadly Thrust,Rogue,Epic,"E: Add 5 x Strength mod to hit damage, if you don’t include Sneak Attack."
+Death’s Twin,Rogue,Epic,"E: If your first death’s twin attack is natural 18+, you can also target the same creature with your second attack."
+Deflection,Rogue,Adventurer,A: Also triggers on a ranged attack vs. AC.
+Deflection,Rogue,Champion,C: Deflected attack now deals full damage.
+Deflection,Rogue,Epic,E: Using the power no longer spends your momentum.
+Evasive Strike,Rogue,Adventurer,"A: If you drop target, you can pop free from all foes."
+Evasive Strike,Rogue,Champion,"C: On a natural even hit, +2 bonus to AC and PD against the next attack."
+Evasive Strike,Rogue,Epic,"E: As champion feat, but now also +2 MD."
+Flying Blade,Rogue,Adventurer,"A: On a crit, target is also dazed."
+Flying Blade,Rogue,Champion,C: Attack roll doesn’t have to be even for Sneak Attack damage.
+Flying Blade,Rogue,Epic,E: Use flying blade with ranged weapons.
+Roll With It,Rogue,Adventurer,A: Also triggers on attack vs. PD.
+Roll With It,Rogue,Champion,C: Also triggers on a ranged attack.
+Roll With It,Rogue,Epic,"E: Once per day, take damage equal to attacker’s level instead of half damage."
+Spiky Bastard,Rogue,Champion,C: Spiky bastard damage now applies while you’re staggered.
+Spiky Bastard,Rogue,Epic,E: Spiky bastard damage is 15 instead of 10 when esc. die is 3+.
+Sure Cut,Rogue,Champion,C: Missing with sure cut doesn’t count as a use of Sneak Attack damage.
+Swift Dodge,Rogue,Champion,C: Also triggers on attack vs. PD.
+Swift Dodge,Rogue,Epic,E: Rerolled attack takes a –2 penalty.
+Swift Riposte,Rogue,Champion,"C: If your attack crits, the enemy misses."
+Swift Riposte,Rogue,Epic,E: Gain a +2 bonus with swift riposte attacks.
+True Targeting,Rogue,Epic,E: Regain your momentum if the invisible enemy’s attack misses.
+Breath weapon,Sorcerer,Adventurer,A: Failing a death save doesn’t cancel your breath weapon spells.
+Gather Power,Sorcerer,Adventurer,"A: Once per battle, you choose a chaotic benefit."
+Gather Power,Sorcerer,Champion,"C: Once per battle, gather power as a quick action if escalation die is 4+."
+Gather Power,Sorcerer,Epic,E: Roll 2 chaotic benefits if escalation die is 2+.
+Arcane Heritage,Sorcerer,Adventurer,A: Use Charisma as the attack ability for wizard spells.
+Arcane Heritage,Sorcerer,Champion,C: Cast wizard spells empowered.
+Blood Link,Sorcerer,Champion,C: Gain another relationship point with an icon in your heritage.
+Chromatic Heritage,Sorcerer,Adventurer,A: Gain +2 attack bonus with empowered breath weapon spells.
+Chromatic Heritage,Sorcerer,Champion,"C: Once per day, turn a breath weapon re-use failure into a success."
+Chromatic Heritage,Sorcerer,Epic,"E: One battle per day, gain resist dragon attack 16+."
+Fey Heritage,Sorcerer,Adventurer,A: Use your Fey Heritage power twice per day now.
+Fey Heritage,Sorcerer,Champion,C: Gain a +2 attack bonus vs. elves and creatures in elven sphere of influence.
+Fey Heritage,Sorcerer,Epic,"E: Once per battle, gain racial ability of an elf race when esc. die is 6+."
+Infernal Heritage,Sorcerer,Adventurer,A: Gain resistance 12+ to fire and one other damage type.
+Infernal Heritage,Sorcerer,Champion,C: Increase one of your resistances to 16+.
+Infernal Heritage,Sorcerer,Epic,E: You can enter a spell frenzy as free action for free if esc die is 5+.
+Metallic Heritage,Sorcerer,Adventurer,A: Gain resist energy 12+ for rest of battle as quick action. You choose type.
+Metallic Heritage,Sorcerer,Champion,"C: When your chaotic benefit increases your defenses, apply it to an ally."
+Metallic Heritage,Sorcerer,Epic,"E: One battle per day, gain resist demon attack 16+ instead of resist energy."
+Sorc’s Familiar,Sorcerer,Adventurer,A: Familiar gains another randomly changing ability.
+Sorc’s Familiar,Sorcerer,Champion,"C: Once per level, familiar can cast one of your expended spells."
+Sorc’s Familiar,Sorcerer,Epic,E: Familiar gains another randomly changing ability.
+Spell Fist,Sorcerer,Adventurer,"A: When you miss with spell vs. engaged enemy, add Cha mod to miss damage. Damage increases at each tier."
+Spell Fist,Sorcerer,Champion,"C: Once per battle, include an enemy engaged with you in a spell targeting other foes."
+Spell Fist,Sorcerer,Epic,"E: Once per day, include all enemies engaged with you as targets of an empowered spell."
+Undead Heritage,Sorcerer,Adventurer,A: Decrease your total recoveries by 1; gain a +2 bonus to death saves.
+Undead Heritage,Sorcerer,Champion,C: Increases your resistance to 16+ and attack bonus vs. undead by +1.
+Undead Heritage,Sorcerer,Epic,E: Gain +1 attack bonus if you cut off hand and put out eye.
+Breath of Black,Sorcerer,Epic,"E: On a miss, ongoing damage is now doubled."
+Breath of Blue,Sorcerer,Epic,E: The spell can now target a far away enemy.
+Burning Hands,Sorcerer,Adventurer,"A: On a miss, deal fire damage equal to any die that rolled max."
+Burning Hands,Sorcerer,Champion,C: Choose another target for spell when you roll a natural 18+.
+Burning Hands,Sorcerer,Epic,E: Can now target all enemies engaged with you in addition to normal targets.
+Calling the Blood,Sorcerer,Epic,"E: Roll two d6s, then choose the roll you want."
+Chaos Bolt,Sorcerer,Adventurer,A: No penalty for attacking a far away enemy.
+Chaos Bolt,Sorcerer,Champion,"C: Roll on epic table for chaotic benefit, or choose it, depending on tier."
+Echoing Thunder,Sorcerer,Champion,C: Empowering echoing thunder doubles its aftershock damage.
+Lightning Fork,Sorcerer,Adventurer,"A: Once per battle, reroll a lightning fork attack."
+Lightning Fork,Sorcerer,Champion,C: Lightning fork not expended if you miss all targets.
+Lightning Fork,Sorcerer,Epic,E: Recharge roll is now 11+.
+Resist Energy,Sorcerer,Adventurer,A: Add another target with the spell.
+Scorching Ray,Sorcerer,Adventurer,"A: You can now target far away enemies, but with a –2 penalty."
+Scorching Ray,Sorcerer,Champion,C: The spell attack can deal random energy damage instead of fire.
+Scorching Ray,Sorcerer,Epic,E: No penalty for attacking a far away enemy.
+The Elven Shadows,Sorcerer,Epic,"E: Once per battle, you can instead teleport to a far away location you can see."
+Ritual Magic,Wizard,Champion,C: Can cast full rituals in 1d3 + 1 rounds.
+Abjuration,Wizard,Adventurer,A: Bonus also applies to PD.
+Abjuration,Wizard,Champion,C: Gain 2d12 temp hp when you cast a daily spell.
+Abjuration,Wizard,Epic,E: Bonus also applies to MD.
+Cantrip Mastery,Wizard,Adventurer,A: You can now use cantrip-style versions of any spell you know.
+Evocation,Wizard,Champion,"C: When you evoke, reroll one natural attack roll that is less than esc. die."
+High Arcana,Wizard,Champion,C: You can now cast counter-magic twice per battle.
+High Arcana,Wizard,Epic,E: You can cast counter-magic in reaction to any magical action.
+Color Spray,Wizard,Adventurer,A: The weakened effect hp threshold increases by 5 hp.
+Color Spray,Wizard,Champion,"C: On a miss, deal damage equal to your level."
+Color Spray,Wizard,Epic,E: The spell now targets 1d3 + 1 creatures.
+Confusion,Wizard,Adventurer,A: You can choose a new miss effect that dazes all missed targets.
+Confusion,Wizard,Champion,C: Each failed save by the target deals 6d10 psychic damage to it.
+Confusion,Wizard,Epic,E: Confused effect now requires a difficult save (16+).
+Denial,Wizard,Champion,C: The target of the spell is also hampered on a natural even miss.
+Denial,Wizard,Epic,E: The spell now targets 1d4 + 1 enemies.
+Disintegrate,Wizard,Epic,E: The spell now targets a far away creature.
+Fireball,Wizard,Champion,C: Target 1d4 enemies instead of 1d3 when you cast the spell recklessly.
+Fireball,Wizard,Epic,E: The spell now targets 1d3 + 1 enemies.
+Force Salvo,Wizard,Adventurer,A: You can now target one creature with bolts until you hit it once.
+Force Salvo,Wizard,Champion,"C: On a miss, deal damage equal to level with a bolt."
+Force Salvo,Wizard,Epic,E: Increase the number of bolts by 1.
+Hold Monster,Wizard,Adventurer,A: Regain the spell if you miss all targets with it.
+Hold Monster,Wizard,Champion,C: The spell can now target 2 enemies under the hp limit.
+Hold Monster,Wizard,Epic,E: Increase the hp limit by +50 hp.
+Lightning Bolt,Wizard,Champion,C: Deal 10 ongoing lightning damage on a natural even hit.
+Lightning Bolt,Wizard,Epic,E: Deal 20 ongoing lightning damage (hard save) on a natural even hit.
+Magic Missile,Wizard,Adventurer,"A: Now choose two targets for the spell, each getting half damage dice."
+Magic Missile,Wizard,Champion,C: Roll a d20 with the spell to see if you crit.
+Magic Missile,Wizard,Epic,E: Use d8s instead of d4s for damage dice at spell levels 7 and 9.
+Meteor Swarm,Wizard,Epic,E: Damage from each meteor is now 5d4 x 10.
+Ray of Frost,Wizard,Adventurer,"A: On a natural even hit, daze the target if it’s staggered."
+Ray of Frost,Wizard,Champion,C: The spell’s target can now be far away.
+Ray of Frost,Wizard,Epic,E: You can have the spell deal lightning or negative energy damage.
+Rebuke,Wizard,Adventurer,A: Deal double your level psychic damage when you roll a natural even hit.
+Rebuke,Wizard,Champion,C: Also daze a target (save ends) you hit with the spell.
+Rebuke,Wizard,Epic,E: Daze a target for a round when you roll a natural even miss.
+Shield,Wizard,Adventurer,A: You choose which attack roll the attacker must use.
+Shield,Wizard,Champion,C: The spell’s recharge roll is now 6+.
+Shield,Wizard,Epic,"E: Hit or miss, take only half damage from attack you use shield against."
+Shocking Grasp,Wizard,Adventurer,A: Cast the spell as a quick action now.
+Shocking Grasp,Wizard,Champion,"C: Once per battle, you can also daze a target you hit with the spell."
+Shocking Grasp,Wizard,Epic,E: Use d8s instead of d6s for the spell’s damage dice.
+Teleport,Wizard,Epic,"E: You can now cast the spell on nearby allies; if allies are close, you can teleport to a location known by an ally."
+Teleport Shield,Wizard,Champion,"C: When your teleport shield attack misses, the attack isn’t expended that round."
+Teleport Shield,Wizard,Epic,E: You can now teleport an enemy to a location far away you can see.
+Utility Spell,Wizard,Adventurer,A: Each utility spell slot lets you cast two spells.
+Utility Spell,Wizard,Champion,C: Each utility spell slot lets you cast three spells.
+Wizard’s Familiar,Wizard,Adventurer,A: Familiar gains another ability.
+Wizard’s Familiar,Wizard,Champion,"C: Once per level, your familiar can cast one of your expended spells."
+Wizard’s Familiar,Wizard,Epic,E: Familiar gains another ability.
