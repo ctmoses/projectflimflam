@@ -7,14 +7,14 @@ Vue.use(Vuex);
 
 interface IState {
     user: Interface.IUser,
-};
+}
 
 export default new Vuex.Store({
     state: {
         user: {
             id: null,
             name: '',
-        }
+        },
     },
     mutations: {
         SET_USER: (state: IState, payload: any) => {

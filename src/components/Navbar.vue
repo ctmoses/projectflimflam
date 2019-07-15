@@ -1,7 +1,13 @@
 <template>
-    <div class="navbar" v-show="user.id">
-        <div class="user-name">{{ user.name }}</div>
-        <div class="logout" @click="logout">Logout</div>
+    <div class="navbar"
+         v-show="user.id">
+        <div class="user-name">
+            {{ user.name }}
+        </div>
+        <div class="logout"
+             @click="logout">
+            Logout
+        </div>
     </div>
 </template>
 
@@ -18,10 +24,10 @@
         @Getter('USER') user!: Interfaces.IUser;
 
         logout() {
-            this.setUser({id: null, name: ''});
+            this.setUser({ id: null, name: '' });
             firebase.auth().signOut().then(function() {
                     this.$router.push('/login');
-                }, function(error) {
+                }, (error) => {
                     console.log(error);
                 });
         }

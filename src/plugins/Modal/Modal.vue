@@ -1,16 +1,20 @@
 <template>
     <transition name="fade">
-        <div class="modal-outer" v-if="isVisible">
+        <div class="modal-outer"
+             v-if="isVisible">
             <div class="modal-inner">
-                <div class="header" v-if="useHeader">
-                    <h3 v-if="params.title" >{{ params.title }}</h3>
-                    <span class="close" @click="close">close</span>
+                <div class="header"
+                     v-if="useHeader">
+                    <h3 v-if="params.title">
+                        {{ params.title }}
+                    </h3>
+                    <span class="close"
+                          @click="close">close</span>
                 </div>
                 <div class="body">
                     <component :is="bodyTemplate"
                                v-if="bodyTemplate"
-                               :params="params">
-                    </component>
+                               :params="params" />
                 </div>
             </div>
         </div>
@@ -18,48 +22,50 @@
 </template>
 
 <script>
-import Modal from './vueModal';
+    // Ignoring next line because linter considers it a dependency cycle
+    /* eslint-disable-next-line */
+    import Modal from './vueModal';
 
-export default {
-    data() {
-        return {
-            isVisible: false,
-            bodyTemplate: null,
-            params: {},
-        };
-    },
-
-    computed: {
-        useHeader() {
-            return this.params && this.params.useHeader;
-        }
-    },
-
-    methods: {
-        close() {
-            this.handleToggleEvent(false);
+    export default {
+        data() {
+            return {
+                isVisible: false,
+                bodyTemplate: null,
+                params: {},
+            };
         },
 
-        handleToggleEvent(visible, template, params) {
-            if (typeof visible === 'boolean') {
-                this.isVisible = visible;
-                this.bodyTemplate = template;
-                this.params = params;
-            } else {
-                this.isVisible = !this.isVisible;
-            }
+        computed: {
+            useHeader() {
+                return this.params && this.params.useHeader;
+            },
+        },
 
-            if (this.isVisible) {
-                this.bodyTemplate = template;
-                this.params = params;
-            }
-        }
-    },
+        methods: {
+            close() {
+                this.handleToggleEvent(false);
+            },
 
-    beforeMount() {
-        Modal.event.$on('toggle', this.handleToggleEvent);
-    },
-};
+            handleToggleEvent(visible, template, params) {
+                if (typeof visible === 'boolean') {
+                    this.isVisible = visible;
+                    this.bodyTemplate = template;
+                    this.params = params;
+                } else {
+                    this.isVisible = !this.isVisible;
+                }
+
+                if (this.isVisible) {
+                    this.bodyTemplate = template;
+                    this.params = params;
+                }
+            },
+        },
+
+        beforeMount() {
+            Modal.event.$on('toggle', this.handleToggleEvent);
+        },
+    };
 </script>
 
 
