@@ -36,24 +36,23 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-    
     const user = firebase.auth().currentUser;
     const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
+    firebase.auth().onAuthStateChanged((fuser) => {
+        if (fuser) {
             store.dispatch('SET_USER', {
-                id: user.uid,
-                name: user.displayName,
+                id: fuser.uid,
+                name: fuser.displayName,
             });
         }
 
-        if (!user && requiresAuth) {
-          next('/login');
+        if (!fuser && requiresAuth) {
+            next('/login');
         } else {
-          next();
+            next();
         }
-    });    
+    });
 });
 
 export default router;

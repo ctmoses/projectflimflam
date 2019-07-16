@@ -2,7 +2,6 @@ export interface IUser {
     id: number | null,
     name: string,
 };
-
 export interface IIcon {
     name: string,
     level: number,
@@ -11,18 +10,17 @@ export interface IRace {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
     power: ISpells
-
 };
 export interface IBackground {
     backgroundtitle : string,
     backgroundmod : number
-}
+};
 export interface IFeats {
     tier: Tiers,
     prereq: string,
     power: string,
     name: string
-}
+};
 export interface ISpells {
     refresh: AbilityRefresh,
     trigger: AbilityTrigger,
@@ -30,7 +28,7 @@ export interface ISpells {
     level: number,
     name: string,
     powertext: string,
-}
+};
 export interface ITalents {
     refresh: AbilityRefresh,
     trigger: AbilityTrigger,
@@ -39,7 +37,7 @@ export interface ITalents {
     innate: boolean,
     name: string,
     powertext: string,
-}
+};
 export interface IClass {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
@@ -62,7 +60,7 @@ export interface IClass {
     calcspells(level:number):number,  
     spells: ISpells[],
     talents: ITalents[]
-}
+};
 export interface ICharacter {
     name: string,
     class: IClass,  //reset spells when rolling initiative or you do a full rest
@@ -155,4 +153,4 @@ export enum Tiers {
     ADVENTURER,
     CHAMPION,
     EPIC
-}
+};
