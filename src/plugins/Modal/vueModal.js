@@ -1,4 +1,4 @@
-import Modal from './Modal';
+import Modal from './Modal.vue';
 
 const Plugin = {
     install(Vue) {
