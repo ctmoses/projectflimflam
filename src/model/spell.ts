@@ -39,9 +39,11 @@ export class feat implements IFeats {
     tier: Tiers;
     prereq: string;
     power: string;
-    constructor(tier:Tiers,prereq:string,power:string){
+    name: string;
+    constructor(tier:Tiers,prereq:string,power:string, name:string){
         this.tier=tier;
         this.prereq=prereq;
         this.power=power;
+        this.name=name;
     }
 }

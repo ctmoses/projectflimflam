@@ -96,7 +96,7 @@ export class barbarian implements IClass {
     calcrangedhit(dex:number, level:number):number{
         var mod=0;
         if(this.ranged==RangedWeapons.XBOWHEAVY||this.ranged==RangedWeapons.XBOWLIGHT||this.ranged==RangedWeapons.XBOWSMALL)
-            mod=-5;
+            mod = -5;
         return calculatebasemodifier(dex)+level+mod;
     }
     calcmeleedmg(str:number, level:number):string{
@@ -106,14 +106,10 @@ export class barbarian implements IClass {
                 dice="d4";
                 break;
             case MeleeWeapons.ONEHLIGHT:
-                dice = "d6";
-                break;
-            case MeleeWeapons.ONEHHEAVY:
-                dice = "d8";
-                break;
             case MeleeWeapons.TWOHSMALL:
                 dice = "d6";
                 break;
+            case MeleeWeapons.ONEHHEAVY:
             case MeleeWeapons.TWOHLIGHT:
                 dice = "d8";
                 break;
@@ -130,25 +126,17 @@ export class barbarian implements IClass {
         var dice;
         switch(this.ranged){
             case RangedWeapons.THROWNSMALL:
+            case RangedWeapons.XBOWSMALL:
                 dice="d4";
                 break;
             case RangedWeapons.THROWNLIGHT:
-                dice = "d6";
-                break;
-            case RangedWeapons.XBOWSMALL:
-                dice = "d4";
-                break;
             case RangedWeapons.XBOWLIGHT:
+            case RangedWeapons.BOWLIGHT:
                 dice = "d6";
                 break;
             case RangedWeapons.XBOWHEAVY:
-                dice = "d8";
-                break;
-            case RangedWeapons.BOWLIGHT:
-                dice="d6";
-                break;
             case RangedWeapons.BOWHEAVY:
-                dice="d8";
+                dice = "d8";
                 break;
             default:
                 dice="d6"
@@ -156,8 +144,6 @@ export class barbarian implements IClass {
         }
         return level+dice+calculatebasemodifier(dex);
     } 
-    //SM: TODO.  Probably need a way to return how many spells/talents/feats the class has available at each level as well
-    
 }
 function calculatebasemodifier(abilityscore: number) {
     return Math.floor((abilityscore - 10) / 2);
