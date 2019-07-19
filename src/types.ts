@@ -57,13 +57,12 @@ export interface IClass {
     calcmeleedmg(attr:number, level:number):string,
     calcrangeddmg(attr:number, level:number):string, 
     calctalents(level:number):number,
-    calcspells(level:number):number,  
-    spells: ISpells[],
-    talents: ITalents[]
+    calcspells(level:number):number,
+    type():string,  
 };
 export interface ICharacter {
     name: string,
-    class: IClass,  //reset spells when rolling initiative or you do a full rest
+    class: IClass,  
     race: IRace,
     level: number,
     str: number,
@@ -73,7 +72,6 @@ export interface ICharacter {
     wis: number,
     cha: number,
     initiative: number,
-    escalationdie: number,  //probably increments after each "to-hit" input, reset to zero when rolling initiative
     ac: number,
     pd: number,
     md: number,
@@ -81,16 +79,18 @@ export interface ICharacter {
     curHp: number,
     maxRec: number,
     curRec: number,
-    recRoll: number,
+    recRoll: string,
     attMelee: number,
-    hitMelee: number,
+    hitMelee: string,
     missMelee: number,
     attRanged: number,
-    hitRanged: number,
+    hitRanged: string,
     missRanged: number,
     unique: string,
     icon: IIcon[],
-    feats: IFeats[], //SM: Need to think through feats, they can affect base character stats, specific spells, races, etc..  moved them here and out of class b/c of that
+    feats: IFeats[], 
+    talents: ITalents[],
+    spells: ISpells[],
     backgrounds: IBackground[],
     magicItems: string[] | null, 
 };
