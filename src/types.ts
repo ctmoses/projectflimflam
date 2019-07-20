@@ -9,7 +9,7 @@ export interface IIcon {
 export interface IRace {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
-    power: ISpells
+    type(): string
 };
 export interface IBackground {
     backgroundtitle : string,
@@ -38,6 +38,11 @@ export interface ITalents {
     name: string,
     powertext: string,
 };
+export interface IMagicItem{
+    type: ItemType,
+    tier: Tiers,
+
+};
 export interface IClass {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
@@ -45,19 +50,20 @@ export interface IClass {
     shield: boolean,
     weapon: MeleeWeapons,
     ranged: RangedWeapons,
-    calchp(con:number,level:number): number,
-    calcinitiative(dex:number, level:number): number,
-    calcac(con:number, dex:number,wis:number, level:number): number,
-    calcpd(str:number, con:number,dex:number,level:number): number,
-    calcmd(int:number, wis:number, cha:number, level:number): number,
-    calcrecoveries(): number,
-    calcrecoveryroll(con:number, level:number): string,  //SM: Not sure what we want to return here...just something like 4d8+4?
-    calcmeleehit(attr:number, level:number):number,
-    calcrangedhit(attr:number, level:number):number,
-    calcmeleedmg(attr:number, level:number):string,
-    calcrangeddmg(attr:number, level:number):string, 
-    calctalents(level:number):number,
-    calcspells(level:number):number,
+    calchp(con:number,level:number, feats?: IFeats[]): number,
+    baselineHP(): number,
+    calcinitiative(dex:number, level:number, feats?: IFeats[]): number,
+    calcac(con:number, dex:number,wis:number, level:number, feats?: IFeats[]): number,
+    calcpd(str:number, con:number,dex:number,level:number, feats?: IFeats[]): number,
+    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[]): number,
+    calcrecoveries(feats?: IFeats[]): number,
+    calcrecoveryroll(con:number, level:number, feats?: IFeats[]): string,  //SM: Not sure what we want to return here...just something like 4d8+4?
+    calcmeleehit(attr:number, level:number, feats?: IFeats[]):number,
+    calcrangedhit(attr:number, level:number, feats?: IFeats[]):number,
+    calcmeleedmg(attr:number, level:number, feats?: IFeats[]):string,
+    calcrangeddmg(attr:number, level:number, feats?: IFeats[]):string, 
+    calctalents(level:number, feats?: IFeats[]):number,
+    calcspells(level:number, feats?: IFeats[]):number,
     type():string,  
 };
 export interface ICharacter {
@@ -80,11 +86,11 @@ export interface ICharacter {
     maxRec: number,
     curRec: number,
     recRoll: string,
-    attMelee: number,
-    hitMelee: string,
+    meleeToHit: number,
+    meleeDmg: string,
     missMelee: number,
-    attRanged: number,
-    hitRanged: string,
+    rangedToHit: number,
+    rangedDmg: string,
     missRanged: number,
     unique: string,
     icon: IIcon[],
@@ -92,7 +98,7 @@ export interface ICharacter {
     talents: ITalents[],
     spells: ISpells[],
     backgrounds: IBackground[],
-    magicItems: string[] | null, 
+    magicItems: IMagicItem[], 
 };
 
 export enum Attributes {
@@ -154,3 +160,12 @@ export enum Tiers {
     CHAMPION,
     EPIC
 };
+export enum ItemType {
+    ARMOR,
+    BELT,
+    CLOAK,
+    HELM,
+    SHIELD,
+    MELEE,
+    RANGED,
+}

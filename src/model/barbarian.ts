@@ -1,4 +1,4 @@
-import { IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityTrigger, AbilityType, ITalents, Tiers } from '@/types';
+import { IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityTrigger, AbilityType, ITalents, Tiers, IFeats } from '@/types';
 import { spell, talent } from './spell';
 
 
@@ -35,10 +35,13 @@ export class barbarian implements IClass {
     calchp(con:number,level:number): number {
         return (7+calculatebasemodifier(con))*level;
     }
-    calcinitiative(dex:number, level:number): number{
+    baselineHP():number {
+        return 7;
+    }
+    calcinitiative(dex:number, level:number, feats?: IFeats[]): number{
         return calculatebasemodifier(dex)+level;
     }
-    calcac(con:number, dex:number,wis:number, level:number): number{
+    calcac(con:number, dex:number,wis:number, level:number, feats?: IFeats[]): number{
         let array = [dex,con,wis];
         array.sort();
         var armor;
@@ -60,32 +63,32 @@ export class barbarian implements IClass {
             armor+=1;
         return calculatebasemodifier(array[1])+level+armor;
     }
-    calcpd(str:number, con:number,dex:number,level:number): number{
+    calcpd(str:number, con:number,dex:number,level:number, feats?: IFeats[]): number{
         let array = [str,con,dex];
         array.sort();
         return calculatebasemodifier(array[1])+11+level;
     }
-    calcmd(int:number, wis:number, cha:number, level:number): number{
+    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[]): number{
         let array = [int,wis,cha];
         array.sort();
         return calculatebasemodifier(array[1])+10+level;
     }
-    calcrecoveries(): number{
+    calcrecoveries(feats: IFeats[]=[]): number{
         return 8;
     }
-    calcrecoveryroll(con:number, level:number): string{
+    calcrecoveryroll(con:number, level:number, feats?: IFeats[]): string{
         return level+"d10"+calculatebasemodifier(con);
     }
-    calcmeleehit(str:number, level:number):number{
+    calcmeleehit(str:number, level:number, feats?: IFeats[]):number{
         return calculatebasemodifier(str)+level;
     }
-    calcrangedhit(dex:number, level:number):number{
+    calcrangedhit(dex:number, level:number, feats?: IFeats[]):number{
         var mod=0;
         if(this.ranged==RangedWeapons.XBOWHEAVY||this.ranged==RangedWeapons.XBOWLIGHT||this.ranged==RangedWeapons.XBOWSMALL)
             mod = -5;
         return calculatebasemodifier(dex)+level+mod;
     }
-    calcmeleedmg(str:number, level:number):string{
+    calcmeleedmg(str:number, level:number, feats?: IFeats[]):string{
         var dice;
         switch(this.weapon){
             case MeleeWeapons.ONEHSMALL:
@@ -108,7 +111,7 @@ export class barbarian implements IClass {
         }
         return level+dice+calculatebasemodifier(str);
     }
-    calcrangeddmg(dex:number, level:number):string{
+    calcrangeddmg(dex:number, level:number, feats?: IFeats[]):string{
         var dice;
         switch(this.ranged){
             case RangedWeapons.THROWNSMALL:

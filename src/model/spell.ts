@@ -1,4 +1,4 @@
-import { AbilityRefresh, AbilityTrigger, AbilityType, ISpells, ITalents, Tiers, IFeats } from "@/types";
+import { AbilityRefresh, AbilityTrigger, AbilityType, ISpells, ITalents, Tiers, IFeats, IMagicItem, ItemType } from "@/types";
 
 
 export class spell implements ISpells{
@@ -45,5 +45,13 @@ export class feat implements IFeats {
         this.prereq=prereq;
         this.power=power;
         this.name=name;
+    }
+}
+export class magicitems implements IMagicItem {
+    type:ItemType;
+    tier: Tiers;
+    constructor(itemType:ItemType,tier: Tiers){
+        this.type=itemType;
+        this.tier=tier;
     }
 }
