@@ -1,6 +1,4 @@
 import { IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityTrigger, AbilityType, ITalents, Tiers, IFeats } from '@/types';
-import { spell, talent } from './spell';
-
 
 export class barbarian implements IClass {
     bonusstat1: Attributes;
@@ -77,7 +75,7 @@ export class barbarian implements IClass {
         return 8;
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[]): string{
-        return level+"d10"+calculatebasemodifier(con);
+        return level+"d10"+calculatebasemodifier(con); //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
     }
     calcmeleehit(str:number, level:number, feats?: IFeats[]):number{
         return calculatebasemodifier(str)+level;
@@ -109,7 +107,7 @@ export class barbarian implements IClass {
                 dice="d8"
                 break;
         }
-        return level+dice+calculatebasemodifier(str);
+        return level+dice+calculatebasemodifier(str);  //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
     }
     calcrangeddmg(dex:number, level:number, feats?: IFeats[]):string{
         var dice;
@@ -131,7 +129,7 @@ export class barbarian implements IClass {
                 dice="d6"
                 break;
         }
-        return level+dice+calculatebasemodifier(dex);
+        return level+dice+calculatebasemodifier(dex); //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
     } 
     type():string{
         return "Barbarian";
