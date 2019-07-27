@@ -25,7 +25,7 @@
 
         logout() {
             this.setUser({ id: null, name: '' });
-            firebase.auth().signOut().then(function() {
+            firebase.auth().signOut().then(function(this: any) {
                     this.$router.push('/login');
                 }, (error) => {
                     console.log(error);

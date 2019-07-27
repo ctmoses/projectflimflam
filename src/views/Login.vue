@@ -23,7 +23,7 @@
                                 firebase.auth.FacebookAuthProvider.PROVIDER_ID,
                 ],
                 callbacks: {
-                    signInSuccessWithAuthResult(authResult) {
+                    signInSuccessWithAuthResult(authResult): any {
                         console.log(authResult);
                         window.location.href = '/';
                     },

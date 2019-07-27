@@ -1,6 +1,7 @@
 export interface IUser {
     id: number | null,
     name: string,
+    imageURL: string,
 }
 
 export interface IIcon {

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import * as firebase from 'firebase/app';
 
-import Home from './views/Home.vue';
+import Main from './views/Main.vue';
 import Login from './views/Login.vue';
 
 import store from '@/store';
@@ -14,7 +14,7 @@ const router = new Router({
         {
             path: '/',
             name: 'home',
-            component: Home,
+            component: Main,
             meta: {
                 requiresAuth: true,
             },
@@ -41,9 +41,11 @@ router.beforeEach((to, from, next) => {
 
     firebase.auth().onAuthStateChanged((fuser) => {
         if (fuser) {
+            console.log(fuser)
             store.dispatch('SET_USER', {
                 id: fuser.uid,
                 name: fuser.displayName,
+                imageURL: fuser.photoURL,
             });
         }
 

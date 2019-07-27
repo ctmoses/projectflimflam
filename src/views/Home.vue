@@ -1,74 +1,15 @@
 <template>
     <div class="home">
-        <div class="chars">
-            <div class="card-container">
-                <md-card>
-                    <md-card-header>
-                        <md-card-header-text>
-                            <div class="md-title">
-                                Test Card
-                            </div>
-                            <div class="md-subhead">
-                                Test sub
-                            </div>
-                        </md-card-header-text>
-                    </md-card-header>
-
-                    <md-card-actions>
-                        <md-button>View</md-button>
-                    </md-card-actions>
-                </md-card>
-            </div>
-
-            <div class="card-container"
-                 id="add-char-card"
-                 @click="addCharacter">
-                <md-card>
-                    <md-ripple>
-                        <md-card-header>
-                            <md-card-header-text>
-                                <div class="md-title">
-                                    Add new character
-                                </div>
-                            </md-card-header-text>
-                            <md-card-media>
-                                <i class="material-icons"
-                                   id="add-char">
-                                    account_circle
-                                </i>
-                            </md-card-media>
-                        </md-card-header>
-                    </md-ripple>
-                </md-card>
-            </div>
-        </div>
+       
     </div>
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import NewCharacter from '@/components/modals/NewCharacter.vue';
 
-    @Component({
-        components: {
-            NewCharacter,
-        },
-    })
+    @Component
     export default class Home extends Vue {
-        showNewChar = false;
-
-        addCharacter() {
-            this.$modal.show(
-                true,
-                NewCharacter,
-                {
-                    title: 'Add a new character',
-                    useHeader: false,
-                    message: 'something',
-                },
-);
-            this.showNewChar = !this.showNewChar;
-        }
+        
     }
 </script>
 
