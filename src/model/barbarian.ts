@@ -1,6 +1,6 @@
 import { IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityTrigger, AbilityType, ITalents, Tiers, IFeats } from '@/types';
 
-export class barbarian implements IClass {
+export default class barbarian implements IClass {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
     armor: ArmorTypes;

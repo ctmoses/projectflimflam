@@ -1,6 +1,6 @@
 import { IRace, IClass, ICharacter, IIcon, IFeats, ITalents, ISpells, IBackground, Tiers, IMagicItem, ItemType } from '@/types';
 
-export class Character implements ICharacter {
+export default class Character implements ICharacter {
     name: string = "Default";
     class: IClass;  
     race: IRace;
