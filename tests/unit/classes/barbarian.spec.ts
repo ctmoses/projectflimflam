@@ -11,5 +11,6 @@ test('Barbarian AC should be calculated', () => {
 
     expect(barbarian.calcac(18, 10, 16, 1)).toBe(18);
     expect(barbarian.calcrecoveryroll(12,4)).toBe("4d10+1");
+    expect(barbarian.calcrangedhit(18,4)).toBe(8);
     
 });

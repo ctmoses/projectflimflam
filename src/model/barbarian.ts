@@ -90,21 +90,21 @@ export default class barbarian implements IClass {
         var dice;
         switch(this.weapon){
             case MeleeWeapons.ONEHSMALL:
-                dice="d4";
+                dice="d4+";
                 break;
             case MeleeWeapons.ONEHLIGHT:
             case MeleeWeapons.TWOHSMALL:
-                dice = "d6";
+                dice = "d6+";
                 break;
             case MeleeWeapons.ONEHHEAVY:
             case MeleeWeapons.TWOHLIGHT:
-                dice = "d8";
+                dice = "d8+";
                 break;
             case MeleeWeapons.TWOHHEAVY:
-                dice="d10";
+                dice="d10+";
                 break;
             default:
-                dice="d8"
+                dice="d8+"
                 break;
         }
         return level+dice+calculatebasemodifier(str);  //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
@@ -114,19 +114,19 @@ export default class barbarian implements IClass {
         switch(this.ranged){
             case RangedWeapons.THROWNSMALL:
             case RangedWeapons.XBOWSMALL:
-                dice="d4";
+                dice="d4+";
                 break;
             case RangedWeapons.THROWNLIGHT:
             case RangedWeapons.XBOWLIGHT:
             case RangedWeapons.BOWLIGHT:
-                dice = "d6";
+                dice = "d6+";
                 break;
             case RangedWeapons.XBOWHEAVY:
             case RangedWeapons.BOWHEAVY:
-                dice = "d8";
+                dice = "d8+";
                 break;
             default:
-                dice="d6"
+                dice="d6+"
                 break;
         }
         return level+dice+calculatebasemodifier(dex); //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
