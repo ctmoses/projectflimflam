@@ -19,12 +19,12 @@ export default class Character implements ICharacter {
     curHp: number;
     maxRec: number;
     curRec: number;
-    recRoll: string;
+    recRoll: number[];
     meleeToHit: number;
-    meleeDmg: string;
+    meleeDmg: number[];
     missMelee: number;
     rangedToHit: number;
-    rangedDmg: string;
+    rangedDmg: number[];
     missRanged: number;
     unique: string = "Default";
     icon: IIcon[] = [];
@@ -103,12 +103,19 @@ export default class Character implements ICharacter {
     setUnique(unique:string){
         this.unique=unique;
     }
-    calcNumberofFeats():number{
+    calcNumberofFeats():number[]{
         var mod=0;
         if(this.race.type()=="Human"){
             mod=1;
         }
-        return this.level+mod;
+        //SM: TODO: Humans get an extra feat. Is it always adv tier?
+        if(this.level<=4)
+            return [this.level+mod,0,0];
+        if(this.level>4 && this.level<8)
+            return [4,this.level%4+mod,0];
+        if(this.level>=8)
+            return [4,3,this.level%7+mod];
+        return [];
     }
     setBackgrounds(backgrounds:IBackground[]){
         this.backgrounds=backgrounds;
@@ -139,10 +146,10 @@ export default class Character implements ICharacter {
         });
         return 5;
     }
-    calcNumberofSpells():number{
+    calcNumberofSpells():number[]{
         return this.class.calcspells(this.level, this.feats);
     }
-    calcNumberofTalents():number{
+    calcNumberofTalents():number[]{
         return this.class.calctalents(this.level, this.feats);
     }
     setHP(newtotal:number){
@@ -167,13 +174,13 @@ export default class Character implements ICharacter {
         this.feats.forEach(element => {
             if(element.name=='Toughness'){
                 if(this.level<=4){
-                    HPAdd=this.class.baselineHP()/2;
+                    HPAdd+=this.class.baselineHP()/2;
                 }
                 else if(this.level>4&&this.level<8){
-                    HPAdd=this.class.baselineHP();
+                    HPAdd+=this.class.baselineHP();
                 }
                 else{
-                    HPAdd=this.class.baselineHP()*2;
+                    HPAdd+=this.class.baselineHP()*2;
                 }
             }
         });
@@ -181,13 +188,13 @@ export default class Character implements ICharacter {
             if(element.type==ItemType.SHIELD){
                 switch (element.tier){
                     case Tiers.ADVENTURER:
-                        HPAdd=4;
+                        HPAdd+=4;
                         break;
                     case Tiers.CHAMPION:
-                        HPAdd=10;
+                        HPAdd+=10;
                         break;
                     case Tiers.EPIC:
-                        HPAdd=25;
+                        HPAdd+=25;
                         break;
                 }
             }

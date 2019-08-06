@@ -17,21 +17,54 @@ export default class barbarian implements IClass {
         this.ranged = ranged;
         this.shield = shield;
     }
-    
-    calctalents(level:number):number{
+    calctalents(level:number):number[]{
         if(level<=4)
-            return 3;
+            return [3,0,0];
         if(level>4&&level<8)
-            return 4;  //SM: TODO.  This class should really return something like 3 Adventurer and 1 Champion tier talent
+            return [3,1,0];  //SM: TODO.  This class should really return something like 3 Adventurer and 1 Champion tier talent
         if(level>=8)
-            return 5;
-        return -1;
+            return [3,1,1];
+        return [-1,-1,-1];
     }
-    calcspells(level:number):number{
-        return 0;
+    calcspells(level:number):number[]{
+        return [];
     }
     calchp(con:number,level:number): number {
-        return (7+calculatebasemodifier(con))*level;
+        var multiplier=1;
+        switch(level){
+            case 1:
+                multiplier = 3;
+                break;
+            case 2:
+                multiplier = 4;
+                break;
+            case 3:
+                multiplier = 5;
+                break;
+            case 4:
+                multiplier = 6;
+                break;
+            case 5:
+                multiplier = 8;
+                break;  
+            case 6:
+                multiplier = 10;
+                break;  
+            case 7:
+                multiplier = 12;
+                break;
+            case 8:
+                multiplier = 16;
+                break;
+            case 9:
+                multiplier = 20;
+                break;
+            case 10:
+                multiplier = 24;
+                break;
+        
+        }
+        return (7+calculatebasemodifier(con))*multiplier;
     }
     baselineHP():number {
         return 7;
@@ -74,8 +107,8 @@ export default class barbarian implements IClass {
     calcrecoveries(feats: IFeats[]=[]): number{
         return 8;
     }
-    calcrecoveryroll(con:number, level:number, feats?: IFeats[]): string{
-        return level+"d10+"+calculatebasemodifier(con); //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
+    calcrecoveryroll(con:number, level:number, feats?: IFeats[]): number[]{
+        return [level,10,calculatebasemodifier(con)];
     }
     calcmeleehit(str:number, level:number, feats?: IFeats[]):number{
         return calculatebasemodifier(str)+level;
@@ -86,53 +119,64 @@ export default class barbarian implements IClass {
             mod = -5;
         return calculatebasemodifier(dex)+level+mod;
     }
-    calcmeleedmg(str:number, level:number, feats?: IFeats[]):string{
+    calcmeleedmg(str:number, level:number, feats?: IFeats[]):number[]{
         var dice;
         switch(this.weapon){
             case MeleeWeapons.ONEHSMALL:
-                dice="d4+";
+                dice=4;
                 break;
             case MeleeWeapons.ONEHLIGHT:
             case MeleeWeapons.TWOHSMALL:
-                dice = "d6+";
+                dice = 6;
                 break;
             case MeleeWeapons.ONEHHEAVY:
             case MeleeWeapons.TWOHLIGHT:
-                dice = "d8+";
+                dice = 8;
                 break;
             case MeleeWeapons.TWOHHEAVY:
-                dice="d10+";
+                dice=10;
                 break;
             default:
-                dice="d8+"
+                dice=8;
                 break;
         }
-        return level+dice+calculatebasemodifier(str);  //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
+        var mult=this.calcDamageBonusMult(level);
+        return [level,dice,calculatebasemodifier(str)*mult]; 
     }
-    calcrangeddmg(dex:number, level:number, feats?: IFeats[]):string{
+    calcrangeddmg(dex:number, level:number, feats?: IFeats[]):number[]{
         var dice;
         switch(this.ranged){
             case RangedWeapons.THROWNSMALL:
             case RangedWeapons.XBOWSMALL:
-                dice="d4+";
+                dice=4;
                 break;
             case RangedWeapons.THROWNLIGHT:
             case RangedWeapons.XBOWLIGHT:
             case RangedWeapons.BOWLIGHT:
-                dice = "d6+";
+                dice = 6;
                 break;
             case RangedWeapons.XBOWHEAVY:
             case RangedWeapons.BOWHEAVY:
-                dice = "d8+";
+                dice = 8;
                 break;
             default:
-                dice="d6+"
+                dice=6;
                 break;
         }
-        return level+dice+calculatebasemodifier(dex); //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
+        var mult = this.calcDamageBonusMult(level);
+        return [level,dice,calculatebasemodifier(dex)*mult];
     } 
     type():string{
         return "Barbarian";
+    }
+    calcDamageBonusMult(level:number):number{
+        if(level<5)
+            return 1;
+        if(level>4 && level<8)
+            return 2;
+        if(level>7)
+            return 3;
+        return 0;
     }
 }
 function calculatebasemodifier(abilityscore: number) {
