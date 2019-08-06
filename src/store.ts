@@ -14,6 +14,7 @@ export default new Vuex.Store({
         user: {
             id: null,
             name: '',
+            imageURL: '',
         },
     },
     mutations: {
@@ -21,6 +22,7 @@ export default new Vuex.Store({
             const user = {
                 id: payload.id,
                 name: payload.name,
+                imageURL: payload.imageURL,
             };
             state.user = user;
         },

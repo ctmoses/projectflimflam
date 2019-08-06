@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Navbar />
+        <!-- <Navbar /> -->
         <div class="viewer">
             <router-view />
         </div>
@@ -40,7 +40,7 @@
 
     .viewer {
         position: absolute;
-        top: $navsize;
+        top: 0; //$navsize;
         bottom: 0;
         left: 0;
         right: 0;
