@@ -75,7 +75,7 @@ export default class barbarian implements IClass {
         return 8;
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[]): string{
-        return level+"d10"+calculatebasemodifier(con); //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
+        return level+"d10+"+calculatebasemodifier(con); //SM: TODO Who even knows what this returns right now.  Need to think through how we want this
     }
     calcmeleehit(str:number, level:number, feats?: IFeats[]):number{
         return calculatebasemodifier(str)+level;

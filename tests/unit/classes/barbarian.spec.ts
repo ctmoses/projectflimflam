@@ -9,5 +9,7 @@ test('Barbarian AC should be calculated', () => {
     let ranged = Types.RangedWeapons.BOWLIGHT;
     let barbarian = new Barbarian(armor, true, weapon, ranged);
 
-    expect(barbarian.calcac(10, 10, 10, 1)).toBe(15);
+    expect(barbarian.calcac(18, 10, 16, 1)).toBe(18);
+    expect(barbarian.calcrecoveryroll(12,4)).toBe("4d10+1");
+    
 });
