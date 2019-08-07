@@ -53,13 +53,13 @@ export default class paladin implements IClass {
                             return [0,0,0,0,1];
                             break;
                         default:
-                            return [0,0,0,0,0,0]
+                            return [0,0,0,0,0];
                             break;
                     }
                 }
             });
         }
-        return [-1,-1,-1,-1,-1];
+        return [0,0,0,0,0];
     }
     calchp(con:number,level:number, feats?: IFeats[], talents?: ITalents[]): number {
         var multiplier=1;
@@ -252,11 +252,11 @@ export default class paladin implements IClass {
     calcDamageBonusMult(level:number):number{
         if(level<5)
             return 1;
-        if(level>4 && level<8)
+        if(level>=5 && level<=7)
             return 2;
         if(level>7)
             return 3;
-        return 0;
+        return -1;
     }
     calculatebasemodifier(abilityscore: number):number {
         return Math.floor((abilityscore - 10) / 2);
