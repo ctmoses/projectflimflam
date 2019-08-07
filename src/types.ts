@@ -24,10 +24,20 @@ export interface IFeats {
     name: string
 }
 export interface ISpells {
-    refresh: AbilityRefresh,
-    trigger: AbilityTrigger,
-    type: AbilityType,
+    charclass: string,
+    name: string,
     level: number,
+    refresh: AbilityRefresh,
+    type: AbilityType,
+    range: string,
+    target: string,
+    attack: string,
+    hit: string,
+    miss: string,
+    effect: string,
+};
+export interface IManeuvers {
+    charclass: string,
     name: string,
     powertext: string,
 }

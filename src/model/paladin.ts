@@ -26,38 +26,39 @@ export default class paladin implements IClass {
         if (level >= 8) return [5, 0, 0];
         return [-1, -1, -1];
     }
-    calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[] {
-        if (talents) {
-            talents.forEach((element) => {
-                if (element.name == 'Cleric Training') {
-                    switch (level) {
-                    case 1:
-                    case 2:
-                        return [1, 0, 0, 0, 0];
-                        break;
-                    case 3:
-                    case 4:
-                        return [0, 1, 0, 0, 0];
-                        break;
-                    case 5:
-                    case 6:
-                        return [0, 0, 1, 0, 0];
-                        break;
-                    case 7:
-                    case 8:
-                        return [0, 0, 0, 1, 0];
-                    case 9:
-                    case 10:
-                        return [0, 0, 0, 0, 1];
-                        break;
-                    default:
-                        return [0, 0, 0, 0, 0, 0];
-                        break;
+    calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
+        if(talents){
+            talents.forEach(element => {
+                if(element.name=="Cleric Training"){
+                    switch(level){
+                        case 1:
+                        case 2:
+                            return [1,0,0,0,0];
+                            break;
+                        case 3:
+                        case 4:
+                            return [0,1,0,0,0];
+                            break;
+                        case 5:
+                        case 6:
+                            return [0,0,1,0,0];
+                            break;
+                        case 7:
+                        case 8:
+                            return [0,0,0,1,0];
+                            break;
+                        case 9:
+                        case 10:
+                            return [0,0,0,0,1];
+                            break;
+                        default:
+                            return [0,0,0,0,0,0]
+                            break;
                     }
                 }
             });
         }
-        return [0, 0, 0, 0, 0];
+        return [-1,-1,-1,-1,-1];
     }
     calchp(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number {
         let multiplier = 1;
