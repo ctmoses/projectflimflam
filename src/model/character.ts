@@ -1,4 +1,5 @@
 import { IRace, IClass, ICharacter, IIcon, IFeats, ITalents, ISpells, IBackground, Tiers, IMagicItem, ItemType } from '@/types';
+import { magicitems } from './spell';
 
 export default class Character implements ICharacter {
     name: string = "Default";
@@ -103,6 +104,9 @@ export default class Character implements ICharacter {
     setUnique(unique:string){
         this.unique=unique;
     }
+    setMagicItems(items:magicitems[]){
+        this.magicItems = items;
+    }
     calcNumberofFeats():number[]{
         var mod=0;
         if(this.race.type()=="Human"){
@@ -122,6 +126,7 @@ export default class Character implements ICharacter {
     }
     calcNumberofBackgrounds():number{
         var mod=0;
+        //SM: TODO: Be sure to test taking all three feats that this adds up to 7
         this.feats.forEach(element => {
             if(element.name=="Further Backgrounding"){
                 if(element.tier==Tiers.ADVENTURER){

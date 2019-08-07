@@ -64,17 +64,17 @@ export default class barbarian implements IClass {
                 break;
         
         }
-        return (7+calculatebasemodifier(con))*multiplier;
+        return (this.baselineHP()+this.calculatebasemodifier(con))*multiplier;
     }
     baselineHP():number {
         return 7;
     }
     calcinitiative(dex:number, level:number, feats?: IFeats[]): number{
-        return calculatebasemodifier(dex)+level;
+        return this.calculatebasemodifier(dex)+level;
     }
     calcac(con:number, dex:number,wis:number, level:number, feats?: IFeats[]): number{
         let array = [dex,con,wis];
-        array.sort();
+        var sorted = array.sort((n1,n2)=>n1-n2);
         var armor;
         switch(this.armor){
             case ArmorTypes.NONE:
@@ -92,32 +92,37 @@ export default class barbarian implements IClass {
         }
         if(this.shield)
             armor+=1;
-        return calculatebasemodifier(array[1])+level+armor;
+        return this.calculatebasemodifier(sorted[1])+level+armor;
     }
     calcpd(str:number, con:number,dex:number,level:number, feats?: IFeats[]): number{
         let array = [str,con,dex];
-        array.sort();
-        return calculatebasemodifier(array[1])+11+level;
+        var sorted = array.sort((n1,n2)=>n1-n2);
+        return this.calculatebasemodifier(sorted[1])+11+level;
     }
     calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[]): number{
         let array = [int,wis,cha];
-        array.sort();
-        return calculatebasemodifier(array[1])+10+level;
+        var sorted = array.sort((n1,n2)=>n1-n2);
+        return this.calculatebasemodifier(sorted[1])+10+level;
     }
     calcrecoveries(feats: IFeats[]=[]): number{
         return 8;
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[]): number[]{
-        return [level,10,calculatebasemodifier(con)];
+        return [level,10,this.calculatebasemodifier(con)];
     }
     calcmeleehit(str:number, level:number, feats?: IFeats[]):number{
-        return calculatebasemodifier(str)+level;
+        var mod=0;
+        if(this.armor==ArmorTypes.HEAVY)
+            mod=-2;
+        return this.calculatebasemodifier(str)+level+mod;
     }
     calcrangedhit(dex:number, level:number, feats?: IFeats[]):number{
         var mod=0;
         if(this.ranged==RangedWeapons.XBOWHEAVY||this.ranged==RangedWeapons.XBOWLIGHT||this.ranged==RangedWeapons.XBOWSMALL)
-            mod = -5;
-        return calculatebasemodifier(dex)+level+mod;
+            mod += -5;
+        if(this.armor==ArmorTypes.HEAVY)
+            mod+=-2;
+        return this.calculatebasemodifier(dex)+level+mod;
     }
     calcmeleedmg(str:number, level:number, feats?: IFeats[]):number[]{
         var dice;
@@ -141,7 +146,7 @@ export default class barbarian implements IClass {
                 break;
         }
         var mult=this.calcDamageBonusMult(level);
-        return [level,dice,calculatebasemodifier(str)*mult]; 
+        return [level,dice,this.calculatebasemodifier(str)*mult]; 
     }
     calcrangeddmg(dex:number, level:number, feats?: IFeats[]):number[]{
         var dice;
@@ -164,7 +169,7 @@ export default class barbarian implements IClass {
                 break;
         }
         var mult = this.calcDamageBonusMult(level);
-        return [level,dice,calculatebasemodifier(dex)*mult];
+        return [level,dice,this.calculatebasemodifier(dex)*mult];
     } 
     type():string{
         return "Barbarian";
@@ -178,7 +183,7 @@ export default class barbarian implements IClass {
             return 3;
         return 0;
     }
-}
-function calculatebasemodifier(abilityscore: number) {
-    return Math.floor((abilityscore - 10) / 2);
+    calculatebasemodifier(abilityscore: number):number {
+        return Math.floor((abilityscore - 10) / 2);
+    }
 }
