@@ -43,7 +43,7 @@ export interface ITalents {
 export interface IMagicItem{
     type: ItemType,
     tier: Tiers,
-
+    equipped: boolean
 };
 export interface IClass {
     bonusstat1: Attributes,

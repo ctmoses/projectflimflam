@@ -16,9 +16,9 @@ test('Character Defenses should be calculated', () => {
     expect(c.md).toBe(10);
     expect(c.pd).toBe(15);
 
-    let magicitem = new Spells.magicitems(Types.ItemType.ARMOR,Types.Tiers.CHAMPION);
-    let magicitem1 = new Spells.magicitems(Types.ItemType.CLOAK,Types.Tiers.ADVENTURER);
-    let magicitem2 = new Spells.magicitems(Types.ItemType.HELM,Types.Tiers.EPIC);
+    let magicitem = new Spells.magicitems(Types.ItemType.ARMOR,Types.Tiers.CHAMPION,true);
+    let magicitem1 = new Spells.magicitems(Types.ItemType.CLOAK,Types.Tiers.ADVENTURER,true);
+    let magicitem2 = new Spells.magicitems(Types.ItemType.HELM,Types.Tiers.EPIC,true);
     c.setMagicItems([magicitem,magicitem1,magicitem2]);
     expect(c.ac).toBe(17);
     expect(c.md).toBe(13);
@@ -107,12 +107,12 @@ test('Character hitpoints should be calculated', () =>{
     expect(c.maxHp).toBe(87);
 
     c = new Character(barbarian,d,18,16,14,6,8,10,10);
-    let magicitem = new Spells.magicitems(Types.ItemType.SHIELD,Types.Tiers.CHAMPION);
+    let magicitem = new Spells.magicitems(Types.ItemType.SHIELD,Types.Tiers.CHAMPION,true);
     c.setMagicItems([magicitem]);
     expect(c.maxHp).toBe(250);
 
     c = new Character(barbarian,d,18,16,14,6,8,10,10);
-    magicitem = new Spells.magicitems(Types.ItemType.SHIELD,Types.Tiers.CHAMPION);
+    magicitem = new Spells.magicitems(Types.ItemType.SHIELD,Types.Tiers.CHAMPION,true);
     f = new Spells.feat(Types.Tiers.ADVENTURER,"","bckgd","Toughness");
     c.setMagicItems([magicitem]);
     c.setFeats([f]);
@@ -131,7 +131,7 @@ test('Character recoveries should be calculated', () =>{
     expect(c.maxRec).toBe(8);
     expect(c.recRoll).toEqual([1,10,3])
 
-    let magicitem = new Spells.magicitems(Types.ItemType.BELT,Types.Tiers.CHAMPION);
+    let magicitem = new Spells.magicitems(Types.ItemType.BELT,Types.Tiers.CHAMPION,true);
     c.setMagicItems([magicitem]);
     expect(c.maxRec).toBe(10);
 
@@ -157,14 +157,22 @@ test('Character hit values should be calculated', () =>{
     expect(c.meleeToHit).toBe(5);
     expect(c.rangedToHit).toBe(3)
 
-    let magicitem = new Spells.magicitems(Types.ItemType.MELEE,Types.Tiers.CHAMPION);
-    let magicitem2 = new Spells.magicitems(Types.ItemType.RANGED,Types.Tiers.EPIC);
+    let magicitem = new Spells.magicitems(Types.ItemType.MELEE,Types.Tiers.CHAMPION,true);
+    let magicitem2 = new Spells.magicitems(Types.ItemType.RANGED,Types.Tiers.EPIC,true);
     c.setMagicItems([magicitem,magicitem2]);
     expect(c.meleeToHit).toBe(7);
     expect(c.rangedToHit).toBe(6);
     
+    magicitem.unequip();
+    c.setMagicItems([magicitem]);
+    expect(c.meleeToHit).toBe(5);
+
     c = new Character(barbarian,d,6,6,4,6,6,6,1);
     expect(c.meleeToHit).toBe(-1);
     expect(c.rangedToHit).toBe(-2);
+
+    
+
+
 });
 

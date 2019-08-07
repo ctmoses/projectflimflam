@@ -196,17 +196,20 @@ export default class Character implements ICharacter {
         });
         this.magicItems.forEach(element => {
             if(element.type==ItemType.SHIELD){
-                switch (element.tier){
-                    case Tiers.ADVENTURER:
-                        HPAdd+=4;
-                        break;
-                    case Tiers.CHAMPION:
-                        HPAdd+=10;
-                        break;
-                    case Tiers.EPIC:
-                        HPAdd+=25;
-                        break;
+                if(element.equipped==true){
+                    switch (element.tier){
+                        case Tiers.ADVENTURER:
+                            HPAdd+=4;
+                            break;
+                        case Tiers.CHAMPION:
+                            HPAdd+=10;
+                            break;
+                        case Tiers.EPIC:
+                            HPAdd+=25;
+                            break;
+                    }
                 }
+
             }
         });
         this.maxHp= this.class.calchp(this.con,this.level,this.feats, this.talents)+HPAdd;
@@ -215,16 +218,18 @@ export default class Character implements ICharacter {
         var mod = 0;
         this.magicItems.forEach(element => {
             if(element.type==ItemType.ARMOR){
-                switch (element.tier){
-                    case Tiers.ADVENTURER:
-                        mod=1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod=2;
-                        break;
-                    case Tiers.EPIC:
-                        mod=3;
-                        break;
+                if(element.equipped==true){
+                    switch (element.tier){
+                        case Tiers.ADVENTURER:
+                            mod=1;
+                            break;
+                        case Tiers.CHAMPION:
+                            mod=2;
+                            break;
+                        case Tiers.EPIC:
+                            mod=3;
+                            break;
+                    }
                 }
             }
         });
@@ -234,16 +239,18 @@ export default class Character implements ICharacter {
         var mod = 0;
         this.magicItems.forEach(element => {
             if(element.type==ItemType.CLOAK){
-                switch (element.tier){
-                    case Tiers.ADVENTURER:
-                        mod=1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod=2;
-                        break;
-                    case Tiers.EPIC:
-                        mod=3;
-                        break;
+                if(element.equipped==true){
+                    switch (element.tier){
+                        case Tiers.ADVENTURER:
+                            mod=1;
+                            break;
+                        case Tiers.CHAMPION:
+                            mod=2;
+                            break;
+                        case Tiers.EPIC:
+                            mod=3;
+                            break;
+                    }
                 }
             }
         });
@@ -253,16 +260,18 @@ export default class Character implements ICharacter {
         var mod = 0;
         this.magicItems.forEach(element => {
             if(element.type==ItemType.HELM){
-                switch (element.tier){
-                    case Tiers.ADVENTURER:
-                        mod=1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod=2;
-                        break;
-                    case Tiers.EPIC:
-                        mod=3;
-                        break;
+                if(element.equipped==true){
+                    switch (element.tier){
+                        case Tiers.ADVENTURER:
+                            mod=1;
+                            break;
+                        case Tiers.CHAMPION:
+                            mod=2;
+                            break;
+                        case Tiers.EPIC:
+                            mod=3;
+                            break;
+                    }
                 }
             }
         });
@@ -272,16 +281,18 @@ export default class Character implements ICharacter {
         var mod = 0;
         this.magicItems.forEach(element => {
             if(element.type==ItemType.BELT){
-                switch (element.tier){
-                    case Tiers.ADVENTURER:
-                        mod=1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod=2;
-                        break;
-                    case Tiers.EPIC:
-                        mod=3;
-                        break;
+                if(element.equipped==true){
+                    switch (element.tier){
+                        case Tiers.ADVENTURER:
+                            mod=1;
+                            break;
+                        case Tiers.CHAMPION:
+                            mod=2;
+                            break;
+                        case Tiers.EPIC:
+                            mod=3;
+                            break;
+                    }
                 }
             }
         });
@@ -291,16 +302,18 @@ export default class Character implements ICharacter {
         var mod = 0;
         this.magicItems.forEach(element => {
             if(element.type==ItemType.MELEE){
-                switch (element.tier){
-                    case Tiers.ADVENTURER:
-                        mod=1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod=2;
-                        break;
-                    case Tiers.EPIC:
-                        mod=3;
-                        break;
+                if(element.equipped==true){
+                    switch (element.tier){
+                        case Tiers.ADVENTURER:
+                            mod=1;
+                            break;
+                        case Tiers.CHAMPION:
+                            mod=2;
+                            break;
+                        case Tiers.EPIC:
+                            mod=3;
+                            break;
+                    }
                 }
             }
         });
@@ -323,16 +336,18 @@ export default class Character implements ICharacter {
         var mod = 0;
         this.magicItems.forEach(element => {
             if(element.type==ItemType.RANGED){
-                switch (element.tier){
-                    case Tiers.ADVENTURER:
-                        mod=1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod=2;
-                        break;
-                    case Tiers.EPIC:
-                        mod=3;
-                        break;
+                if(element.equipped==true){
+                    switch (element.tier){
+                        case Tiers.ADVENTURER:
+                            mod=1;
+                            break;
+                        case Tiers.CHAMPION:
+                            mod=2;
+                            break;
+                        case Tiers.EPIC:
+                            mod=3;
+                            break;
+                    }
                 }
             }
         });

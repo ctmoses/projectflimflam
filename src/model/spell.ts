@@ -50,8 +50,16 @@ export class feat implements IFeats {
 export class magicitems implements IMagicItem {
     type:ItemType;
     tier: Tiers;
-    constructor(itemType:ItemType,tier: Tiers){
+    equipped: boolean;
+    constructor(itemType:ItemType,tier: Tiers,equipped: boolean){
         this.type=itemType;
         this.tier=tier;
+        this.equipped=equipped;
+    }
+    equip(){
+        this.equipped=true;
+    }
+    unequip(){
+        this.equipped=false;
     }
 }
