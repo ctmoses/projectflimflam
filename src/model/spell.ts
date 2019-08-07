@@ -2,19 +2,30 @@ import { AbilityRefresh, AbilityTrigger, AbilityType, ISpells, ITalents, Tiers, 
 
 
 export class spell implements ISpells{
-    refresh: AbilityRefresh;
-    trigger: AbilityTrigger;
-    type: AbilityType;
+    charclass: string;
     name: string;
-    powertext: string;
     level: number;
-    constructor(refresh: AbilityRefresh, trigger: AbilityTrigger, type: AbilityType, level: number,  name: string, powertext: string){
-        this.refresh = refresh;
-        this.trigger = trigger;
-        this.type = type;
-        this.name = name;
-        this.powertext = powertext;
-        this.level = level;
+    refresh: AbilityRefresh;
+    type: AbilityType;
+    range: string;
+    target: string;
+    attack: string;
+    hit: string;
+    miss: string;
+    effect: string;
+    constructor(charclass: string, name: string, level: number, refresh: AbilityRefresh, type: AbilityType, range: string, target: string, attack:string, hit: string, miss: string, effect: string){
+        this.charclass=charclass;
+        this.name=name;
+        this.level=level;
+        this.refresh=refresh;
+        this.type=type;
+        this.range=range;
+        this.target=target;
+        this.attack=attack;
+        this.hit=hit;
+        this.miss=miss;
+        this.effect=effect;
+
     }
 }
 export class talent implements ITalents{
