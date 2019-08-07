@@ -1,10 +1,9 @@
 <template>
     <div id="app">
-        <!-- <Navbar /> -->
+        <Navbar />
         <div class="viewer">
             <router-view />
         </div>
-        <vue-modal />
     </div>
 </template>
 

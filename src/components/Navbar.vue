@@ -4,6 +4,11 @@
         <div class="user-name">
             {{ user.name }}
         </div>
+
+        <div class="create">
+            <router-link to="/create" />
+        </div>
+
         <div class="logout"
              @click="logout">
             Logout
@@ -56,6 +61,12 @@
             &:hover {
                 cursor: pointer;
                 text-decoration: underline;
+            }
+        }
+
+        .create {
+            a {
+                color: #fff;
             }
         }
     }
