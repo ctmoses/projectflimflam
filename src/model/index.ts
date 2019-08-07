@@ -1,5 +1,5 @@
-import Barbarian from './barbarian';
-import Paladin from './paladin';
+import Barbarian from './classes/barbarian';
+import Paladin from './classes/paladin';
 import Character from './character';
 import * as constants from './constants';
 import * as Race from './race';

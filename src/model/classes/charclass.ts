@@ -10,7 +10,6 @@ export default abstract class charclass implements IClass {
     weapon: MeleeWeapons;
     ranged: RangedWeapons;
 
-
     constructor(armor: ArmorTypes, shield: boolean, weapon: MeleeWeapons, ranged: RangedWeapons) {
         this.bonusstat1 = NaN;
         this.bonusstat2 = NaN;
@@ -84,9 +83,7 @@ export default abstract class charclass implements IClass {
         return this.calculatebasemodifier(sorted[1]) + level;
     }
     calcrecoveries(feats?: IFeats[], talents?: ITalents[]): number {
-        let recoveries = 8;
-       
-        return recoveries;
+        return 8;
     }
     abstract calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[];
     calcmeleehit(str:number, level:number, feats?: IFeats[], talents?: ITalents[]):number {

@@ -1,7 +1,7 @@
 import {
     IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityTrigger, AbilityType, ITalents, Tiers, IFeats,
 } from '@/types';
-import { feat } from './spell';
+import { feat } from '../spell';
 import charclass from './charclass';
 
 export default class paladin extends charclass {

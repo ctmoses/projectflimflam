@@ -1,4 +1,4 @@
-import Paladin from '../../../src/model/paladin';
+import Paladin from '../../../src/model/classes/paladin';
 import * as Race from '../../../src/model/race';
 import Character from '../../../src/model/character';
 import * as Types from '../../../src/types';

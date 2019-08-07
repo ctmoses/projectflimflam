@@ -1,4 +1,4 @@
-import Barbarian from '../../../src/model/barbarian';
+import Barbarian from '../../../src/model/classes/barbarian';
 import * as Race from '../../../src/model/race';
 import Character from '../../../src/model/character';
 import * as Types from '../../../src/types';
