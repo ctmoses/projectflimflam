@@ -7,22 +7,22 @@ export interface IUser {
 export interface IIcon {
     name: string,
     level: number,
-};
+}
 export interface IRace {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
     type(): string
-};
+}
 export interface IBackground {
     backgroundtitle : string,
     backgroundmod : number
-};
+}
 export interface IFeats {
     tier: Tiers,
     prereq: string,
     power: string,
     name: string
-};
+}
 export interface ISpells {
     charclass: string,
     name: string,
@@ -39,10 +39,7 @@ export interface ISpells {
 export interface IManeuvers {
     charclass: string,
     name: string,
-    level: number,
-    range: string,
-    trigger: string,
-    effect: string
+    powertext: string,
 }
 export interface ITalents {
     refresh: AbilityRefresh,
@@ -52,12 +49,12 @@ export interface ITalents {
     name: string,
     powertext: string,
     url: string,
-};
+}
 export interface IMagicItem{
     type: ItemType,
     tier: Tiers,
     equipped: boolean
-};
+}
 export interface IClass {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
@@ -65,25 +62,25 @@ export interface IClass {
     shield: boolean,
     weapon: MeleeWeapons,
     ranged: RangedWeapons,
-    calchp(con:number,level:number, feats?: IFeats[], talents?: ITalents[]): number,
+    calchp(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
     baselineHP(): number,
     calcinitiative(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
-    calcac(con:number, dex:number,wis:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
-    calcpd(str:number, con:number,dex:number,level:number, feats?: IFeats[], talents?: ITalents[]): number,
+    calcac(con:number, dex:number, wis:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
+    calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
     calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
     calcrecoveries(feats?: IFeats[], talents?: ITalents[]): number,
-    calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[],  //SM: Not sure what we want to return here...just something like 4d8+4?
+    calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[], // SM: Not sure what we want to return here...just something like 4d8+4?
     calcmeleehit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
     calcrangedhit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
     calcmeleedmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[],
-    calcrangeddmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[], 
+    calcrangeddmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
-    type():string,  
-};
+    type():string,
+}
 export interface ICharacter {
     name: string,
-    class: IClass,  
+    class: IClass,
     race: IRace,
     level: number,
     str: number,
@@ -109,12 +106,12 @@ export interface ICharacter {
     missRanged: number,
     unique: string,
     icon: IIcon[],
-    feats: IFeats[], 
+    feats: IFeats[],
     talents: ITalents[],
     spells: ISpells[],
     backgrounds: IBackground[],
-    magicItems: IMagicItem[], 
-};
+    magicItems: IMagicItem[],
+}
 
 export enum Attributes {
     STRENGTH,
@@ -124,20 +121,20 @@ export enum Attributes {
     CONSTITUTION,
     CHARISMA,
     ALL
-};
+}
 
 export enum AbilityRefresh {
     ATWILL,
     BATTLE,
     DAILY
-};
+}
 export enum AbilityType {
     STANDARD,
     MOVE,
     QUICK,
     INTERRUPT,
     FREE
-};
+}
 export enum AbilityTrigger {
     HIT,
     DAMAGETAKEN,
@@ -146,12 +143,12 @@ export enum AbilityTrigger {
     MONDEATH,
     MONSTAGGER,
     PCSTAGGER,
-};
+}
 export enum ArmorTypes {
     NONE,
     LIGHT,
     HEAVY,
-};
+}
 export enum MeleeWeapons {
     ONEHSMALL,
     ONEHLIGHT,
@@ -159,7 +156,7 @@ export enum MeleeWeapons {
     TWOHSMALL,
     TWOHLIGHT,
     TWOHHEAVY
-};
+}
 export enum RangedWeapons {
     THROWNSMALL,
     THROWNLIGHT,
@@ -169,12 +166,12 @@ export enum RangedWeapons {
     XBOWHEAVY,
     BOWLIGHT,
     BOWHEAVY
-};
+}
 export enum Tiers {
     ADVENTURER,
     CHAMPION,
     EPIC
-};
+}
 export enum ItemType {
     ARMOR,
     BELT,
