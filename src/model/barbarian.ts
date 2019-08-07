@@ -17,7 +17,7 @@ export default class barbarian implements IClass {
         this.ranged = ranged;
         this.shield = shield;
     }
-    calctalents(level:number):number[]{
+    calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
         if(level<=4)
             return [3,0,0];
         if(level>4&&level<8)
@@ -26,10 +26,10 @@ export default class barbarian implements IClass {
             return [3,1,1];
         return [-1,-1,-1];
     }
-    calcspells(level:number):number[]{
-        return [];
+    calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
+        return [0,0,0];
     }
-    calchp(con:number,level:number): number {
+    calchp(con:number,level:number, feats?: IFeats[], talents?: ITalents[]): number {
         var multiplier=1;
         switch(level){
             case 1:
@@ -69,10 +69,10 @@ export default class barbarian implements IClass {
     baselineHP():number {
         return 7;
     }
-    calcinitiative(dex:number, level:number, feats?: IFeats[]): number{
+    calcinitiative(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number{
         return this.calculatebasemodifier(dex)+level;
     }
-    calcac(con:number, dex:number,wis:number, level:number, feats?: IFeats[]): number{
+    calcac(con:number, dex:number,wis:number, level:number, feats?: IFeats[], talents?: ITalents[]): number{
         let array = [dex,con,wis];
         var sorted = array.sort((n1,n2)=>n1-n2);
         var armor;
@@ -94,12 +94,12 @@ export default class barbarian implements IClass {
             armor+=1;
         return this.calculatebasemodifier(sorted[1])+level+armor;
     }
-    calcpd(str:number, con:number,dex:number,level:number, feats?: IFeats[]): number{
+    calcpd(str:number, con:number,dex:number,level:number, feats?: IFeats[], talents?: ITalents[]): number{
         let array = [str,con,dex];
         var sorted = array.sort((n1,n2)=>n1-n2);
         return this.calculatebasemodifier(sorted[1])+11+level;
     }
-    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[]): number{
+    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[], talents?: ITalents[]): number{
         let array = [int,wis,cha];
         var sorted = array.sort((n1,n2)=>n1-n2);
         return this.calculatebasemodifier(sorted[1])+10+level;
@@ -107,16 +107,16 @@ export default class barbarian implements IClass {
     calcrecoveries(feats: IFeats[]=[]): number{
         return 8;
     }
-    calcrecoveryroll(con:number, level:number, feats?: IFeats[]): number[]{
+    calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[]{
         return [level,10,this.calculatebasemodifier(con)];
     }
-    calcmeleehit(str:number, level:number, feats?: IFeats[]):number{
+    calcmeleehit(str:number, level:number, feats?: IFeats[], talents?: ITalents[]):number{
         var mod=0;
         if(this.armor==ArmorTypes.HEAVY)
             mod=-2;
         return this.calculatebasemodifier(str)+level+mod;
     }
-    calcrangedhit(dex:number, level:number, feats?: IFeats[]):number{
+    calcrangedhit(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]):number{
         var mod=0;
         if(this.ranged==RangedWeapons.XBOWHEAVY||this.ranged==RangedWeapons.XBOWLIGHT||this.ranged==RangedWeapons.XBOWSMALL)
             mod += -5;
@@ -124,7 +124,7 @@ export default class barbarian implements IClass {
             mod+=-2;
         return this.calculatebasemodifier(dex)+level+mod;
     }
-    calcmeleedmg(str:number, level:number, feats?: IFeats[]):number[]{
+    calcmeleedmg(str:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
         var dice;
         switch(this.weapon){
             case MeleeWeapons.ONEHSMALL:
@@ -148,7 +148,7 @@ export default class barbarian implements IClass {
         var mult=this.calcDamageBonusMult(level);
         return [level,dice,this.calculatebasemodifier(str)*mult]; 
     }
-    calcrangeddmg(dex:number, level:number, feats?: IFeats[]):number[]{
+    calcrangeddmg(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
         var dice;
         switch(this.ranged){
             case RangedWeapons.THROWNSMALL:

@@ -63,7 +63,7 @@ test('Barbarian Talent/Spell info should be calculated', () => {
     let barbarian = new Barbarian(armor, false, weapon, ranged);
 
     expect(barbarian.calctalents(8)).toEqual([3,1,1])
-    expect(barbarian.calcspells(5)).toEqual([]);
+    expect(barbarian.calcspells(5)).toEqual([0,0,0]);
     
 });
 

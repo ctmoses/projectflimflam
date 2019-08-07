@@ -42,7 +42,7 @@ export class feat implements IFeats {
     name: string;
     constructor(tier:Tiers,prereq:string,power:string, name:string){
         this.tier=tier;
-        this.prereq=prereq;
+        this.prereq=prereq;  //SM: Should the prereq be the ID of the adventurer or champion tier feat that is required?
         this.power=power;
         this.name=name;
     }

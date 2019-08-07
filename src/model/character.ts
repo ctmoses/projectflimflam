@@ -91,21 +91,25 @@ export default class Character implements ICharacter {
     }
     setFeats(feats:IFeats[]){
         this.feats=feats;
+        this.calcAll();
     }
     setIcons(icons:IIcon[]){
         this.icon=icons;
     }
     setSpells(spells:ISpells[]){
         this.spells=spells;
+        this.calcAll();
     }
     setTalents(talents:ITalents[]){
         this.talents=talents;
+        this.calcAll();
     }
     setUnique(unique:string){
         this.unique=unique;
     }
     setMagicItems(items:magicitems[]){
         this.magicItems = items;
+        this.calcAll();
     }
     calcNumberofFeats():number[]{
         var mod=0;
@@ -123,10 +127,10 @@ export default class Character implements ICharacter {
     }
     setBackgrounds(backgrounds:IBackground[]){
         this.backgrounds=backgrounds;
+        this.calcAll();
     }
     calcNumberofBackgrounds():number{
         var mod=0;
-        //SM: TODO: Be sure to test taking all three feats that this adds up to 7
         this.feats.forEach(element => {
             if(element.name=="Further Backgrounding"){
                 if(element.tier==Tiers.ADVENTURER){
@@ -140,22 +144,23 @@ export default class Character implements ICharacter {
                 }
             }
         });
-        return 5+ mod;
+        return 5 + mod;
     }
     calcBackgroundCap():number{
+        var mod =0;
         this.feats.forEach(element => {
             if(element.name=="Further Backgrounding"){
                 if(element.tier==Tiers.EPIC)
-                    return 7;
+                    mod+=2;  //SM: Chris, why doesn't "return 7; work here?"
             }
         });
-        return 5;
+        return 5 + mod;
     }
     calcNumberofSpells():number[]{
-        return this.class.calcspells(this.level, this.feats);
+        return this.class.calcspells(this.level, this.feats, this.talents);
     }
     calcNumberofTalents():number[]{
-        return this.class.calctalents(this.level, this.feats);
+        return this.class.calctalents(this.level, this.feats, this.talents);
     }
     setHP(newtotal:number){
         if(newtotal>this.maxHp){}  //Throw error
@@ -172,7 +177,7 @@ export default class Character implements ICharacter {
             if(element.name=="Imp. Initiative")
                 mod=4;
         });
-        this.initiative=this.class.calcinitiative(this.dex,this.level,this.feats)+mod;
+        this.initiative=this.class.calcinitiative(this.dex,this.level,this.feats, this.talents)+mod;
     }
     calcMaxHP(){
         var HPAdd=0;
@@ -204,7 +209,7 @@ export default class Character implements ICharacter {
                 }
             }
         });
-        this.maxHp= this.class.calchp(this.con,this.level,this.feats)+HPAdd;
+        this.maxHp= this.class.calchp(this.con,this.level,this.feats, this.talents)+HPAdd;
     }
     calcAC(){
         var mod = 0;
@@ -223,7 +228,7 @@ export default class Character implements ICharacter {
                 }
             }
         });
-        this.ac=this.class.calcac(this.con,this.dex,this.wis,this.level,this.feats)+mod;
+        this.ac=this.class.calcac(this.con,this.dex,this.wis,this.level,this.feats, this.talents)+mod;
     }
     calcPD(){
         var mod = 0;
@@ -242,7 +247,7 @@ export default class Character implements ICharacter {
                 }
             }
         });
-        this.pd=this.class.calcpd(this.str,this.con,this.dex,this.level,this.feats)+mod;
+        this.pd=this.class.calcpd(this.str,this.con,this.dex,this.level,this.feats, this.talents)+mod;
     }
     calcMD(){
         var mod = 0;
@@ -261,7 +266,7 @@ export default class Character implements ICharacter {
                 }
             }
         });
-        this.md=this.class.calcmd(this.int, this.wis, this.cha, this.level,this.feats)+mod;
+        this.md=this.class.calcmd(this.int, this.wis, this.cha, this.level,this.feats, this.talents)+mod;
     }
     calcMaxRecoveries(){
         var mod = 0;
@@ -280,7 +285,7 @@ export default class Character implements ICharacter {
                 }
             }
         });
-        this.maxRec=this.class.calcrecoveries(this.feats)+mod;
+        this.maxRec=this.class.calcrecoveries(this.feats, this.talents)+mod;
     }
     calcMeleeHit(){
         var mod = 0;
@@ -301,17 +306,51 @@ export default class Character implements ICharacter {
         });
         if(this.class.type()=="Bard"||this.class.type()=="Ranger"){
             if(this.str>=this.dex){
-                this.meleeToHit=this.class.calcmeleehit(this.str,this.level)+mod;
+                this.meleeToHit=this.class.calcmeleehit(this.str,this.level,this.feats,this.talents)+mod;
             }
             else{
-                this.meleeToHit=this.class.calcmeleehit(this.dex,this.level)+mod;
+                this.meleeToHit=this.class.calcmeleehit(this.dex,this.level,this.feats,this.talents)+mod;
             }
         }
         else if(this.class.type()=="Rogue"){
-            this.meleeToHit=this.class.calcmeleehit(this.dex,this.level)+mod;
+            this.meleeToHit=this.class.calcmeleehit(this.dex,this.level,this.feats,this.talents)+mod;
         }
         else{
-            this.meleeToHit=this.class.calcmeleehit(this.str,this.level)+mod;
+            this.meleeToHit=this.class.calcmeleehit(this.str,this.level,this.feats,this.talents)+mod;
         }
+    }
+    calcRangedHit(){
+        var mod = 0;
+        this.magicItems.forEach(element => {
+            if(element.type==ItemType.RANGED){
+                switch (element.tier){
+                    case Tiers.ADVENTURER:
+                        mod=1;
+                        break;
+                    case Tiers.CHAMPION:
+                        mod=2;
+                        break;
+                    case Tiers.EPIC:
+                        mod=3;
+                        break;
+                }
+            }
+        });
+        this.rangedToHit=this.class.calcrangedhit(this.dex,this.level,this.feats,this.talents)+mod;
+    }
+    calcAll(){
+        this.calcAC();
+        this.calcBackgroundCap();
+        this.calcInitiative();
+        this.calcMD();
+        this.calcMaxHP();
+        this.calcMaxRecoveries();
+        this.calcMeleeHit();
+        this.calcNumberofBackgrounds();
+        this.calcNumberofFeats();
+        this.calcNumberofSpells();
+        this.calcNumberofTalents();
+        this.calcPD();
+        this.calcRangedHit();
     }
 };
