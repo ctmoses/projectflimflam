@@ -33,12 +33,12 @@ export interface ISpells {
 };
 export interface ITalents {
     refresh: AbilityRefresh,
-    trigger: AbilityTrigger,
     type: AbilityType,
     tier: Tiers,
-    innate: boolean,
+    feature: boolean,
     name: string,
     powertext: string,
+    url: string,
 };
 export interface IMagicItem{
     type: ItemType,

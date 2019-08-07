@@ -1,4 +1,4 @@
-import { AbilityRefresh, AbilityTrigger, AbilityType, ISpells, ITalents, Tiers, IFeats, IMagicItem, ItemType } from "@/types";
+import { AbilityRefresh, AbilityTrigger, AbilityType, ISpells, ITalents, Tiers, IFeats, IMagicItem, ItemType, IIcon, IBackground } from "@/types";
 
 
 export class spell implements ISpells{
@@ -19,20 +19,20 @@ export class spell implements ISpells{
 }
 export class talent implements ITalents{
     refresh: AbilityRefresh;
-    trigger: AbilityTrigger;
     type: AbilityType;
-    innate: boolean;
+    feature: boolean;
     name: string;
     powertext: string;
     tier: Tiers;
-    constructor(refresh: AbilityRefresh, trigger: AbilityTrigger, type: AbilityType, tier: Tiers, innate: boolean,  name: string, powertext: string){
+    url: string;
+    constructor(refresh: AbilityRefresh, type: AbilityType, tier: Tiers, feature: boolean,  name: string, powertext: string, url: string){
         this.refresh = refresh;
-        this.trigger = trigger;
         this.type = type;
         this.name = name;
         this.powertext = powertext;
-        this.innate = innate;
+        this.feature = feature;
         this.tier=tier;
+        this.url=url;
     }
 }
 export class feat implements IFeats {
@@ -63,3 +63,24 @@ export class magicitems implements IMagicItem {
         this.equipped=false;
     }
 }
+
+export class icon implements IIcon {
+    name: string;
+    level:number;
+
+    constructor(name:string, level:number){
+        this.name=name;
+        this.level=level;
+
+    }
+}
+
+export class background implements IBackground {
+    backgroundtitle: string;
+    backgroundmod: number;
+
+    constructor(backgroundtitle:string, backgroundmod: number){
+        this.backgroundtitle=backgroundtitle;
+        this.backgroundmod=backgroundmod;
+    }
+};

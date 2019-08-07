@@ -135,7 +135,7 @@ test('Character recoveries should be calculated', () =>{
     c.setMagicItems([magicitem]);
     expect(c.maxRec).toBe(10);
 
-    let talent = new Spells.talent(Types.AbilityRefresh.ATWILL,Types.AbilityTrigger.NONE,Types.AbilityType.FREE,Types.Tiers.ADVENTURER,false,"Strongheart","Does stuff");
+    let talent = new Spells.talent(Types.AbilityRefresh.ATWILL,Types.AbilityType.FREE,Types.Tiers.ADVENTURER,false,"Strongheart","Does stuff","http://test.com");
     c.setTalents([talent]);
     expect(c.recRoll).toEqual([1,12,3])
 
