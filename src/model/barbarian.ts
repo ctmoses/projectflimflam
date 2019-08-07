@@ -97,7 +97,16 @@ export default class barbarian implements IClass {
     calcpd(str:number, con:number,dex:number,level:number, feats?: IFeats[], talents?: ITalents[]): number{
         let array = [str,con,dex];
         var sorted = array.sort((n1,n2)=>n1-n2);
-        return this.calculatebasemodifier(sorted[1])+11+level;
+        var mod =0;
+        if(feats){
+            feats.forEach(element => {
+                if(element.name=="Strongheart"){
+                    if(element.tier==Tiers.CHAMPION)
+                        mod=1;
+                }
+            });
+        }
+        return this.calculatebasemodifier(sorted[1])+11+level+mod;
     }
     calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[], talents?: ITalents[]): number{
         let array = [int,wis,cha];
@@ -122,14 +131,23 @@ export default class barbarian implements IClass {
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[]{
         var dicetype=10;
+        var mod =1;
         if(talents){
             talents.forEach(element => {
                 if(element.name=="Strongheart")
                     dicetype=12;
             });
         }
+        if(feats){
+            feats.forEach(element => {
+                if(element.name=="Unstoppable"){
+                    if(element.tier==Tiers.CHAMPION)
+                        mod=2;
+                }
+            });
+        }
             
-        return [level,dicetype,this.calculatebasemodifier(con)];
+        return [level,dicetype,this.calculatebasemodifier(con)*mod];
     }
     calcmeleehit(str:number, level:number, feats?: IFeats[], talents?: ITalents[]):number{
         var mod=0;

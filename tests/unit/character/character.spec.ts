@@ -163,6 +163,9 @@ test('Character hit values should be calculated', () =>{
     expect(c.meleeToHit).toBe(7);
     expect(c.rangedToHit).toBe(6);
     
+    //SM: TODO unequiping doesn't kick off a recalc...need a cleaner way to do this
+    //c.magicItems[0].equipped=false;
+    
     magicitem.unequip();
     c.setMagicItems([magicitem]);
     expect(c.meleeToHit).toBe(5);
