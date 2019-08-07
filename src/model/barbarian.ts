@@ -104,11 +104,32 @@ export default class barbarian implements IClass {
         var sorted = array.sort((n1,n2)=>n1-n2);
         return this.calculatebasemodifier(sorted[1])+10+level;
     }
-    calcrecoveries(feats: IFeats[]=[]): number{
-        return 8;
+    calcrecoveries(feats?: IFeats[], talents?: ITalents[]): number{
+        var recoveries=8;
+        if(feats){
+            feats.forEach(element => {
+                if(element.name=="Strongheart"){
+                    if(element.tier==Tiers.ADVENTURER){
+                        recoveries+=1;
+                    }
+                    if(element.tier==Tiers.EPIC){
+                        recoveries+=1;
+                    }
+                }
+            });
+        }
+        return recoveries;
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[]{
-        return [level,10,this.calculatebasemodifier(con)];
+        var dicetype=10;
+        if(talents){
+            talents.forEach(element => {
+                if(element.name=="Strongheart")
+                    dicetype=12;
+            });
+        }
+            
+        return [level,dicetype,this.calculatebasemodifier(con)];
     }
     calcmeleehit(str:number, level:number, feats?: IFeats[], talents?: ITalents[]):number{
         var mod=0;

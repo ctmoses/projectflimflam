@@ -120,7 +120,7 @@ test('Character hitpoints should be calculated', () =>{
 
 });
 
-test('Character hitpoints should be calculated', () =>{
+test('Character recoveries should be calculated', () =>{
     let armor: Types.ArmorTypes = Types.ArmorTypes.LIGHT;
     let weapon = Types.MeleeWeapons.TWOHHEAVY;
     let ranged = Types.RangedWeapons.BOWLIGHT;
@@ -129,10 +129,21 @@ test('Character hitpoints should be calculated', () =>{
     let c = new Character(barbarian,d,18,16,14,6,8,10,1);
     
     expect(c.maxRec).toBe(8);
-    
+    expect(c.recRoll).toEqual([1,10,3])
+
     let magicitem = new Spells.magicitems(Types.ItemType.BELT,Types.Tiers.CHAMPION);
     c.setMagicItems([magicitem]);
     expect(c.maxRec).toBe(10);
+
+    let talent = new Spells.talent(Types.AbilityRefresh.ATWILL,Types.AbilityTrigger.NONE,Types.AbilityType.FREE,Types.Tiers.ADVENTURER,false,"Strongheart","Does stuff");
+    c.setTalents([talent]);
+    expect(c.recRoll).toEqual([1,12,3])
+
+    let feat = new Spells.feat(Types.Tiers.ADVENTURER,"","","Strongheart");
+    let feat2 = new Spells.feat(Types.Tiers.ADVENTURER,"","","Strongheart");
+    c.setFeats([feat,feat2]);
+    expect(c.maxRec).toBe(12);
+
 });
 
 test('Character hit values should be calculated', () =>{
@@ -156,3 +167,4 @@ test('Character hit values should be calculated', () =>{
     expect(c.meleeToHit).toBe(-1);
     expect(c.rangedToHit).toBe(-2);
 });
+

@@ -338,6 +338,10 @@ export default class Character implements ICharacter {
         });
         this.rangedToHit=this.class.calcrangedhit(this.dex,this.level,this.feats,this.talents)+mod;
     }
+    calcRecoveryRoll(){
+        this.recRoll = this.class.calcrecoveryroll(this.con,this.level,this.feats,this.talents);
+    }
+
     calcAll(){
         this.calcAC();
         this.calcBackgroundCap();
@@ -352,5 +356,7 @@ export default class Character implements ICharacter {
         this.calcNumberofTalents();
         this.calcPD();
         this.calcRangedHit();
+        this.calcRecoveryRoll();
+
     }
 };
