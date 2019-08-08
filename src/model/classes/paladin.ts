@@ -61,6 +61,9 @@ export default class paladin extends charclass {
                 }
             });
         }
+        else{
+            spells = [0,0,0,0,0];
+        }
         return spells;
     }
     baselineHP():number {
