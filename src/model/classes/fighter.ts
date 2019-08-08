@@ -1,5 +1,6 @@
 import { IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityType, ITalents, Tiers, IFeats } from '@/types';
 import charclass from './charclass';
+import { spell } from '../spell';
 
 export default class fighter extends charclass {
     bonusstat1: Attributes;
@@ -27,41 +28,43 @@ export default class fighter extends charclass {
         return [-1,-1,-1];
     }
     calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
+        var spells;
         switch(level){
             case 1:
-                return [3,0,0,0,0];
+                spells =  [3,0,0,0,0];
                 break;
             case 2:
-                return [4,0,0,0,0];
+                spells =  [4,0,0,0,0];
                 break;
             case 3:
-                return [0,4,0,0,0];
+                spells =  [0,4,0,0,0];
                 break;
             case 4:
-                return [0,5,0,0,0];
+                spells =  [0,5,0,0,0];
                 break;
             case 5:
-                return [0,0,5,0,0];
+                spells =  [0,0,5,0,0];
                 break;                
             case 6:
-                return [0,0,6,0,0];
+                spells =  [0,0,6,0,0];
                 break;
             case 7:
-                return [0,0,0,6,0];
+                spells =  [0,0,0,6,0];
                 break;
             case 8:
-                return [0,0,0,7,0];
+                spells =  [0,0,0,7,0];
                 break;
             case 9:
-                return [0,0,0,0,7];
+                spells =  [0,0,0,0,7];
                 break;
             case 10:
-                return [0,0,0,0,8];
+                spells =  [0,0,0,0,8];
                 break;
             default:
-                return [-1,-1,-1,-1,-1,-1]
+                spells =  [-1,-1,-1,-1,-1,-1]
                 break;
         }
+        return spells;
     }
     baselineHP():number {
         return 8;
