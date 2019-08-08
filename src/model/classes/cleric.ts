@@ -2,10 +2,7 @@ import {
     IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh,  AbilityType, ITalents, Tiers, IFeats,
 } from '@/types';
 import charclass from './charclass';
-
-//Domain Knowledge/Lore
-//Domain love/beauty
-//Domain Strength
+import { talent } from '../spell';
 
 export default class cleric extends charclass {
     bonusstat1: Attributes;
@@ -24,6 +21,36 @@ export default class cleric extends charclass {
         this.weapon = weapon;
         this.ranged = ranged;
         this.shield = shield;
+    }
+    calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number{
+        var mod=0;
+        if(talents){
+            talents.forEach(element => {
+                if(element.name=="Domain: Love/Beauty"){
+                    mod+=1;
+                    if(feats){
+                        feats.forEach(element => {
+                            if(element.name=="Domain: Love/Beauty"){
+                                if(element.tier==Tiers.CHAMPION){
+                                    mod+=1;
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        return mod;
+    }
+    calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
+        var mod;
+        if(talents){
+            talents.forEach(element => {
+                if(element.name=="Domain: Knowledge/Lore")
+                    mod=4;
+            });
+        }
+        return mod;
     }
     calctalents(level:number):number[] {
         return [3, 0, 0];
@@ -97,9 +124,17 @@ export default class cleric extends charclass {
     calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[] {
         return [level, 8, this.calculatebasemodifier(con)];
     }
-    calcmeleehit(dex:number, level:number):number {
+    calcmeleehit(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]):number {
         let mod = 0;
-        if(this.weapon==MeleeWeapons.ONEHHEAVY||this.weapon==MeleeWeapons.TWOHHEAVY)
+        var talent = false;
+        if(talents){
+            talents.forEach(element => {
+                if(element.name=="Domain: Strength"){
+                    talent=true;
+                }
+            });
+        }
+        if(!talent && this.weapon==MeleeWeapons.ONEHHEAVY||this.weapon==MeleeWeapons.TWOHHEAVY)
             mod +=- 2;
         return this.calculatebasemodifier(dex) + level + mod;
     }

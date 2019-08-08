@@ -63,7 +63,7 @@ export default class rogue extends charclass {
         }
         return spells;
     }
-    calcNumberofBackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
+    calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
         var mod;
         if(talents){
             talents.forEach(element => {

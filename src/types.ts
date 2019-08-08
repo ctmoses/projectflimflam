@@ -79,7 +79,8 @@ export interface IClass {
     calcrangeddmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
-    calcNumberofBackgrounds(feats?: IFeats[], talents?: ITalents[]):number,
+    calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number,
+    calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number,
     type():string,
 }
 export interface ICharacter {

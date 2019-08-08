@@ -23,6 +23,9 @@ export default abstract class charclass implements IClass {
     abstract baselineHP():number;
     abstract calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[];
     
+    calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number{
+        return 0;
+    }
     calcspells(level:number):number[] {
         return [0, 0, 0];
     }
@@ -159,7 +162,7 @@ export default abstract class charclass implements IClass {
     calculatebasemodifier(abilityscore: number):number {
         return Math.floor((abilityscore - 10) / 2);
     }
-    calcNumberofBackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
+    calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
         return 0;
     }
 }

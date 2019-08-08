@@ -145,13 +145,14 @@ export default class Character implements ICharacter {
         return [];
     }
     calcNumberofIcons():number{
+        var mod=0;
         if (this.level<4)
-            return 3;
+            mod = 3;
         if (this.level>=5 && this.level<=7)
-            return 4;
+            mod = 4;
         if (this.level>7)
-            return 5;
-        return -1
+            mod = 5;
+        return mod + this.class.calcnumberoficons();
     }
     calcIconCap():number{
         if (this.level<4)
@@ -175,7 +176,7 @@ export default class Character implements ICharacter {
                 }
             }
         });
-        return 5 + mod + this.class.calcNumberofBackgrounds(this.feats,this.talents);
+        return 5 + mod + this.class.calcnumberofbackgrounds(this.feats,this.talents);
     }
     calcBackgroundCap():number {
         let mod = 0;
