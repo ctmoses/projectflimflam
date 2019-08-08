@@ -24,32 +24,18 @@ export default class cleric extends charclass {
     }
     calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number{
         var mod=0;
-        if(talents){
-            talents.forEach(element => {
-                if(element.name=="Domain: Love/Beauty"){
-                    mod+=1;
-                    if(feats){
-                        feats.forEach(element => {
-                            if(element.name=="Domain: Love/Beauty"){
-                                if(element.tier==Tiers.CHAMPION){
-                                    mod+=1;
-                                }
-                            }
-                        });
-                    }
-                }
-            });
-        }
+        
+        if(talents && this.talenttaken(talents,"Domain: Love/Beauty"))
+            mod+=1;
+        if(feats && this.feattaken(feats,"Domain: Love/Beauty",Tiers.CHAMPION))
+            mod+=1;
+
         return mod;
     }
     calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
-        var mod;
-        if(talents){
-            talents.forEach(element => {
-                if(element.name=="Domain: Knowledge/Lore")
-                    mod=4;
-            });
-        }
+        var mod=0;
+        if(talents && this.talenttaken(talents,"Domain: Knowledge/Lore"))
+            mod=4;
         return mod;
     }
     calctalents(level:number):number[] {
@@ -127,13 +113,9 @@ export default class cleric extends charclass {
     calcmeleehit(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]):number {
         let mod = 0;
         var talent = false;
-        if(talents){
-            talents.forEach(element => {
-                if(element.name=="Domain: Strength"){
-                    talent=true;
-                }
-            });
-        }
+        if(talents && this.talenttaken(talents,"Domain: Strength"))
+            talent=true;
+
         if(!talent && this.weapon==MeleeWeapons.ONEHHEAVY||this.weapon==MeleeWeapons.TWOHHEAVY)
             mod +=- 2;
         return this.calculatebasemodifier(dex) + level + mod;

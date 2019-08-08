@@ -65,14 +65,11 @@ export default class rogue extends charclass {
     }
     calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
         var mod;
-        if(talents){
-            talents.forEach(element => {
-                if(element.name=="Cunning")
-                    mod=2;
-                if(element.name=="Thievery")
-                    mod=5;
-            });
-        }
+        if(talents && this.talenttaken(talents,"Cunning"))
+            mod+=2;
+        if(talents && this.talenttaken(talents,"Thievery"))
+            mod+=5;
+
         return mod;
     }
     baselineHP():number {
@@ -100,14 +97,10 @@ export default class rogue extends charclass {
         return super.calcpd(str,con,dex,level)+ 12;
     }
     calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[]): number {
-        var mod;
-        if(feats){
-            feats.forEach(element => {
-                if(element.name=="Cunning")
-                    if(element.tier==Tiers.ADVENTURER)
-                        mod=2;
-            });
-        }
+        var mod = 0;;
+        if(feats && this.feattaken(feats,"Cunning",Tiers.ADVENTURER))
+            mod = 2;
+
         return super.calcmd(int, wis, cha, level)+ 10 + mod;
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[] {

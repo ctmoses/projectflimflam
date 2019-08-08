@@ -134,7 +134,7 @@ test('Character recoveries should be calculated', () => {
     expect(c.recRoll).toEqual([1, 12, 3]);
 
     const feat = new Spells.feat(Types.Tiers.ADVENTURER, '', '', 'Strongheart');
-    const feat2 = new Spells.feat(Types.Tiers.ADVENTURER, '', '', 'Strongheart');
+    const feat2 = new Spells.feat(Types.Tiers.EPIC, '', '', 'Strongheart');
     c.setFeats([feat, feat2]);
     expect(c.maxRec).toBe(12);
 });

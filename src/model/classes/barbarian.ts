@@ -50,12 +50,8 @@ export default class barbarian extends charclass {
     }
     calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[]): number {
         let mod = 0;
-        if (feats) {
-            feats.forEach((element) => {
-                if (element.name == 'Strongheart') {
-                    if (element.tier == Tiers.CHAMPION) mod = 1;
-                }
-            });
+        if(feats && this.feattaken(feats,"Strongheart",Tiers.CHAMPION)){
+            mod =1;
         }
         return   super.calcpd(str,con,dex,level)+ 11 + mod;
     }
@@ -64,35 +60,20 @@ export default class barbarian extends charclass {
     }
     calcrecoveries(feats?: IFeats[]): number {
         let recoveries = 8;
-        if (feats) {
-            feats.forEach((element) => {
-                if (element.name == 'Strongheart') {
-                    if (element.tier == Tiers.ADVENTURER) {
-                        recoveries += 1;
-                    }
-                    if (element.tier == Tiers.EPIC) {
-                        recoveries += 1;
-                    }
-                }
-            });
-        }
+        if(feats && this.feattaken(feats,"Strongheart",Tiers.ADVENTURER))
+            recoveries+=1;
+        if(feats && this.feattaken(feats,"Strongheart",Tiers.EPIC))
+            recoveries+=1;
+        
         return recoveries;
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[] {
         let dicetype = 10;
         let mod = 1;
-        if (talents) {
-            talents.forEach((element) => {
-                if (element.name == 'Strongheart') dicetype = 12;
-            });
-        }
-        if (feats) {
-            feats.forEach((element) => {
-                if (element.name == 'Unstoppable') {
-                    if (element.tier == Tiers.CHAMPION) mod = 2;
-                }
-            });
-        }
+        if(talents && this.talenttaken(talents,"Strongheart"))
+            dicetype = 12;
+        if(feats && this.feattaken(feats,"Unstoppable",Tiers.CHAMPION))
+            mod = 2;
 
         return [level, dicetype, this.calculatebasemodifier(con) * mod];
     }

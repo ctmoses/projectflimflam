@@ -30,36 +30,32 @@ export default class paladin extends charclass {
     }
     calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
         var spells;
-        if(talents){
-            talents.forEach(element => {
-                if(element.name=="Cleric Training"){
-                    switch(level){
-                        case 1:
-                        case 2:
-                            spells = [1,0,0,0,0];
-                            break;
-                        case 3:
-                        case 4:
-                            spells = [0,1,0,0,0];
-                            break;
-                        case 5:
-                        case 6:
-                            spells = [0,0,1,0,0];
-                            break;
-                        case 7:
-                        case 8:
-                            spells = [0,0,0,1,0];
-                            break;
-                        case 9:
-                        case 10:
-                            spells = [0,0,0,0,1];
-                            break;
-                        default:
-                            spells = [0,0,0,0,0];
-                            break;
-                    }
-                }
-            });
+        if(talents && this.talenttaken(talents,"Cleric Training")){
+            switch(level){
+                case 1:
+                case 2:
+                    spells = [1,0,0,0,0];
+                    break;
+                case 3:
+                case 4:
+                    spells = [0,1,0,0,0];
+                    break;
+                case 5:
+                case 6:
+                    spells = [0,0,1,0,0];
+                    break;
+                case 7:
+                case 8:
+                    spells = [0,0,0,1,0];
+                    break;
+                case 9:
+                case 10:
+                    spells = [0,0,0,0,1];
+                    break;
+                default:
+                    spells = [0,0,0,0,0];
+                    break;
+            }
         }
         else{
             spells = [0,0,0,0,0];
@@ -85,52 +81,30 @@ export default class paladin extends charclass {
             armor = 16;
             break;
         }
-        if (talents) {
-            talents.forEach((element) => {
-                if (element.name == 'Bastion') {
-                    armor += 1;
-                }
-            });
-        }
+        if(talents && this.talenttaken(talents,"Bastion"))
+            armor+=1;
+
         return super.calcac(con,dex,wis,level) + armor;
     }
     calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[]): number {
         let mod = 0;
-        if (feats) {
-            feats.forEach((element) => {
-                if (element.name == 'Implacable') {
-                    if (element.tier == Tiers.EPIC) {
-                        mod += 1;
-                    }
-                }
-            });
-        }
+        if(feats && this.feattaken(feats,"Implacable",Tiers.EPIC))
+            mod+=1;
+
         return super.calcpd(str,con,dex,level) + 10 + mod;
     }
     calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[]): number {
         let mod = 0;
-
-        if (feats) {
-            feats.forEach((element) => {
-                if (element.name == 'Implacable') {
-                    if (element.tier == Tiers.EPIC) {
-                        mod += 1;
-                    }
-                }
-            });
-        }
+        if(feats && this.feattaken(feats,"Implacable",Tiers.EPIC))
+            mod+=1;
 
         return super.calcmd(int,wis,cha,level) + 12 + mod;
     }
     calcrecoveries(feats?: IFeats[]): number {
         let recoveries = 8;
-        if (feats) {
-            feats.forEach((element) => {
-                if (element.name == 'Bastion') {
-                    if (element.tier == Tiers.ADVENTURER) recoveries += 1;
-                }
-            });
-        }
+        if(feats && this.feattaken(feats,"Bastion",Tiers.EPIC))
+            recoveries += 1;
+
         return recoveries;
     }
     calcrecoveryroll(con:number, level:number): number[] {

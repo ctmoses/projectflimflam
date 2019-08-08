@@ -165,4 +165,28 @@ export default abstract class charclass implements IClass {
     calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
         return 0;
     }
+    talenttaken(talents: ITalents[], name: string){
+        let val = false;
+        if(talents){
+            talents.forEach(element => {
+                if(element.name==name){
+                    val = true;
+                }
+            });
+        }
+        return val;
+    }
+    feattaken(feats: IFeats[], name: string, tier: Tiers){
+        let val = false;
+        if(feats){
+            feats.forEach(element => {
+                if(element.name==name){
+                    if(element.tier==tier){
+                        val=true;;
+                    }
+                }
+            });
+        }
+        return val;
+    }
 }

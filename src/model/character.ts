@@ -100,20 +100,14 @@ export default class Character implements ICharacter {
     }
     setTalents(talents:ITalents[]) {
         this.talents = talents;
-        if(this.class.type()=="Rogue"){    
-            talents.forEach(element => {
-                if(element.name=="Thievery"){
-                    this.addBackground(new background("Thievery",5));
-                }
-            });
-        }
-        if(this.class.type()=="Ranger"){    
-            talents.forEach(element => {
-                if(element.name=="Tracker"){
-                    this.addBackground(new background("Tracker",5));
-                }
-            });
-        }
+        if(this.class.type()=="Rogue")
+            if(this.class.talenttaken(this.talents,"Thievery"))
+                this.addBackground(new background("Thievery",5));
+        
+        if(this.class.type()=="Ranger")
+            if(this.class.talenttaken(this.talents,"Tracker"))
+                this.addBackground(new background("Tracker",5));   
+
         this.calcAll();
     }
     setUnique(unique:string) {
@@ -172,26 +166,20 @@ export default class Character implements ICharacter {
     }
     calcNumberofBackgrounds():number {
         let mod = 0;
-        this.feats.forEach((element) => {
-            if (element.name == 'Further Backgrounding') {
-                if (element.tier == Tiers.ADVENTURER) {
-                    mod += 2;
-                } else if (element.tier == Tiers.CHAMPION) {
-                    mod += 3;
-                } else if (element.tier == Tiers.EPIC) {
-                    mod += 2;
-                }
-            }
-        });
+        if(this.class.feattaken(this.feats,"Further Backgrounding",Tiers.ADVENTURER))
+            mod += 2;
+        if(this.class.feattaken(this.feats,"Further Backgrounding",Tiers.CHAMPION))
+            mod += 3;
+        if(this.class.feattaken(this.feats,"Further Backgrounding",Tiers.EPIC))
+            mod += 2;
+
         return 5 + mod + this.class.calcnumberofbackgrounds(this.feats,this.talents);
     }
     calcBackgroundCap():number {
         let mod = 0;
-        this.feats.forEach((element) => {
-            if (element.name == 'Further Backgrounding') {
-                if (element.tier == Tiers.EPIC) mod += 2; 
-            }
-        });
+        if(this.class.feattaken(this.feats,"Further Backgrounding",Tiers.EPIC))
+            mod += 2;
+
         return 5 + mod;
     }
     calcNumberofSpells():number[] {
@@ -202,24 +190,23 @@ export default class Character implements ICharacter {
     }
     calcInitiative() {
         let mod = 0;
-        this.feats.forEach((element) => {
-            if (element.name == 'Imp. Initiative') mod = 4;
-        });
+        if(this.class.feattaken(this.feats,"Imp. Initiative",Tiers.ADVENTURER))
+            mod = 4;    
+
         this.initiative = this.class.calcinitiative(this.dex, this.level, this.feats, this.talents) + mod;
     }
     calcMaxHP() {
         let HPAdd = 0;
-        this.feats.forEach((element) => {
-            if (element.name == 'Toughness') {
-                if (this.level <= 4) {
-                    HPAdd += this.class.baselineHP() / 2;
-                } else if (this.level > 4 && this.level < 8) {
-                    HPAdd += this.class.baselineHP();
-                } else {
-                    HPAdd += this.class.baselineHP() * 2;
-                }
+        if(this.class.feattaken(this.feats,"Toughness",Tiers.ADVENTURER)){
+            if (this.level <= 4) {
+                HPAdd += this.class.baselineHP() / 2;
+            } else if (this.level > 4 && this.level < 8) {
+                HPAdd += this.class.baselineHP();
+            } else {
+                HPAdd += this.class.baselineHP() * 2;
             }
-        });
+        }
+
         this.magicItems.forEach((element) => {
             if (element.type == ItemType.SHIELD) {
                 if (element.equipped == true) {

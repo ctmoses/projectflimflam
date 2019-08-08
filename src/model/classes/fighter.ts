@@ -95,18 +95,11 @@ export default class fighter extends charclass {
     }
     calcrecoveries(feats?: IFeats[], talents?: ITalents[]): number{
         var mod=0;
-        if(feats){
-            feats.forEach(element => {
-                if(element.name=="Extra Tough"){
-                    mod+=1;
-                }
-                if(element.name=="Tough as Iron"){
-                    if(element.tier==Tiers.CHAMPION){
-                        mod+=2;
-                    }
-                }
-            });
-        }
+        if(feats && this.feattaken(feats,"Extra Tough",Tiers.ADVENTURER))
+            mod+=1;
+        if(feats && this.feattaken(feats,"Tough as Iron",Tiers.CHAMPION))
+            mod+=2;
+
         return 9+mod;
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[]{
@@ -114,33 +107,29 @@ export default class fighter extends charclass {
     }
     calcrangeddmg(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[] {
         var damage;
-        if(talents){
-            talents.forEach(element => {
-                if(element.name=="Deadeye Archer"){
-                    let dice;
-                    switch (this.ranged) {
-                    case RangedWeapons.THROWNSMALL:
-                    case RangedWeapons.XBOWSMALL:
-                        dice = 4;
-                        break;
-                    case RangedWeapons.THROWNLIGHT:
-                    case RangedWeapons.XBOWLIGHT:
-                    case RangedWeapons.BOWLIGHT:
-                        dice = 8;
-                        break;
-                    case RangedWeapons.XBOWHEAVY:
-                    case RangedWeapons.BOWHEAVY:
-                        dice = 10;
-                        break;
-                    default:
-                        dice = 6;
-                        break;
-                    }
-                    const mult = this.calcDamageBonusMult(level);
-                   damage = [level, dice, this.calculatebasemodifier(dex) * mult];
-                    //TODO Epic feat for crit range
-                }
-            });
+        if(talents && this.talenttaken(talents,"Deadeye Archer")){
+            let dice;
+            switch (this.ranged) {
+            case RangedWeapons.THROWNSMALL:
+            case RangedWeapons.XBOWSMALL:
+                dice = 4;
+                break;
+            case RangedWeapons.THROWNLIGHT:
+            case RangedWeapons.XBOWLIGHT:
+            case RangedWeapons.BOWLIGHT:
+                dice = 8;
+                break;
+            case RangedWeapons.XBOWHEAVY:
+            case RangedWeapons.BOWHEAVY:
+                dice = 10;
+                break;
+            default:
+                dice = 6;
+                break;
+            }
+            const mult = this.calcDamageBonusMult(level);
+            damage = [level, dice, this.calculatebasemodifier(dex) * mult];
+            //TODO Epic feat for crit range
         }
         else
             damage = super.calcrangeddmg(dex,level); 
@@ -148,13 +137,8 @@ export default class fighter extends charclass {
     }
     calcrangedmiss(level:number, feats?: IFeats[], talents?: ITalents[]){
         var damage=0;
-        if(talents){
-            talents.forEach(element => {
-                if(element.name=="Deadeye Archer"){
-                    damage=level;
-                }
-            });
-        }
+        if(talents && this.talenttaken(talents,"Deadeye Archer"))
+            damage=level;
         return damage;
     }
     type():string{

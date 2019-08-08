@@ -35,30 +35,15 @@ export default class ranger extends charclass {
         //Also need to filter by daily vs at-will with the extra feats.
         var spells;
         var num=0;
-        if(talents){
-            talents.forEach(element => {
-                if(element.name=="Ranger ex Cathedral"){
-                    num+=1
-                    if(feats){
-                        feats.forEach(element => {
-                            if(element.name=="Ranger ex Cathedral"){
-                                if (element.tier==Tiers.EPIC) num+=1;
-                            }
-                        });
-                    }
-                }
-                if(element.name=="Fey Queen's Enchantments"){
-                    num+=1
-                    if(feats){
-                        feats.forEach(element => {
-                            if(element.name=="Fey Queen's Enchantments"){
-                                if (element.tier==Tiers.EPIC) num+=1;
-                            }
-                        });
-                    }
-                }
-            });
-        }
+        if(talents && this.talenttaken(talents, "Ranger ex Cathedral"))
+            num+=1;
+        if(talents && this.talenttaken(talents, "Fey Queen's Enchantments"))
+            num+=1;
+        if(feats && this.feattaken(feats, "Ranger ex Cathedral", Tiers.EPIC))
+            num+=1;
+        if(feats && this.feattaken(feats, "Fey Queen's Enchantments", Tiers.EPIC))
+            num+=1;
+        
         switch(level){
             case 1:
                 spells =  [num,0,0,0,0];
@@ -98,12 +83,9 @@ export default class ranger extends charclass {
     }
     calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
         var mod;
-        if(talents){
-            talents.forEach(element => {
-                if(element.name=="Tracker")
-                    mod=5;
-            });
-        }
+        if(talents && this.talenttaken(talents, "Tracker"))
+            mod=5;
+
         return mod;
     }
     baselineHP():number {

@@ -82,6 +82,8 @@ export interface IClass {
     calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number,
     calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number,
     type():string,
+    talenttaken(talents: ITalents[], name:string):boolean,
+    feattaken(feats: IFeats[], name: string, tier: Tiers):boolean
 }
 export interface ICharacter {
     name: string,
