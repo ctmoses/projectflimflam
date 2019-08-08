@@ -2,10 +2,8 @@ import {
     IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh,  AbilityType, ITalents, Tiers, IFeats,
 } from '@/types';
 import charclass from './charclass';
+import { feat } from '../spell';
 
-//Fey Queen's Enchantments
-//Tracker
-//Two weapon mastery
 //Animal Companion
 
 export default class ranger extends charclass {
@@ -33,8 +31,34 @@ export default class ranger extends charclass {
         return [-1, -1, -1];
     }
     calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
+        //TODO When picking these, need a way to distinguish between slots for cleric vs sorcerer.
+        //Also need to filter by daily vs at-will with the extra feats.
         var spells;
         var num=0;
+        if(talents){
+            talents.forEach(element => {
+                if(element.name=="Ranger ex Cathedral"){
+                    num+=1
+                    if(feats){
+                        feats.forEach(element => {
+                            if(element.name=="Ranger ex Cathedral"){
+                                if (element.tier==Tiers.EPIC) num+=1;
+                            }
+                        });
+                    }
+                }
+                if(element.name=="Fey Queen's Enchantments"){
+                    num+=1
+                    if(feats){
+                        feats.forEach(element => {
+                            if(element.name=="Fey Queen's Enchantments"){
+                                if (element.tier==Tiers.EPIC) num+=1;
+                            }
+                        });
+                    }
+                }
+            });
+        }
         switch(level){
             case 1:
                 spells =  [num,0,0,0,0];
@@ -71,6 +95,16 @@ export default class ranger extends charclass {
                 break;
         }
         return spells;
+    }
+    calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
+        var mod;
+        if(talents){
+            talents.forEach(element => {
+                if(element.name=="Tracker")
+                    mod=5;
+            });
+        }
+        return mod;
     }
     baselineHP():number {
         return 7;

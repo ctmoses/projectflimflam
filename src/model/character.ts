@@ -107,6 +107,13 @@ export default class Character implements ICharacter {
                 }
             });
         }
+        if(this.class.type()=="Ranger"){    
+            talents.forEach(element => {
+                if(element.name=="Tracker"){
+                    this.addBackground(new background("Tracker",5));
+                }
+            });
+        }
         this.calcAll();
     }
     setUnique(unique:string) {
