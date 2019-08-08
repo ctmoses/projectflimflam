@@ -1,7 +1,7 @@
 import {
     IRace, IClass, ICharacter, IIcon, IFeats, ITalents, ISpells, IBackground, Tiers, IMagicItem, ItemType,
 } from '@/types';
-import { magicitems } from './spell';
+import { magicitems, spell, background } from './spell';
 
 export default class Character implements ICharacter {
     name: string = 'Default';
@@ -100,6 +100,13 @@ export default class Character implements ICharacter {
     }
     setTalents(talents:ITalents[]) {
         this.talents = talents;
+        if(this.class.type()=="Rogue"){    
+            talents.forEach(element => {
+                if(element.name=="Thievery"){
+                    this.addBackground(new background("Thievery",5));
+                }
+            });
+        }
         this.calcAll();
     }
     setUnique(unique:string) {
@@ -112,6 +119,10 @@ export default class Character implements ICharacter {
     setBackgrounds(backgrounds:IBackground[]) {
         this.backgrounds = backgrounds;
         this.calcAll();
+    }
+    addBackground(background:IBackground){
+        //TODO: Test this..what happens if you concat to empty?
+        this.backgrounds.concat(background);
     }
     setRecoveries(newtotal:number) {
         if (newtotal > this.maxRec) {}
@@ -146,13 +157,13 @@ export default class Character implements ICharacter {
                 }
             }
         });
-        return 5 + mod;
+        return 5 + mod + this.class.calcNumberofBackgrounds(this.feats,this.talents);
     }
     calcBackgroundCap():number {
         let mod = 0;
         this.feats.forEach((element) => {
             if (element.name == 'Further Backgrounding') {
-                if (element.tier == Tiers.EPIC) mod += 2; // SM: Chris, why doesn't "return 7; work here?"
+                if (element.tier == Tiers.EPIC) mod += 2; 
             }
         });
         return 5 + mod;

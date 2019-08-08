@@ -3,9 +3,6 @@ import {
 } from '@/types';
 import charclass from './charclass';
 
-//TODO.  Talents Thievery and Cunning need to be implemented.
-//TODO.  Feat Cunning needs implemented
-
 export default class rogue extends charclass {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
@@ -66,6 +63,18 @@ export default class rogue extends charclass {
         }
         return spells;
     }
+    calcNumberofBackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
+        var mod;
+        if(talents){
+            talents.forEach(element => {
+                if(element.name=="Cunning")
+                    mod=2;
+                if(element.name=="Thievery")
+                    mod=5;
+            });
+        }
+        return mod;
+    }
     baselineHP():number {
         return 6;
     }
@@ -90,8 +99,16 @@ export default class rogue extends charclass {
     calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[]): number {
         return super.calcpd(str,con,dex,level)+ 12;
     }
-    calcmd(int:number, wis:number, cha:number, level:number): number {
-        return super.calcmd(int, wis, cha, level)+ 10;
+    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[]): number {
+        var mod;
+        if(feats){
+            feats.forEach(element => {
+                if(element.name=="Cunning")
+                    if(element.tier==Tiers.ADVENTURER)
+                        mod=2;
+            });
+        }
+        return super.calcmd(int, wis, cha, level)+ 10 + mod;
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[] {
         return [level, 8, this.calculatebasemodifier(con)];
@@ -129,6 +146,6 @@ export default class rogue extends charclass {
         return this.calculatebasemodifier(dex) + level + mod;
     }
     type():string {
-        return 'Barbarian';
+        return 'Rogue';
     }
 }

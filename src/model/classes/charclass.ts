@@ -159,4 +159,7 @@ export default abstract class charclass implements IClass {
     calculatebasemodifier(abilityscore: number):number {
         return Math.floor((abilityscore - 10) / 2);
     }
+    calcNumberofBackgrounds(feats?: IFeats[], talents?: ITalents[]):number{
+        return 0;
+    }
 }
