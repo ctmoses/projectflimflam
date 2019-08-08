@@ -72,6 +72,7 @@ export interface IClass {
     calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[], // SM: Not sure what we want to return here...just something like 4d8+4?
     calcmeleehit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
     calcrangedhit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
+    calcrangedmiss(level:number, feats?: IFeats[], talents?: ITalents[]),
     calcmeleedmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calcrangeddmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
@@ -120,7 +121,8 @@ export enum Attributes {
     WISDOM,
     CONSTITUTION,
     CHARISMA,
-    ALL
+    ALL,
+    NONE
 }
 
 export enum AbilityRefresh {
@@ -135,15 +137,6 @@ export enum AbilityType {
     INTERRUPT,
     FREE
 }
-export enum AbilityTrigger {
-    HIT,
-    DAMAGETAKEN,
-    MISS,
-    NONE,
-    MONDEATH,
-    MONSTAGGER,
-    PCSTAGGER,
-}
 export enum ArmorTypes {
     NONE,
     LIGHT,
@@ -155,7 +148,8 @@ export enum MeleeWeapons {
     ONEHHEAVY,
     TWOHSMALL,
     TWOHLIGHT,
-    TWOHHEAVY
+    TWOHHEAVY,
+    NONE
 }
 export enum RangedWeapons {
     THROWNSMALL,
@@ -164,7 +158,8 @@ export enum RangedWeapons {
     XBOWLIGHT,
     XBOWHEAVY,
     BOWLIGHT,
-    BOWHEAVY
+    BOWHEAVY,
+    NONE
 }
 export enum Tiers {
     ADVENTURER,

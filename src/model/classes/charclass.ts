@@ -1,5 +1,5 @@
 import {
-    IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityTrigger, AbilityType, ITalents, Tiers, IFeats,
+    IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityType, ITalents, Tiers, IFeats,
 } from '@/types';
 
 export default abstract class charclass implements IClass {
@@ -11,18 +11,22 @@ export default abstract class charclass implements IClass {
     ranged: RangedWeapons;
 
     constructor(armor: ArmorTypes, shield: boolean, weapon: MeleeWeapons, ranged: RangedWeapons) {
-        this.bonusstat1 = NaN;
-        this.bonusstat2 = NaN;
-        this.armor = NaN;
-        this.weapon = NaN;
-        this.ranged = NaN;
+        this.bonusstat1 = Attributes.NONE;
+        this.bonusstat2 = Attributes.NONE;
+        this.armor = ArmorTypes.NONE;
+        this.weapon = MeleeWeapons.NONE;
+        this.ranged = RangedWeapons.NONE;
         this.shield = false;
     }
+
     abstract calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[];
-    calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[] {
+    abstract baselineHP():number;
+    abstract calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[];
+    
+    calcspells(level:number):number[] {
         return [0, 0, 0];
     }
-    calchp(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number {
+    calchp(con:number, level:number): number {
         let multiplier = 1;
         switch (level) {
         case 1:
@@ -58,11 +62,11 @@ export default abstract class charclass implements IClass {
         }
         return (this.baselineHP() + this.calculatebasemodifier(con)) * multiplier;
     }
-    abstract baselineHP():number;
-    calcinitiative(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number {
+    
+    calcinitiative(dex:number, level:number): number {
         return this.calculatebasemodifier(dex) + level;
     }
-    calcac(con:number, dex:number, wis:number, level:number, feats?: IFeats[], talents?: ITalents[]): number {
+    calcac(con:number, dex:number, wis:number, level:number): number {
         const array = [dex, con, wis];
         const sorted = array.sort((n1, n2) => n1 - n2);
         let armor=0;
@@ -70,29 +74,32 @@ export default abstract class charclass implements IClass {
             armor += 1;
         return this.calculatebasemodifier(sorted[1]) + level + armor;
     }
-    calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number {
+    calcpd(str:number, con:number, dex:number, level:number): number {
         const array = [str, con, dex];
         const sorted = array.sort((n1, n2) => n1 - n2);
         
         return this.calculatebasemodifier(sorted[1]) + level;
     }
-    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[], talents?: ITalents[]): number {
+    calcmd(int:number, wis:number, cha:number, level:number): number {
         const array = [int, wis, cha];
         const sorted = array.sort((n1, n2) => n1 - n2);
         
         return this.calculatebasemodifier(sorted[1]) + level;
     }
-    calcrecoveries(feats?: IFeats[], talents?: ITalents[]): number {
+    calcrecoveries(): number {
         return 8;
     }
-    abstract calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[];
-    calcmeleehit(str:number, level:number, feats?: IFeats[], talents?: ITalents[]):number {
+    
+    calcmeleehit(str:number, level:number):number {
         return this.calculatebasemodifier(str) + level;
     }
-    calcrangedhit(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]):number {
+    calcrangedhit(dex:number, level:number):number {
         return this.calculatebasemodifier(dex) + level;
     }
-    calcmeleedmg(str:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[] {
+    calcrangedmiss(level:number){
+        return level;
+    }
+    calcmeleedmg(str:number, level:number):number[] {
         let dice;
         switch (this.weapon) {
         case MeleeWeapons.ONEHSMALL:
@@ -116,7 +123,7 @@ export default abstract class charclass implements IClass {
         const mult = this.calcDamageBonusMult(level);
         return [level, dice, this.calculatebasemodifier(str) * mult];
     }
-    calcrangeddmg(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[] {
+    calcrangeddmg(dex:number, level:number):number[] {
         let dice;
         switch (this.ranged) {
         case RangedWeapons.THROWNSMALL:

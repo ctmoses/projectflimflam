@@ -1,5 +1,5 @@
 import {
-    AbilityRefresh, AbilityTrigger, AbilityType, ISpells, ITalents, Tiers, IFeats, IMagicItem, ItemType, IIcon, IBackground,
+    AbilityRefresh, AbilityType, ISpells, ITalents, Tiers, IFeats, IMagicItem, ItemType, IIcon, IBackground,
 } from '@/types';
 
 

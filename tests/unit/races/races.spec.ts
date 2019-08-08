@@ -46,7 +46,7 @@ test('High Elf should return correct stats', () => {
 test('Human should return correct stats', () => {
     const h = new Race.human();
     expect(h.bonusstat1).toBe(Types.Attributes.ALL);
-    expect(h.bonusstat2).toBe(NaN);
+    expect(h.bonusstat2).toBe(Types.Attributes.NONE);
 });
 
 test('Wood Elf should return correct stats', () => {

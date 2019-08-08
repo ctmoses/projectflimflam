@@ -337,6 +337,9 @@ export default class Character implements ICharacter {
         });
         this.rangedToHit = this.class.calcrangedhit(this.dex, this.level, this.feats, this.talents) + mod;
     }
+    calcRangedMiss(){
+        this.missRanged = this.class.calcrangedmiss(this.level,this.feats,this.talents);
+    }
     calcRecoveryRoll() {
         this.recRoll = this.class.calcrecoveryroll(this.con, this.level, this.feats, this.talents);
     }
@@ -356,5 +359,6 @@ export default class Character implements ICharacter {
         this.calcPD();
         this.calcRangedHit();
         this.calcRecoveryRoll();
+        this.calcRangedMiss();
     }
 }

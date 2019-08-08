@@ -1,5 +1,5 @@
 import {
-    IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityTrigger, AbilityType, ITalents, Tiers, IFeats,
+    IClass, Attributes, ArmorTypes, MeleeWeapons, RangedWeapons, ISpells, AbilityRefresh, AbilityType, ITalents, Tiers, IFeats,
 } from '@/types';
 import { feat } from '../spell';
 import charclass from './charclass';
@@ -22,7 +22,7 @@ export default class paladin extends charclass {
         this.ranged = ranged;
         this.shield = shield;
     }
-    calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[] {
+    calctalents(level:number):number[] {
         if (level <= 4) return [3, 0, 0];
         if (level > 4 && level < 8) return [4, 0, 0];
         if (level >= 8) return [5, 0, 0];
@@ -90,7 +90,7 @@ export default class paladin extends charclass {
         }
         return super.calcac(con,dex,wis,level) + armor;
     }
-    calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number {
+    calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[]): number {
         let mod = 0;
         if (feats) {
             feats.forEach((element) => {
@@ -103,7 +103,7 @@ export default class paladin extends charclass {
         }
         return super.calcpd(str,con,dex,level) + 10 + mod;
     }
-    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[], talents?: ITalents[]): number {
+    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[]): number {
         let mod = 0;
 
         if (feats) {
@@ -118,7 +118,7 @@ export default class paladin extends charclass {
 
         return super.calcmd(int,wis,cha,level) + 12 + mod;
     }
-    calcrecoveries(feats?: IFeats[], talents?: ITalents[]): number {
+    calcrecoveries(feats?: IFeats[]): number {
         let recoveries = 8;
         if (feats) {
             feats.forEach((element) => {
@@ -129,7 +129,7 @@ export default class paladin extends charclass {
         }
         return recoveries;
     }
-    calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[] {
+    calcrecoveryroll(con:number, level:number): number[] {
         return [level, 10, this.calculatebasemodifier(con)];
     }
     type():string {
