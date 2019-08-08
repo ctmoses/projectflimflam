@@ -72,6 +72,7 @@ export default abstract class charclass implements IClass {
         let armor=0;
         if (this.shield) 
             armor += 1;
+
         return this.calculatebasemodifier(sorted[1]) + level + armor;
     }
     calcpd(str:number, con:number, dex:number, level:number): number {
@@ -97,7 +98,7 @@ export default abstract class charclass implements IClass {
         return this.calculatebasemodifier(dex) + level;
     }
     calcrangedmiss(level:number){
-        return level;
+        return 0;
     }
     calcmeleedmg(str:number, level:number):number[] {
         let dice;

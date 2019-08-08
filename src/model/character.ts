@@ -83,6 +83,7 @@ export default class Character implements ICharacter {
             this.missMelee = this.level;
         }
     }
+
     setName(name:string) {
         this.name = name;
     }
@@ -108,6 +109,19 @@ export default class Character implements ICharacter {
         this.magicItems = items;
         this.calcAll();
     }
+    setBackgrounds(backgrounds:IBackground[]) {
+        this.backgrounds = backgrounds;
+        this.calcAll();
+    }
+    setRecoveries(newtotal:number) {
+        if (newtotal > this.maxRec) {}
+        // THROW ERROR
+        this.curRec = newtotal;
+    }
+    setHP(newtotal:number) {
+        if (newtotal > this.maxHp) {} // Throw error
+        this.curHp = newtotal;
+    }
     calcNumberofFeats():number[] {
         let mod = 0;
         if (this.race.type() == 'Human') {
@@ -118,10 +132,6 @@ export default class Character implements ICharacter {
         if (this.level > 4 && this.level < 8) return [4, this.level % 4 + mod, 0];
         if (this.level >= 8) return [4, 3, this.level % 7 + mod];
         return [];
-    }
-    setBackgrounds(backgrounds:IBackground[]) {
-        this.backgrounds = backgrounds;
-        this.calcAll();
     }
     calcNumberofBackgrounds():number {
         let mod = 0;
@@ -152,15 +162,6 @@ export default class Character implements ICharacter {
     }
     calcNumberofTalents():number[] {
         return this.class.calctalents(this.level, this.feats, this.talents);
-    }
-    setHP(newtotal:number) {
-        if (newtotal > this.maxHp) {} // Throw error
-        this.curHp = newtotal;
-    }
-    setRecoveries(newtotal:number) {
-        if (newtotal > this.maxRec) {}
-        // THROW ERROR
-        this.curRec = newtotal;
     }
     calcInitiative() {
         let mod = 0;

@@ -110,6 +110,7 @@ export default class fighter extends charclass {
         return [level,10,this.calculatebasemodifier(con)];
     }
     calcrangeddmg(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[] {
+        var damage;
         if(talents){
             talents.forEach(element => {
                 if(element.name=="Deadeye Archer"){
@@ -133,22 +134,25 @@ export default class fighter extends charclass {
                         break;
                     }
                     const mult = this.calcDamageBonusMult(level);
-                    return [level, dice, this.calculatebasemodifier(dex) * mult];
+                   damage = [level, dice, this.calculatebasemodifier(dex) * mult];
                     //SM: TODO Epic feat for crit range
                 }
             });
         }
-        return super.calcrangeddmg(dex,level); 
+        else
+            damage = super.calcrangeddmg(dex,level); 
+        return damage;
     }
     calcrangedmiss(level:number, feats?: IFeats[], talents?: ITalents[]){
+        var damage=0;
         if(talents){
             talents.forEach(element => {
                 if(element.name=="Deadeye Archer"){
-                    return level;
+                    damage=level;
                 }
             });
         }
-        return 0;
+        return damage;
     }
     type():string{
         return "Fighter";
