@@ -144,6 +144,24 @@ export default class Character implements ICharacter {
         if (this.level >= 8) return [4, 3, this.level % 7 + mod];
         return [];
     }
+    calcNumberofIcons():number{
+        if (this.level<4)
+            return 3;
+        if (this.level>=5 && this.level<=7)
+            return 4;
+        if (this.level>7)
+            return 5;
+        return -1
+    }
+    calcIconCap():number{
+        if (this.level<4)
+            return 3;
+        if (this.level>=5 && this.level<=7)
+            return 4;
+        if (this.level>7)
+            return 5;
+        return -1
+    }
     calcNumberofBackgrounds():number {
         let mod = 0;
         this.feats.forEach((element) => {
