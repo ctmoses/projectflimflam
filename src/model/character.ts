@@ -206,7 +206,7 @@ export default class Character implements ICharacter {
                 HPAdd += this.class.baselineHP() * 2;
             }
         }
-
+        
         this.magicItems.forEach((element) => {
             if (element.type == ItemType.SHIELD) {
                 if (element.equipped == true) {
@@ -228,107 +228,32 @@ export default class Character implements ICharacter {
     }
     calcAC() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.ARMOR) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.ARMOR);
+
         this.ac = this.class.calcac(this.con, this.dex, this.wis, this.level, this.feats, this.talents) + mod;
     }
     calcPD() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.CLOAK) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.CLOAK);
+
         this.pd = this.class.calcpd(this.str, this.con, this.dex, this.level, this.feats, this.talents) + mod;
     }
     calcMD() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.HELM) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.HELM);
+
         this.md = this.class.calcmd(this.int, this.wis, this.cha, this.level, this.feats, this.talents) + mod;
     }
     calcMaxRecoveries() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.BELT) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.BELT);
+
         this.maxRec = this.class.calcrecoveries(this.feats, this.talents) + mod;
     }
     calcMeleeHit() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.MELEE) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.MELEE);
+
         if (this.class.type() == 'Bard' || this.class.type() == 'Ranger') {
             if (this.str >= this.dex) {
                 this.meleeToHit = this.class.calcmeleehit(this.str, this.level, this.feats, this.talents) + mod;
@@ -343,23 +268,8 @@ export default class Character implements ICharacter {
     }
     calcRangedHit() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.RANGED) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.RANGED);
+        
         this.rangedToHit = this.class.calcrangedhit(this.dex, this.level, this.feats, this.talents) + mod;
     }
     calcRangedMiss(){
@@ -385,5 +295,26 @@ export default class Character implements ICharacter {
         this.calcRangedHit();
         this.calcRecoveryRoll();
         this.calcRangedMiss();
+    }
+    magicItemMod(type: ItemType):number{
+        var mod = 0;
+        this.magicItems.forEach((element) => {
+            if (element.type == type) {
+                if (element.equipped == true) {
+                    switch (element.tier) {
+                    case Tiers.ADVENTURER:
+                        mod = 1;
+                        break;
+                    case Tiers.CHAMPION:
+                        mod = 2;
+                        break;
+                    case Tiers.EPIC:
+                        mod = 3;
+                        break;
+                    }
+                }
+            }
+        });
+        return mod;
     }
 }
