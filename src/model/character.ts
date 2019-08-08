@@ -127,7 +127,7 @@ export default class Character implements ICharacter {
         if (this.race.type() == 'Human') {
             mod = 1;
         }
-        // SM: TODO: Humans get an extra feat. Is it always adv tier?
+        // TODO: Humans get an extra feat. Is it always adv tier?
         if (this.level <= 4) return [this.level + mod, 0, 0];
         if (this.level > 4 && this.level < 8) return [4, this.level % 4 + mod, 0];
         if (this.level >= 8) return [4, 3, this.level % 7 + mod];

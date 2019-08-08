@@ -23,7 +23,7 @@ export default class barbarian extends charclass {
     }
     calctalents(level:number):number[] {
         if (level <= 4) return [3, 0, 0];
-        if (level > 4 && level < 8) return [3, 1, 0]; // SM: TODO.  This class should really return something like 3 Adventurer and 1 Champion tier talent
+        if (level > 4 && level < 8) return [3, 1, 0];
         if (level >= 8) return [3, 1, 1];
         return [-1, -1, -1];
     }

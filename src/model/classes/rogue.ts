@@ -3,8 +3,8 @@ import {
 } from '@/types';
 import charclass from './charclass';
 
-//SM: TODO.  Talents Thievery and Cunning need to be implemented.
-//SM: TODO.  Feat Cunning needs implemented
+//TODO.  Talents Thievery and Cunning need to be implemented.
+//TODO.  Feat Cunning needs implemented
 
 export default class rogue extends charclass {
     bonusstat1: Attributes;
@@ -88,15 +88,13 @@ export default class rogue extends charclass {
         return super.calcac(con,dex,wis,level) + armor;
     }
     calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[]): number {
-        return   super.calcpd(str,con,dex,level)+ 12;
+        return super.calcpd(str,con,dex,level)+ 12;
     }
     calcmd(int:number, wis:number, cha:number, level:number): number {
-        return   super.calcmd(int, wis, cha, level)+ 10;
+        return super.calcmd(int, wis, cha, level)+ 10;
     }
     calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[] {
-        let dicetype = 8;
-
-        return [level, dicetype, this.calculatebasemodifier(con)];
+        return [level, 8, this.calculatebasemodifier(con)];
     }
     calcmeleehit(dex:number, level:number):number {
         let mod = 0;

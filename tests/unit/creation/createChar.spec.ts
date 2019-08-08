@@ -14,9 +14,9 @@ test('Test Initial Char Creation', () => {
     const c = new Character(barbarian, d, 18, 16, 14, 6, 8, 10, 1);
 
     // Set Some Magic Items
-    const magicitem = new Spells.magicitems(Types.ItemType.ARMOR, Types.Tiers.CHAMPION, true);
-    const magicitem1 = new Spells.magicitems(Types.ItemType.CLOAK, Types.Tiers.ADVENTURER, true);
-    const magicitem2 = new Spells.magicitems(Types.ItemType.HELM, Types.Tiers.EPIC, true);
+    const magicitem = new Spells.magicitems(Types.ItemType.ARMOR, Types.Tiers.CHAMPION, true,"","");
+    const magicitem1 = new Spells.magicitems(Types.ItemType.CLOAK, Types.Tiers.ADVENTURER, true,"","");
+    const magicitem2 = new Spells.magicitems(Types.ItemType.HELM, Types.Tiers.EPIC, true,"","");
     c.setMagicItems([magicitem, magicitem1, magicitem2]);
 
     // Set the talents
@@ -35,7 +35,7 @@ test('Test Initial Char Creation', () => {
     c.setUnique('test');
 
     // Set Icon
-    // SM: TODO Need character to calculate how many icons are allowed and the cap
+    // TODO Need character to calculate how many icons are allowed and the cap
     const icon = new Spells.icon('Ork King', 3);
     c.setIcons([icon]);
 

@@ -53,7 +53,9 @@ export interface ITalents {
 export interface IMagicItem{
     type: ItemType,
     tier: Tiers,
-    equipped: boolean
+    equipped: boolean,
+    name: string,
+    power: string
 }
 export interface IClass {
     bonusstat1: Attributes,
@@ -69,7 +71,7 @@ export interface IClass {
     calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
     calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
     calcrecoveries(feats?: IFeats[], talents?: ITalents[]): number,
-    calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[], // SM: Not sure what we want to return here...just something like 4d8+4?
+    calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[], 
     calcmeleehit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
     calcrangedhit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
     calcrangedmiss(level:number, feats?: IFeats[], talents?: ITalents[]),
@@ -174,4 +176,5 @@ export enum ItemType {
     SHIELD,
     MELEE,
     RANGED,
+    OTHER
 }

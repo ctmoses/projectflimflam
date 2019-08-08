@@ -64,10 +64,14 @@ export class magicitems implements IMagicItem {
     type:ItemType;
     tier: Tiers;
     equipped: boolean;
-    constructor(itemType:ItemType, tier: Tiers, equipped: boolean) {
+    name: string;
+    power: string;
+    constructor(itemType:ItemType, tier: Tiers, equipped: boolean, name: string, power: string) {
         this.type = itemType;
         this.tier = tier;
         this.equipped = equipped;
+        this.name=name;
+        this.power=power;
     }
     equip() {
         this.equipped = true;

@@ -138,7 +138,7 @@ export default class fighter extends charclass {
                     }
                     const mult = this.calcDamageBonusMult(level);
                    damage = [level, dice, this.calculatebasemodifier(dex) * mult];
-                    //SM: TODO Epic feat for crit range
+                    //TODO Epic feat for crit range
                 }
             });
         }
