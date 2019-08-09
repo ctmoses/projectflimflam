@@ -69,7 +69,7 @@
                     <md-select v-model="armor"
                                name="class"
                                id="class"
-                               :placeholder="'Pick a armor weapon'">
+                               :placeholder="'Pick an armor'">
                         <md-option v-for="a in armors"
                                    :key="a"
                                    :value="a">
@@ -108,6 +108,7 @@
         className = '';
         meleeWeapon = '';
         rangedWeapon = '';
+        
         armor = "";
         stats = {
             str: 9,
@@ -122,14 +123,21 @@
             const raceName = Models.constants.RACES.filter(r => r.label === this.race)[0];
             const RaceClass =  Models.Race.RaceFactory(raceName.name);
             const myRace = new RaceClass();
-
+            var test = 0;
             const className = Models.constants.CLASSES.filter(c => c.label === this.className)[0];
             const ClassClass = Models[className.label];
-            const myClass = new ClassClass(this.armor, false, this.meleeWeapon, this.rangedWeapon);
+            
+            switch(this.armor)
+            {
+                case "Light":
+                    test = TYPES.ArmorTypes.LIGHT;
+            }
+            const myClass = new ClassClass(test, false, this.meleeWeapon, this.rangedWeapon);
             
             const myStats = Object.values(this.stats);
-
-            const myChar = new Models.Character(myClass, myRace, ...myStats, 1);
+            //TODO Editing stats on the page passes them in as strings and not numbers
+            const myChar = new Models.Character(myClass, myRace, myStats[0], myStats[1], myStats[2], myStats[3], myStats[4], myStats[5], 5);
+            //const myChar = new Models.Character(myClass, myRace, ...myStats, 1);
             console.log(myChar);
         }
 

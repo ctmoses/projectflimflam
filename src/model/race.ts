@@ -113,6 +113,18 @@ export const RaceFactory = (name: String): any => {
             return darkelf;
         case 'gnome':
             return gnome;
+        case 'halfelf':
+            return halfelf;
+        case 'halforc':
+            return halforc;
+        case 'halfling':
+            return halfling;
+        case 'highelf':
+            return highelf;
+        case 'human':
+            return human;
+        case 'woodelf':
+            return woodelf;
         default:
             return -1;
     }

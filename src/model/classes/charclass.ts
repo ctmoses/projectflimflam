@@ -131,7 +131,11 @@ export default abstract class charclass implements IClass {
             break;
         }
         const mult = this.calcDamageBonusMult(level);
-        return [level, dice, this.calculatebasemodifier(str) * mult];
+        //Only multiply by if you have a positive ability modifier
+        var mod = this.calculatebasemodifier(str);
+        if(mod>0)
+            mod=mod*mult;
+        return [level, dice, mod];
     }
     calcrangeddmg(dex:number, level:number):number[] {
         let dice;

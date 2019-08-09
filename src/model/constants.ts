@@ -46,7 +46,36 @@ export const CLASSES = [
     {
         name: 'paladin',
         label: 'Paladin',
+    },
+    {
+        name: 'bard',
+        label: 'Bard',
+    },
+    {
+        name: 'cleric',
+        label: 'Cleric',
+    },
+    {
+        name: 'fighter',
+        label: 'Fighter',
+    },
+    {
+        name: 'ranger',
+        label: 'Ranger',
+    },
+    {
+        name: 'rogue',
+        label: 'Rogue',
+    },
+    {
+        name: 'sorcerer',
+        label: 'Sorcerer',
+    },
+    {
+        name: 'wizard',
+        label: 'Wizard',
     }
+
 ];
 
 export const WEAPONS_MELEE_TYPES = [
@@ -110,15 +139,15 @@ export const WEAPONS_RANGED_TYPES = [
 
 export const ARMOR_TYPES = [
     {
-        name: 'NONE',
+        name: '0',
         label: 'None',
     },
     {
-        name: 'LIGHT',
+        name: '1',
         label: 'Light',
     },
     {
-        name: 'HEAVY',
-        label: 'HEAVY',
+        name: '2',
+        label: 'Heavy',
     }
 ];
