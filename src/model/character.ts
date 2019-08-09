@@ -1,7 +1,7 @@
 import {
-    IRace, IClass, ICharacter, IIcon, IFeats, ITalents, ISpells, IBackground, Tiers, IMagicItem, ItemType,
+    IRace, IClass, ICharacter, IIcon, IFeats, ITalents, ISpells, IBackground, Tiers, IMagicItem, ItemType, Attributes,
 } from '@/types';
-import { magicitems } from './spell';
+import { magicitems, spell, background } from './spell';
 
 export default class Character implements ICharacter {
     name: string = 'Default';
@@ -83,6 +83,7 @@ export default class Character implements ICharacter {
             this.missMelee = this.level;
         }
     }
+
     setName(name:string) {
         this.name = name;
     }
@@ -99,6 +100,14 @@ export default class Character implements ICharacter {
     }
     setTalents(talents:ITalents[]) {
         this.talents = talents;
+        if(this.class.type()=="Rogue")
+            if(this.class.talenttaken(this.talents,"Thievery"))
+                this.addBackground(new background("Thievery",5));
+        
+        if(this.class.type()=="Ranger")
+            if(this.class.talenttaken(this.talents,"Tracker"))
+                this.addBackground(new background("Tracker",5));   
+
         this.calcAll();
     }
     setUnique(unique:string) {
@@ -108,43 +117,69 @@ export default class Character implements ICharacter {
         this.magicItems = items;
         this.calcAll();
     }
+    setBackgrounds(backgrounds:IBackground[]) {
+        this.backgrounds = backgrounds;
+        this.calcAll();
+    }
+    addBackground(background:IBackground){
+        //TODO: Test this..what happens if you concat to empty?
+        this.backgrounds.concat(background);
+    }
+    setRecoveries(newtotal:number) {
+        if (newtotal > this.maxRec) {}
+        // THROW ERROR
+        this.curRec = newtotal;
+    }
+    setHP(newtotal:number) {
+        if (newtotal > this.maxHp) {} // Throw error
+        this.curHp = newtotal;
+    }
     calcNumberofFeats():number[] {
         let mod = 0;
         if (this.race.type() == 'Human') {
             mod = 1;
         }
-        // SM: TODO: Humans get an extra feat. Is it always adv tier?
+        // TODO: Humans get an extra feat. Is it always adv tier?
         if (this.level <= 4) return [this.level + mod, 0, 0];
         if (this.level > 4 && this.level < 8) return [4, this.level % 4 + mod, 0];
         if (this.level >= 8) return [4, 3, this.level % 7 + mod];
         return [];
     }
-    setBackgrounds(backgrounds:IBackground[]) {
-        this.backgrounds = backgrounds;
-        this.calcAll();
+    calcNumberofIcons():number{
+        var mod=0;
+        if (this.level<4)
+            mod = 3;
+        if (this.level>=5 && this.level<=7)
+            mod = 4;
+        if (this.level>7)
+            mod = 5;
+        return mod + this.class.calcnumberoficons();
+    }
+    calcIconCap():number{
+        if (this.level<4)
+            return 3;
+        if (this.level>=5 && this.level<=7)
+            return 4;
+        if (this.level>7)
+            return 5;
+        return -1
     }
     calcNumberofBackgrounds():number {
         let mod = 0;
-        this.feats.forEach((element) => {
-            if (element.name == 'Further Backgrounding') {
-                if (element.tier == Tiers.ADVENTURER) {
-                    mod += 2;
-                } else if (element.tier == Tiers.CHAMPION) {
-                    mod += 3;
-                } else if (element.tier == Tiers.EPIC) {
-                    mod += 2;
-                }
-            }
-        });
-        return 5 + mod;
+        if(this.class.feattaken(this.feats,"Further Backgrounding",Tiers.ADVENTURER))
+            mod += 2;
+        if(this.class.feattaken(this.feats,"Further Backgrounding",Tiers.CHAMPION))
+            mod += 3;
+        if(this.class.feattaken(this.feats,"Further Backgrounding",Tiers.EPIC))
+            mod += 2;
+
+        return 5 + mod + this.class.calcnumberofbackgrounds(this.feats,this.talents);
     }
     calcBackgroundCap():number {
         let mod = 0;
-        this.feats.forEach((element) => {
-            if (element.name == 'Further Backgrounding') {
-                if (element.tier == Tiers.EPIC) mod += 2; // SM: Chris, why doesn't "return 7; work here?"
-            }
-        });
+        if(this.class.feattaken(this.feats,"Further Backgrounding",Tiers.EPIC))
+            mod += 2;
+
         return 5 + mod;
     }
     calcNumberofSpells():number[] {
@@ -153,35 +188,25 @@ export default class Character implements ICharacter {
     calcNumberofTalents():number[] {
         return this.class.calctalents(this.level, this.feats, this.talents);
     }
-    setHP(newtotal:number) {
-        if (newtotal > this.maxHp) {} // Throw error
-        this.curHp = newtotal;
-    }
-    setRecoveries(newtotal:number) {
-        if (newtotal > this.maxRec) {}
-        // THROW ERROR
-        this.curRec = newtotal;
-    }
     calcInitiative() {
         let mod = 0;
-        this.feats.forEach((element) => {
-            if (element.name == 'Imp. Initiative') mod = 4;
-        });
+        if(this.class.feattaken(this.feats,"Imp. Initiative",Tiers.ADVENTURER))
+            mod = 4;    
+
         this.initiative = this.class.calcinitiative(this.dex, this.level, this.feats, this.talents) + mod;
     }
     calcMaxHP() {
         let HPAdd = 0;
-        this.feats.forEach((element) => {
-            if (element.name == 'Toughness') {
-                if (this.level <= 4) {
-                    HPAdd += this.class.baselineHP() / 2;
-                } else if (this.level > 4 && this.level < 8) {
-                    HPAdd += this.class.baselineHP();
-                } else {
-                    HPAdd += this.class.baselineHP() * 2;
-                }
+        if(this.class.feattaken(this.feats,"Toughness",Tiers.ADVENTURER)){
+            if (this.level <= 4) {
+                HPAdd += this.class.baselineHP() / 2;
+            } else if (this.level > 4 && this.level < 8) {
+                HPAdd += this.class.baselineHP();
+            } else {
+                HPAdd += this.class.baselineHP() * 2;
             }
-        });
+        }
+        
         this.magicItems.forEach((element) => {
             if (element.type == ItemType.SHIELD) {
                 if (element.equipped == true) {
@@ -203,107 +228,32 @@ export default class Character implements ICharacter {
     }
     calcAC() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.ARMOR) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.ARMOR);
+
         this.ac = this.class.calcac(this.con, this.dex, this.wis, this.level, this.feats, this.talents) + mod;
     }
     calcPD() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.CLOAK) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.CLOAK);
+
         this.pd = this.class.calcpd(this.str, this.con, this.dex, this.level, this.feats, this.talents) + mod;
     }
     calcMD() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.HELM) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.HELM);
+
         this.md = this.class.calcmd(this.int, this.wis, this.cha, this.level, this.feats, this.talents) + mod;
     }
     calcMaxRecoveries() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.BELT) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.BELT);
+
         this.maxRec = this.class.calcrecoveries(this.feats, this.talents) + mod;
     }
     calcMeleeHit() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.MELEE) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.MELEE);
+
         if (this.class.type() == 'Bard' || this.class.type() == 'Ranger') {
             if (this.str >= this.dex) {
                 this.meleeToHit = this.class.calcmeleehit(this.str, this.level, this.feats, this.talents) + mod;
@@ -316,26 +266,18 @@ export default class Character implements ICharacter {
             this.meleeToHit = this.class.calcmeleehit(this.str, this.level, this.feats, this.talents) + mod;
         }
     }
+    calcAbilityHit(attr:Attributes):number {
+        //TODO Lots of feats can modify the base attr used for abilities, need to add conditions here
+        return this.class.calcabilitytohit(attr, this.level,this.feats,this.talents);
+    }
     calcRangedHit() {
         let mod = 0;
-        this.magicItems.forEach((element) => {
-            if (element.type == ItemType.RANGED) {
-                if (element.equipped == true) {
-                    switch (element.tier) {
-                    case Tiers.ADVENTURER:
-                        mod = 1;
-                        break;
-                    case Tiers.CHAMPION:
-                        mod = 2;
-                        break;
-                    case Tiers.EPIC:
-                        mod = 3;
-                        break;
-                    }
-                }
-            }
-        });
+        mod = this.magicItemMod(ItemType.RANGED);
+        
         this.rangedToHit = this.class.calcrangedhit(this.dex, this.level, this.feats, this.talents) + mod;
+    }
+    calcRangedMiss(){
+        this.missRanged = this.class.calcrangedmiss(this.level,this.feats,this.talents);
     }
     calcRecoveryRoll() {
         this.recRoll = this.class.calcrecoveryroll(this.con, this.level, this.feats, this.talents);
@@ -356,5 +298,27 @@ export default class Character implements ICharacter {
         this.calcPD();
         this.calcRangedHit();
         this.calcRecoveryRoll();
+        this.calcRangedMiss();
+    }
+    magicItemMod(type: ItemType):number{
+        var mod = 0;
+        this.magicItems.forEach((element) => {
+            if (element.type == type) {
+                if (element.equipped == true) {
+                    switch (element.tier) {
+                    case Tiers.ADVENTURER:
+                        mod = 1;
+                        break;
+                    case Tiers.CHAMPION:
+                        mod = 2;
+                        break;
+                    case Tiers.EPIC:
+                        mod = 3;
+                        break;
+                    }
+                }
+            }
+        });
+        return mod;
     }
 }

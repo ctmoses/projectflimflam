@@ -1,5 +1,5 @@
 import {
-    ISpells, IRace, AbilityRefresh, AbilityTrigger, Attributes, AbilityType,
+    ISpells, IRace, AbilityRefresh, Attributes, AbilityType,
 } from '@/types';
 import { spell } from '@/model/spell';
 
@@ -87,7 +87,7 @@ export class human implements IRace {
     bonusstat2: Attributes;
     constructor() {
         this.bonusstat1 = Attributes.ALL;
-        this.bonusstat2 = NaN; // SM: Uhh, humans threw a wrench in the model..maybe rewrite so bonus stats are an array?
+        this.bonusstat2 = Attributes.NONE; // SM: Uhh, humans threw a wrench in the model..maybe rewrite so bonus stats are an array?
     }
     type():string {
         return 'Human';

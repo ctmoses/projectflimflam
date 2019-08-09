@@ -1,4 +1,4 @@
-import Paladin from '../../../src/model/paladin';
+import Paladin from '../../../src/model/classes/paladin';
 import * as Race from '../../../src/model/race';
 import Character from '../../../src/model/character';
 import * as Types from '../../../src/types';
@@ -77,20 +77,4 @@ test('Paladin melee info should be calculated', () => {
     expect(paladin.calcmeleedmg(16, 8)).toEqual([8, 10, 9]);
 });
 
-test('Base Modifier', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const paladin = new Paladin(armor, false, weapon, ranged);
 
-    expect(paladin.calculatebasemodifier(2)).toBe(-4);
-    expect(paladin.calculatebasemodifier(4)).toBe(-3);
-    expect(paladin.calculatebasemodifier(6)).toBe(-2);
-    expect(paladin.calculatebasemodifier(8)).toBe(-1);
-    expect(paladin.calculatebasemodifier(10)).toBe(0);
-    expect(paladin.calculatebasemodifier(12)).toBe(1);
-    expect(paladin.calculatebasemodifier(14)).toBe(2);
-    expect(paladin.calculatebasemodifier(16)).toBe(3);
-    expect(paladin.calculatebasemodifier(18)).toBe(4);
-    expect(paladin.calculatebasemodifier(20)).toBe(5);
-});

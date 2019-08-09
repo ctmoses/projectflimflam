@@ -53,7 +53,9 @@ export interface ITalents {
 export interface IMagicItem{
     type: ItemType,
     tier: Tiers,
-    equipped: boolean
+    equipped: boolean,
+    name: string,
+    power: string
 }
 export interface IClass {
     bonusstat1: Attributes,
@@ -69,14 +71,21 @@ export interface IClass {
     calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
     calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
     calcrecoveries(feats?: IFeats[], talents?: ITalents[]): number,
-    calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[], // SM: Not sure what we want to return here...just something like 4d8+4?
+    calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[], 
     calcmeleehit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
     calcrangedhit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
+    calcrangedmiss(level:number, feats?: IFeats[], talents?: ITalents[]),
     calcmeleedmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calcrangeddmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
+    calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number,
+    calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number,
+    calcbattlecries(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     type():string,
+    talenttaken(talents: ITalents[], name:string):boolean,
+    feattaken(feats: IFeats[], name: string, tier: Tiers):boolean,
+    calcabilitytohit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number
 }
 export interface ICharacter {
     name: string,
@@ -120,7 +129,8 @@ export enum Attributes {
     WISDOM,
     CONSTITUTION,
     CHARISMA,
-    ALL
+    ALL,
+    NONE
 }
 
 export enum AbilityRefresh {
@@ -135,15 +145,6 @@ export enum AbilityType {
     INTERRUPT,
     FREE
 }
-export enum AbilityTrigger {
-    HIT,
-    DAMAGETAKEN,
-    MISS,
-    NONE,
-    MONDEATH,
-    MONSTAGGER,
-    PCSTAGGER,
-}
 export enum ArmorTypes {
     NONE,
     LIGHT,
@@ -155,7 +156,8 @@ export enum MeleeWeapons {
     ONEHHEAVY,
     TWOHSMALL,
     TWOHLIGHT,
-    TWOHHEAVY
+    TWOHHEAVY,
+    NONE
 }
 export enum RangedWeapons {
     THROWNSMALL,
@@ -164,7 +166,8 @@ export enum RangedWeapons {
     XBOWLIGHT,
     XBOWHEAVY,
     BOWLIGHT,
-    BOWHEAVY
+    BOWHEAVY,
+    NONE
 }
 export enum Tiers {
     ADVENTURER,
@@ -179,4 +182,5 @@ export enum ItemType {
     SHIELD,
     MELEE,
     RANGED,
+    OTHER
 }
