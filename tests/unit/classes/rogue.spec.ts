@@ -8,4 +8,5 @@ test('Rogue ', () => {
     const ranged = Types.RangedWeapons.BOWLIGHT;
     const rogue = new Rogue(armor, false, weapon, ranged);
 
+    expect(rogue.calcac(10,10,10,1)).toBe(14);
 });
