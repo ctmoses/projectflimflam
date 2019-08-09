@@ -84,7 +84,8 @@ export interface IClass {
     calcbattlecries(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     type():string,
     talenttaken(talents: ITalents[], name:string):boolean,
-    feattaken(feats: IFeats[], name: string, tier: Tiers):boolean
+    feattaken(feats: IFeats[], name: string, tier: Tiers):boolean,
+    calcabilitytohit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number
 }
 export interface ICharacter {
     name: string,

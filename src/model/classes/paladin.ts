@@ -110,6 +110,9 @@ export default class paladin extends charclass {
     calcrecoveryroll(con:number, level:number): number[] {
         return [level, 10, this.calculatebasemodifier(con)];
     }
+    calcabilitytohit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number{
+        return this.calculatebasemodifier(attr) + level;
+    }
     type():string {
         return 'Paladin';
     }

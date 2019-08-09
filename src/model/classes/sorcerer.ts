@@ -152,6 +152,17 @@ export default class sorcerer extends charclass {
             mod+=1;
         return this.calculatebasemodifier(dex) + level + mod;
     }
+    calcabilitytohit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number{
+        //TODO Technicaly weapons should mod downwards, but need a way to know if ranged or melee is equipped
+        let mod = 0;
+        if (this.armor == ArmorTypes.HEAVY) {
+            mod = -2;
+        }
+        if (this.shield){
+            mod += -2;
+        }
+        return this.calculatebasemodifier(attr) + level+mod;
+    }
     type():string {
         return 'Sorcerer';
     }

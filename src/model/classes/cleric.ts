@@ -128,6 +128,9 @@ export default class cleric extends charclass {
         
         return this.calculatebasemodifier(dex) + level + mod;
     }
+    calcabilitytohit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number{
+        return this.calculatebasemodifier(attr) + level;
+    }
     type():string {
         return 'Cleric';
     }

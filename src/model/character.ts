@@ -1,5 +1,5 @@
 import {
-    IRace, IClass, ICharacter, IIcon, IFeats, ITalents, ISpells, IBackground, Tiers, IMagicItem, ItemType,
+    IRace, IClass, ICharacter, IIcon, IFeats, ITalents, ISpells, IBackground, Tiers, IMagicItem, ItemType, Attributes,
 } from '@/types';
 import { magicitems, spell, background } from './spell';
 
@@ -265,6 +265,10 @@ export default class Character implements ICharacter {
         } else {
             this.meleeToHit = this.class.calcmeleehit(this.str, this.level, this.feats, this.talents) + mod;
         }
+    }
+    calcAbilityHit(attr:Attributes):number {
+        //TODO Lots of feats can modify the base attr used for abilities, need to add conditions here
+        return this.class.calcabilitytohit(attr, this.level,this.feats,this.talents);
     }
     calcRangedHit() {
         let mod = 0;

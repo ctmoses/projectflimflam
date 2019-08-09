@@ -106,6 +106,9 @@ export default abstract class charclass implements IClass {
     calcrangedmiss(level:number){
         return 0;
     }
+    calcabilitytohit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number{
+        return 0;
+    }
     calcmeleedmg(str:number, level:number):number[] {
         let dice;
         switch (this.weapon) {
