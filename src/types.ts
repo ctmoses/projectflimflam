@@ -81,6 +81,7 @@ export interface IClass {
     calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number,
     calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number,
+    calcbattlecries(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
     type():string,
     talenttaken(talents: ITalents[], name:string):boolean,
     feattaken(feats: IFeats[], name: string, tier: Tiers):boolean

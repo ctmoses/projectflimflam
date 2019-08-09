@@ -29,6 +29,9 @@ export default abstract class charclass implements IClass {
     calcspells(level:number):number[] {
         return [0, 0, 0];
     }
+    calcbattlecries(level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
+        return[-1,-1,-1,-1,-1];
+    }
     calchp(con:number, level:number): number {
         let multiplier = 1;
         switch (level) {
