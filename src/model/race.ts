@@ -104,3 +104,16 @@ export class woodelf implements IRace {
         return 'Wood Elf';
     }
 }
+
+export const RaceFactory = (name: String): any => {
+    switch(name) {
+        case 'dwarf':
+            return dwarf;
+        case 'darkelf':
+            return darkelf;
+        case 'gnome':
+            return gnome;
+        default:
+            return -1;
+    }
+};

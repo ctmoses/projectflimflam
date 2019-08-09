@@ -160,7 +160,6 @@ export enum MeleeWeapons {
 export enum RangedWeapons {
     THROWNSMALL,
     THROWNLIGHT,
-    THROWNHEAVY,
     XBOWSMALL,
     XBOWLIGHT,
     XBOWHEAVY,
