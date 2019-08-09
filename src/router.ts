@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 
 import Main from './views/Main.vue';
 import Login from './views/Login.vue';
+import CharacterCreation from './components/CharacterCreation.vue';
 
 import store from '@/store';
 
@@ -25,6 +26,11 @@ const router = new Router({
             component: Login,
         },
         {
+            path: '/create',
+            name: 'create',
+            component: CharacterCreation,
+        },
+        {
             path: '/about',
             name: 'about',
             // route level code-splitting
@@ -41,7 +47,7 @@ router.beforeEach((to, from, next) => {
 
     firebase.auth().onAuthStateChanged((fuser) => {
         if (fuser) {
-            console.log(fuser)
+            console.log(fuser);
             store.dispatch('SET_USER', {
                 id: fuser.uid,
                 name: fuser.displayName,

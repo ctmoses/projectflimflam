@@ -1,44 +1,66 @@
 <template>
     <div class="main">
         <div class="status">
-            <div class="rest"></div>
-            <div class="health"></div>
+            <div class="rest" />
+            <div class="health" />
             <div class="avatar">
-                <img :src="user.imageURL" alt="" class="avatar-img">
+                <img :src="user.imageURL"
+                     alt=""
+                     class="avatar-img">
             </div>
-            <div class="level">4</div>
+            <div class="level">
+                4
+            </div>
         </div>
 
         <div class="attributes">
             <div class="attribute">
-                <div class="label">AC</div>
-                <div class="value">20</div>
+                <div class="label">
+                    AC
+                </div>
+                <div class="value">
+                    20
+                </div>
             </div>
             <div class="attribute">
-                <div class="label">AC</div>
-                <div class="value">20</div>
+                <div class="label">
+                    AC
+                </div>
+                <div class="value">
+                    20
+                </div>
             </div>
             <div class="attribute">
-                <div class="label">AC</div>
-                <div class="value">20</div>
+                <div class="label">
+                    AC
+                </div>
+                <div class="value">
+                    20
+                </div>
             </div>
         </div>
-        
+
         <div class="actions">
-            <div class="action">ACTION</div>
-            <div class="action">SKILL CHECK</div>
-            <div class="action">REST</div>
+            <div class="action">
+                ACTION
+            </div>
+            <div class="action">
+                SKILL CHECK
+            </div>
+            <div class="action">
+                REST
+            </div>
         </div>
-        
-        <div class="equipped"></div>
+
+        <div class="equipped" />
     </div>
 </template>
 
 <script lang="ts">
-    import { Component,  Vue } from 'vue-property-decorator';
+    import { Component, Vue } from 'vue-property-decorator';
     import { Getter } from 'vuex-class';
     import { IUser } from '@/types';
-    
+
     @Component
     export default class Main extends Vue {
         @Getter('USER') user!: IUser;

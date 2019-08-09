@@ -7,44 +7,56 @@ export interface IUser {
 export interface IIcon {
     name: string,
     level: number,
-};
+}
 export interface IRace {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
     type(): string
-};
+}
 export interface IBackground {
     backgroundtitle : string,
     backgroundmod : number
-};
+}
 export interface IFeats {
     tier: Tiers,
     prereq: string,
     power: string,
     name: string
-};
+}
 export interface ISpells {
-    refresh: AbilityRefresh,
-    trigger: AbilityTrigger,
-    type: AbilityType,
+    charclass: string,
+    name: string,
     level: number,
+    refresh: AbilityRefresh,
+    type: AbilityType,
+    range: string,
+    target: string,
+    attack: string,
+    hit: string,
+    miss: string,
+    effect: string,
+};
+export interface IManeuvers {
+    charclass: string,
     name: string,
     powertext: string,
-};
+}
 export interface ITalents {
     refresh: AbilityRefresh,
-    trigger: AbilityTrigger,
     type: AbilityType,
     tier: Tiers,
-    innate: boolean,
+    feature: boolean,
     name: string,
     powertext: string,
-};
+    url: string,
+}
 export interface IMagicItem{
     type: ItemType,
     tier: Tiers,
-
-};
+    equipped: boolean,
+    name: string,
+    power: string
+}
 export interface IClass {
     bonusstat1: Attributes,
     bonusstat2: Attributes,
@@ -52,25 +64,32 @@ export interface IClass {
     shield: boolean,
     weapon: MeleeWeapons,
     ranged: RangedWeapons,
-    calchp(con:number,level:number, feats?: IFeats[]): number,
+    calchp(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
     baselineHP(): number,
-    calcinitiative(dex:number, level:number, feats?: IFeats[]): number,
-    calcac(con:number, dex:number,wis:number, level:number, feats?: IFeats[]): number,
-    calcpd(str:number, con:number,dex:number,level:number, feats?: IFeats[]): number,
-    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[]): number,
-    calcrecoveries(feats?: IFeats[]): number,
-    calcrecoveryroll(con:number, level:number, feats?: IFeats[]): string,  //SM: Not sure what we want to return here...just something like 4d8+4?
-    calcmeleehit(attr:number, level:number, feats?: IFeats[]):number,
-    calcrangedhit(attr:number, level:number, feats?: IFeats[]):number,
-    calcmeleedmg(attr:number, level:number, feats?: IFeats[]):string,
-    calcrangeddmg(attr:number, level:number, feats?: IFeats[]):string, 
-    calctalents(level:number, feats?: IFeats[]):number,
-    calcspells(level:number, feats?: IFeats[]):number,
-    type():string,  
-};
+    calcinitiative(dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
+    calcac(con:number, dex:number, wis:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
+    calcpd(str:number, con:number, dex:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
+    calcmd(int:number, wis:number, cha:number, level:number, feats?: IFeats[], talents?: ITalents[]): number,
+    calcrecoveries(feats?: IFeats[], talents?: ITalents[]): number,
+    calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[], 
+    calcmeleehit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
+    calcrangedhit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number,
+    calcrangedmiss(level:number, feats?: IFeats[], talents?: ITalents[]),
+    calcmeleedmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[],
+    calcrangeddmg(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number[],
+    calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
+    calcspells(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
+    calcnumberofbackgrounds(feats?: IFeats[], talents?: ITalents[]):number,
+    calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number,
+    calcbattlecries(level:number, feats?: IFeats[], talents?: ITalents[]):number[],
+    type():string,
+    talenttaken(talents: ITalents[], name:string):boolean,
+    feattaken(feats: IFeats[], name: string, tier: Tiers):boolean,
+    calcabilitytohit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number
+}
 export interface ICharacter {
     name: string,
-    class: IClass,  
+    class: IClass,
     race: IRace,
     level: number,
     str: number,
@@ -87,21 +106,21 @@ export interface ICharacter {
     curHp: number,
     maxRec: number,
     curRec: number,
-    recRoll: string,
+    recRoll: number[],
     meleeToHit: number,
-    meleeDmg: string,
+    meleeDmg: number[],
     missMelee: number,
     rangedToHit: number,
-    rangedDmg: string,
+    rangedDmg: number[],
     missRanged: number,
     unique: string,
     icon: IIcon[],
-    feats: IFeats[], 
+    feats: IFeats[],
     talents: ITalents[],
     spells: ISpells[],
     backgrounds: IBackground[],
-    magicItems: IMagicItem[], 
-};
+    magicItems: IMagicItem[],
+}
 
 export enum Attributes {
     STRENGTH,
@@ -110,58 +129,51 @@ export enum Attributes {
     WISDOM,
     CONSTITUTION,
     CHARISMA,
-    ALL
-};
+    ALL,
+    NONE
+}
 
 export enum AbilityRefresh {
     ATWILL,
     BATTLE,
     DAILY
-};
+}
 export enum AbilityType {
     STANDARD,
     MOVE,
     QUICK,
     INTERRUPT,
     FREE
-};
-export enum AbilityTrigger {
-    HIT,
-    DAMAGETAKEN,
-    MISS,
-    NONE,
-    MONDEATH,
-    MONSTAGGER,
-    PCSTAGGER,
-};
+}
 export enum ArmorTypes {
     NONE,
     LIGHT,
     HEAVY,
-};
+}
 export enum MeleeWeapons {
     ONEHSMALL,
     ONEHLIGHT,
     ONEHHEAVY,
     TWOHSMALL,
     TWOHLIGHT,
-    TWOHHEAVY
-};
+    TWOHHEAVY,
+    NONE
+}
 export enum RangedWeapons {
     THROWNSMALL,
     THROWNLIGHT,
-    THROWNHEAVY,
     XBOWSMALL,
     XBOWLIGHT,
     XBOWHEAVY,
     BOWLIGHT,
-    BOWHEAVY
-};
+    BOWHEAVY,
+    NONE
+}
 export enum Tiers {
     ADVENTURER,
     CHAMPION,
     EPIC
-};
+}
 export enum ItemType {
     ARMOR,
     BELT,
@@ -170,4 +182,5 @@ export enum ItemType {
     SHIELD,
     MELEE,
     RANGED,
+    OTHER
 }

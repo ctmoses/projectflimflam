@@ -1,7 +1,5 @@
 <template>
-    <div class="home">
-       
-    </div>
+    <div class="home" />
 </template>
 
 <script lang="ts">
@@ -9,7 +7,7 @@
 
     @Component
     export default class Home extends Vue {
-        
+
     }
 </script>
 
