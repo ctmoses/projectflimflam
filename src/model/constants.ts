@@ -139,15 +139,15 @@ export const WEAPONS_RANGED_TYPES = [
 
 export const ARMOR_TYPES = [
     {
-        name: '0',
+        name: 'NONE',
         label: 'None',
     },
     {
-        name: '1',
+        name: 'LIGHT',
         label: 'Light',
     },
     {
-        name: '2',
+        name: 'HEAVY',
         label: 'Heavy',
     }
 ];

@@ -92,8 +92,39 @@
                 </div>
             </div>
         </div>
-
         <md-button class="md-primary" @click="create">Create</md-button>
+        <div>
+            AC:
+            {{ac}}
+        </div>
+        <div>
+            HP:
+            {{hp}}
+        </div>
+        <div>
+            Initiative:
+            {{init}}
+        </div>
+        <div>
+            MD:
+            {{md}}
+        </div>
+        <div>
+            PD:
+            {{pd}}
+        </div>
+        <div>
+            Melee Hit:
+            {{mhit}}
+        </div>
+        <div>
+            Melee Dmg:
+            {{mdmgdicemult}}d{{mdmgdice}}+{{mdmgmod}}
+        </div>
+        <div>
+            Recovery Roll:
+            {{recroll}}
+        </div>
     </div>
 </template>
 
@@ -118,27 +149,101 @@
             wis: 13,
             cha: 14,
         };
-
+        ac=0;
+        md=0;
+        pd=0;
+        mdmgdice;
+        mdmgdicemult;
+        mdmgmod;
+        recroll;
+        mhit=0;
+        init=0;
+        hp=0;
         create() {
             const raceName = Models.constants.RACES.filter(r => r.label === this.race)[0];
             const RaceClass =  Models.Race.RaceFactory(raceName.name);
             const myRace = new RaceClass();
-            var test = 0;
+            var armortype = 0;
+            var weapontype;
+            var rangedtype;
             const className = Models.constants.CLASSES.filter(c => c.label === this.className)[0];
             const ClassClass = Models[className.label];
             
             switch(this.armor)
             {
                 case "Light":
-                    test = TYPES.ArmorTypes.LIGHT;
+                    armortype = TYPES.ArmorTypes.LIGHT;
+                    break;
+                case "None":
+                    armortype = TYPES.ArmorTypes.NONE;
+                    break;
+                case "Heavy":
+                    armortype = TYPES.ArmorTypes.HEAVY;
+                    break;
+                    
             }
-            const myClass = new ClassClass(test, false, this.meleeWeapon, this.rangedWeapon);
+            switch(this.meleeWeapon){
+                case "Small, one-handed - 1d4":
+                    weapontype = TYPES.MeleeWeapons.ONEHSMALL;
+                    break;
+                case "Light, one-handed - 1d6":
+                    weapontype = TYPES.MeleeWeapons.ONEHLIGHT;
+                    break;
+                case "Heavy, one-handed - 1d8":
+                    weapontype = TYPES.MeleeWeapons.ONEHHEAVY;
+                    break;
+                case "Small, two-handed - 1d6":
+                    weapontype = TYPES.MeleeWeapons.TWOHSMALL;
+                    break;
+                case "Light, two-handed - 1d8":
+                    weapontype = TYPES.MeleeWeapons.TWOHLIGHT;
+                    break;
+                case "Heavy, two-handed - 1d10":
+                    weapontype = TYPES.MeleeWeapons.TWOHHEAVY;
+                    break;
+            }
+
+            switch(this.rangedWeapon){
+                case "Small, thrown weapon - 1d4":
+                    rangedtype = TYPES.RangedWeapons.THROWNSMALL;
+                    break;
+                case "Light, thrown weapon - 1d6":
+                    rangedtype = TYPES.RangedWeapons.THROWNLIGHT;
+                    break;
+                case "Small crossbow - 1d4":
+                    rangedtype = TYPES.RangedWeapons.XBOWSMALL;
+                    break;
+                case "Light crossbow - 1d6":
+                    rangedtype = TYPES.RangedWeapons.XBOWLIGHT;
+                    break;
+                case "Heavy cross bow - 1d8":
+                    rangedtype = TYPES.RangedWeapons.XBOWHEAVY;
+                    break;
+                case "Light bow - 1d6":
+                    rangedtype = TYPES.RangedWeapons.BOWLIGHT;
+                    break;
+                case "Heavy bow - 1d8":
+                    rangedtype = TYPES.RangedWeapons.BOWHEAVY;
+                    break;
+            }
+
+            const myClass = new ClassClass(armortype, false, weapontype, rangedtype);
             
             const myStats = Object.values(this.stats);
-            //TODO Editing stats on the page passes them in as strings and not numbers
+            //TODO Editing stats on the page passes them in as strings and not numbers..but seems to work?
             const myChar = new Models.Character(myClass, myRace, myStats[0], myStats[1], myStats[2], myStats[3], myStats[4], myStats[5], 5);
             //const myChar = new Models.Character(myClass, myRace, ...myStats, 1);
             console.log(myChar);
+            this.ac=myChar.ac;
+            this.md=myChar.md;
+            this.pd=myChar.pd;
+            this.hp=myChar.maxHp;
+            this.init=myChar.initiative;
+            this.mhit=myChar.meleeToHit;
+            this.mdmgdice=myChar.meleeDmg[1];
+            this.mdmgdicemult=myChar.meleeDmg[0];
+            this.mdmgmod=myChar.meleeDmg[2];
+            this.recroll=myChar.recRoll;
         }
 
         setRace(r) {
