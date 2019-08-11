@@ -79,13 +79,13 @@
                 </md-field>
             </div>
         </div>
-        <template>
+
         <div>
-            <input type="checkbox" value="shield" v-model="shield"/>
-           <!-- <md-checkbox v-model="boolean" class="md-primary">Shield</md-checkbox> -->
+          <!--  <input type="checkbox" value="shield" v-model="shield"/> -->
+            <md-checkbox v-model="shield" class="md-primary">Shield</md-checkbox>
             Shield: {{shield}}
         </div>
-        </template>
+
         <div class="section">
             <div class="stats">
                 <div class="stat" 
@@ -125,20 +125,40 @@
         </div>
         <div>
             Melee Dmg: <!-- TODO These arent updating when create is pushed for some reason, but they update if you flip a different selection -->
+            <!-- Fixed this by assigning the three variables to zero in the initializer..why does that matter? -->
             {{mdmgdicemult}}d{{mdmgdice}}+{{mdmgmod}}
         </div>
         <div>
             Recovery Roll:
             {{recroll}}
         </div>
+            <div class="section">
+            <div class="stats">
+            <md-checkbox v-model="melee" class="md-primary">Melee Equipped</md-checkbox>         
+            <md-field name="magic-select">
+                <md-select v-model="mTier"
+                            name="class"
+                            id="class"
+                            :placeholder="'Item Tier'">
+                    <md-option v-for="t in tiers"
+                                :key="t"
+                                :value="t">
+                        {{ t }}
+                    </md-option>
+                </md-select>
+            </md-field>
+            </div>
+        </div>
     </div>
+    
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
     import * as TYPES from '@/types';
     import Models from '@/model';
-
+    import VueMaterial from 'vue-material'
+    Vue.use(VueMaterial);
     @Component
     export default class CharacterCreation extends Vue {
         race: String = '';
@@ -158,24 +178,24 @@
         ac=0;
         md=0;
         pd=0;
-        mdmgdice;
-        mdmgdicemult;
-        mdmgmod;
+        mdmgdice=0;
+        mdmgdicemult=0;
+        mdmgmod=0;
         recroll;
         mhit=0;
         init=0;
         hp=0;
         shield=false;
+        melee=false;
         create() {
             var mitemtype = TYPES.ItemType.MELEE;
             var mitemtier = TYPES.Tiers.EPIC;
-            var myMagicItems = new Models.Spell.magicitems(mitemtype,mitemtier,true,"Test","Test");
             const raceName = Models.constants.RACES.filter(r => r.label === this.race)[0];
             const RaceClass =  Models.Race.RaceFactory(raceName.name);
             const myRace = new RaceClass();
             var armortype = 0;
-            var weapontype;
-            var rangedtype;
+            var weapontype=0;
+            var rangedtype=0;
             const className = Models.constants.CLASSES.filter(c => c.label === this.className)[0];
             const ClassClass = Models[className.label];
             
@@ -242,6 +262,7 @@
             const myStats = Object.values(this.stats);
             //TODO Editing stats on the page passes them in as strings and not numbers..but seems to work?
             const myChar = new Models.Character(myClass, myRace, myStats[0], myStats[1], myStats[2], myStats[3], myStats[4], myStats[5], 5);
+            var myMagicItems = new Models.Spell.magicitems(mitemtype,mitemtier,true,"Test","Test");
             myChar.setMagicItems([myMagicItems]);
             //const myChar = new Models.Character(myClass, myRace, ...myStats, 1);
             console.log(myChar);
@@ -279,6 +300,9 @@
 
         get armors() {
             return Models.constants.ARMOR_TYPES.map(a => a.label);
+        }
+        get tiers() {
+            return Models.constants.TIERS.map(t => t.label);
         }
     }
 </script>

@@ -150,4 +150,19 @@ export const ARMOR_TYPES = [
         name: 'HEAVY',
         label: 'Heavy',
     }
+
+];
+export const TIERS = [
+    {
+        name: 'Adventurer',
+        label: 'Adventurer',
+    },
+    {
+        name: 'Champion',
+        label: 'Champion',
+    },
+    {
+        name: 'Epic',
+        label: 'Epic',
+    }
 ];
