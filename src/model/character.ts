@@ -266,6 +266,7 @@ export default class Character implements ICharacter {
             this.meleeToHit = this.class.calcmeleehit(this.str, this.level, this.feats, this.talents) + mod;
         }
     }
+    //TODO Need calc melee & ranged damage based on magic items equipped.
     calcAbilityHit(attr:Attributes):number {
         //TODO Lots of feats can modify the base attr used for abilities, need to add conditions here
         return this.class.calcabilitytohit(attr, this.level,this.feats,this.talents);

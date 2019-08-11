@@ -79,7 +79,13 @@
                 </md-field>
             </div>
         </div>
-
+        <template>
+        <div>
+            <input type="checkbox" value="shield" v-model="shield"/>
+           <!-- <md-checkbox v-model="boolean" class="md-primary">Shield</md-checkbox> -->
+            Shield: {{shield}}
+        </div>
+        </template>
         <div class="section">
             <div class="stats">
                 <div class="stat" 
@@ -118,7 +124,7 @@
             {{mhit}}
         </div>
         <div>
-            Melee Dmg:
+            Melee Dmg: <!-- TODO These arent updating when create is pushed for some reason, but they update if you flip a different selection -->
             {{mdmgdicemult}}d{{mdmgdice}}+{{mdmgmod}}
         </div>
         <div>
@@ -159,7 +165,11 @@
         mhit=0;
         init=0;
         hp=0;
+        shield=false;
         create() {
+            var mitemtype = TYPES.ItemType.MELEE;
+            var mitemtier = TYPES.Tiers.EPIC;
+            var myMagicItems = new Models.Spell.magicitems(mitemtype,mitemtier,true,"Test","Test");
             const raceName = Models.constants.RACES.filter(r => r.label === this.race)[0];
             const RaceClass =  Models.Race.RaceFactory(raceName.name);
             const myRace = new RaceClass();
@@ -227,11 +237,12 @@
                     break;
             }
 
-            const myClass = new ClassClass(armortype, false, weapontype, rangedtype);
-            
+            const myClass = new ClassClass(armortype, this.shield, weapontype, rangedtype);
+           
             const myStats = Object.values(this.stats);
             //TODO Editing stats on the page passes them in as strings and not numbers..but seems to work?
             const myChar = new Models.Character(myClass, myRace, myStats[0], myStats[1], myStats[2], myStats[3], myStats[4], myStats[5], 5);
+            myChar.setMagicItems([myMagicItems]);
             //const myChar = new Models.Character(myClass, myRace, ...myStats, 1);
             console.log(myChar);
             this.ac=myChar.ac;
@@ -299,7 +310,7 @@
         justify-content: space-evenly;
         align-items: center;
         width: 100%;
-        
+
         .stat {
             $size: 75px;
             width: $size;
