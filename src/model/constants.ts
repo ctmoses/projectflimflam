@@ -154,6 +154,10 @@ export const ARMOR_TYPES = [
 ];
 export const TIERS = [
     {
+        name: 'Not Magic',
+        label: 'Not Magic',
+    },
+    {
         name: 'Adventurer',
         label: 'Adventurer',
     },

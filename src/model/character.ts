@@ -338,7 +338,6 @@ export default class Character implements ICharacter {
             this.meleeToHit = this.class.calcmeleehit(this.str, this.level, this.feats, this.talents) + mod;
         }
     }
-    //TODO Need calc melee & ranged damage based on magic items equipped.
     calcAbilityHit(attr:Attributes):number {
         //TODO Lots of feats can modify the base attr used for abilities, need to add conditions here
         return this.class.calcabilitytohit(attr, this.level,this.feats,this.talents);
@@ -355,7 +354,26 @@ export default class Character implements ICharacter {
     calcRecoveryRoll() {
         this.recRoll = this.class.calcrecoveryroll(this.con, this.level, this.feats, this.talents);
     }
-
+    calcMeleeDamage() {    
+        if (this.class.type() == 'Bard' || this.class.type() == 'Ranger') {
+            if (this.str >= this.dex) {
+                this.meleeDmg = this.class.calcmeleedmg(this.str, this.level);
+            } else {
+                this.meleeDmg = this.class.calcmeleedmg(this.dex, this.level);
+            }
+        } else if (this.class.type() == 'Rogue') {
+            this.meleeDmg = this.class.calcmeleedmg(this.dex, this.level);
+        } else {
+            this.meleeDmg = this.class.calcmeleedmg(this.str, this.level);
+        }
+        var mod = this.magicItemMod(ItemType.MELEE);
+        this.meleeDmg[2]+=mod;
+    }
+    calcRangedDamage() {
+        this.rangedDmg = this.class.calcrangeddmg(this.dex,this.level,this.feats,this.talents);
+        var mod = this.magicItemMod(ItemType.RANGED);
+        this.rangedDmg[2]+=mod;
+    }
     calcAll() {
         this.calcAC();
         this.calcBackgroundCap();
@@ -372,6 +390,7 @@ export default class Character implements ICharacter {
         this.calcRangedHit();
         this.calcRecoveryRoll();
         this.calcRangedMiss();
+        this.calcMeleeDamage();
     }
     magicItemMod(type: ItemType):number{
         var mod = 0;
