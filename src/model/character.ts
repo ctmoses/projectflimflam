@@ -1,7 +1,7 @@
 import {
-    IRace, IClass, ICharacter, IIcon, IFeats, ITalents, ISpells, IBackground, Tiers, IMagicItem, ItemType, Attributes,
+    IRace, IClass, ICharacter, IIcon, IFeats, ITalents, ISpells, IBackground, Tiers, ItemType, Attributes, ArmorTypes, ItemSubType, IItem, MeleeWeapons, RangedWeapons,
 } from '@/types';
-import { magicitems, spell, background } from './spell';
+import { spell, background, items } from './spell';
 
 export default class Character implements ICharacter {
     name: string = 'Default';
@@ -35,7 +35,7 @@ export default class Character implements ICharacter {
     talents: ITalents[] = [];
     spells: ISpells[] = [];
     backgrounds: IBackground[] = [];
-    magicItems: IMagicItem[] = [];
+    items: IItem[] = [];
     constructor(charclass: IClass, race:IRace, str:number, con:number, dex:number, int:number, wis:number, cha:number, level:number) {
         this.class = charclass;
         this.race = race;
@@ -113,8 +113,80 @@ export default class Character implements ICharacter {
     setUnique(unique:string) {
         this.unique = unique;
     }
-    setMagicItems(items:magicitems[]) {
-        this.magicItems = items;
+    setItems(items:items[]) {
+        this.items = items;
+        items.forEach(element => {
+            if(element.type==ItemType.SHIELD){
+                this.class.setshield(element.equipped);
+            }
+            if(element.type==ItemType.ARMOR){
+                switch(element.subtype){
+                    case ItemSubType.NONE:
+                        this.class.setarmor(ArmorTypes.NONE);
+                        break;
+                    case ItemSubType.LIGHT:
+                        this.class.setarmor(ArmorTypes.LIGHT);
+                        break;
+                    case ItemSubType.HEAVY:
+                        this.class.setarmor(ArmorTypes.HEAVY);
+                        break;
+                }
+            }
+            if(element.type==ItemType.MELEE){
+                switch(element.subtype){
+                    case ItemSubType.NONE:
+                        this.class.setmeleeweapon(MeleeWeapons.NONE);
+                        break;
+                    case ItemSubType.ONEHSMALL:
+                        this.class.setmeleeweapon(MeleeWeapons.ONEHSMALL);
+                        break;
+                    case ItemSubType.ONEHLIGHT:
+                        this.class.setmeleeweapon(MeleeWeapons.ONEHLIGHT);
+                        break;
+                    case ItemSubType.ONEHHEAVY:
+                        this.class.setmeleeweapon(MeleeWeapons.ONEHHEAVY);
+                        break;
+                    case ItemSubType.TWOHSMALL:
+                        this.class.setmeleeweapon(MeleeWeapons.TWOHLIGHT);
+                        break;
+                    case ItemSubType.TWOHLIGHT:
+                        this.class.setmeleeweapon(MeleeWeapons.TWOHSMALL);
+                        break;
+                    case ItemSubType.TWOHHEAVY:
+                        this.class.setmeleeweapon(MeleeWeapons.TWOHHEAVY);
+                        break;
+                }
+            }
+            if(element.type==ItemType.RANGED){
+                switch(element.subtype){
+                    case ItemSubType.NONE:
+                        this.class.setrangedweapon(RangedWeapons.NONE);
+                        break;
+                    case ItemSubType.THROWNLIGHT:
+                        this.class.setrangedweapon(RangedWeapons.THROWNLIGHT);
+                        break;
+                    case ItemSubType.THROWNSMALL:
+                        this.class.setrangedweapon(RangedWeapons.THROWNSMALL);
+                        break;
+                    case ItemSubType.XBOWLIGHT:
+                        this.class.setrangedweapon(RangedWeapons.XBOWLIGHT);
+                        break;
+                    case ItemSubType.XBOWSMALL:
+                        this.class.setrangedweapon(RangedWeapons.XBOWSMALL);
+                        break;
+                    case ItemSubType.XBOWHEAVY:
+                        this.class.setrangedweapon(RangedWeapons.XBOWHEAVY);
+                        break;
+                    case ItemSubType.BOWLIGHT:
+                        this.class.setrangedweapon(RangedWeapons.BOWLIGHT);
+                        break;
+                    case ItemSubType.BOWLIGHT:
+                        this.class.setrangedweapon(RangedWeapons.BOWHEAVY);
+                        break;
+                }
+            }
+        });
+
         this.calcAll();
     }
     setBackgrounds(backgrounds:IBackground[]) {
@@ -207,7 +279,7 @@ export default class Character implements ICharacter {
             }
         }
         
-        this.magicItems.forEach((element) => {
+        this.items.forEach((element) => {
             if (element.type == ItemType.SHIELD) {
                 if (element.equipped == true) {
                     switch (element.tier) {
@@ -303,7 +375,7 @@ export default class Character implements ICharacter {
     }
     magicItemMod(type: ItemType):number{
         var mod = 0;
-        this.magicItems.forEach((element) => {
+        this.items.forEach((element) => {
             if (element.type == type) {
                 if (element.equipped == true) {
                     switch (element.tier) {
@@ -315,6 +387,9 @@ export default class Character implements ICharacter {
                         break;
                     case Tiers.EPIC:
                         mod = 3;
+                        break;
+                    case Tiers.NOTMAGIC:
+                        mod = 0;
                         break;
                     }
                 }

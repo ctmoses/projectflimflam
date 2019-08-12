@@ -4,10 +4,11 @@ import Character from '../../../src/model/character';
 import * as Types from '../../../src/types';
 
 test('Barbarian Defenses should be calculated', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.XBOWHEAVY;
-    const barbarian = new Barbarian(armor, true, weapon, ranged);
+    const barbarian = new Barbarian();
+    barbarian.setarmor(Types.ArmorTypes.HEAVY);
+    barbarian.setmeleeweapon(Types.MeleeWeapons.TWOHHEAVY);
+    barbarian.setrangedweapon(Types.RangedWeapons.XBOWHEAVY);
+    barbarian.setshield(true);
 
     expect(barbarian.calcac(18, 10, 16, 1)).toBe(18);
     expect(barbarian.calcac(18, 4, 6, 1)).toBe(13);
@@ -17,56 +18,47 @@ test('Barbarian Defenses should be calculated', () => {
 });
 
 test('Barbarian Recovery Info should be calculated', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.LIGHT;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const barbarian = new Barbarian(armor, false, weapon, ranged);
+
+    const barbarian = new Barbarian();
 
     expect(barbarian.calcrecoveries()).toBe(8);
     expect(barbarian.calcrecoveryroll(12, 4)).toEqual([4, 10, 1]); // SM: Is toequal ok to use here?
 });
 
 test('Barbarian ranged info should be calculated', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    let ranged = Types.RangedWeapons.BOWLIGHT;
-    let barbarian = new Barbarian(armor, false, weapon, ranged);
+    let barbarian = new Barbarian();
+    barbarian.setarmor(Types.ArmorTypes.HEAVY);
+    barbarian.setmeleeweapon(Types.MeleeWeapons.TWOHHEAVY);
+    barbarian.setrangedweapon(Types.RangedWeapons.BOWLIGHT);
 
     expect(barbarian.calcrangedhit(18, 4)).toBe(6);
     expect(barbarian.calcrangeddmg(12, 3)).toEqual([3, 6, 1]);
     expect(barbarian.calcrangeddmg(12, 6)).toEqual([6, 6, 2]);
     expect(barbarian.calcrangeddmg(12, 10)).toEqual([10, 6, 3]);
 
-    ranged = Types.RangedWeapons.XBOWHEAVY;
-    barbarian = new Barbarian(armor, false, weapon, ranged);
+    barbarian.setrangedweapon(Types.RangedWeapons.XBOWHEAVY);
     expect(barbarian.calcrangedhit(18, 4)).toBe(1);
 });
 
 test('Barbarian HitPoint info should be calculated', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const barbarian = new Barbarian(armor, false, weapon, ranged);
+    const barbarian = new Barbarian();
 
     expect(barbarian.calchp(12, 8)).toBe(128);
     expect(barbarian.baselineHP()).toBe(7);
 });
 
 test('Barbarian Talent/Spell info should be calculated', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const barbarian = new Barbarian(armor, false, weapon, ranged);
+    const barbarian = new Barbarian();
 
     expect(barbarian.calctalents(8)).toEqual([3, 1, 1]);
     expect(barbarian.calcspells(5)).toEqual([0, 0, 0]);
 });
 
 test('Barbarian melee info should be calculated', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const barbarian = new Barbarian(armor, false, weapon, ranged);
+    const barbarian = new Barbarian();
+    barbarian.setarmor(Types.ArmorTypes.HEAVY);
+    barbarian.setmeleeweapon(Types.MeleeWeapons.TWOHHEAVY);
+    barbarian.setrangedweapon(Types.RangedWeapons.BOWLIGHT);
 
     expect(barbarian.calcmeleehit(18, 4)).toBe(6);
     expect(barbarian.calcmeleedmg(16, 4)).toEqual([4, 10, 3]);
@@ -75,10 +67,7 @@ test('Barbarian melee info should be calculated', () => {
 });
 
 test('Base Modifier', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const barbarian = new Barbarian(armor, false, weapon, ranged);
+    const barbarian = new Barbarian();
 
     expect(barbarian.calculatebasemodifier(2)).toBe(-4);
     expect(barbarian.calculatebasemodifier(4)).toBe(-3);

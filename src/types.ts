@@ -50,7 +50,7 @@ export interface ITalents {
     powertext: string,
     url: string,
 }
-export interface IMagicItem{
+export interface IItem{
     type: ItemType,
     tier: Tiers,
     equipped: boolean,
@@ -86,6 +86,10 @@ export interface IClass {
     talenttaken(talents: ITalents[], name:string):boolean,
     feattaken(feats: IFeats[], name: string, tier: Tiers):boolean,
     calcabilitytohit(attr:number, level:number, feats?: IFeats[], talents?: ITalents[]):number
+    setshield(shield:boolean),
+    setmeleeweapon(weapon: MeleeWeapons);
+    setrangedweapon(weapon: RangedWeapons);
+    setarmor(armor:ArmorTypes);
 }
 export interface ICharacter {
     name: string,
@@ -119,7 +123,7 @@ export interface ICharacter {
     talents: ITalents[],
     spells: ISpells[],
     backgrounds: IBackground[],
-    magicItems: IMagicItem[],
+    items: IItem[],
 }
 
 export enum Attributes {
@@ -151,15 +155,16 @@ export enum ArmorTypes {
     HEAVY,
 }
 export enum MeleeWeapons {
+    NONE,
     ONEHSMALL,
     ONEHLIGHT,
     ONEHHEAVY,
     TWOHSMALL,
     TWOHLIGHT,
     TWOHHEAVY,
-    NONE
 }
 export enum RangedWeapons {
+    NONE,
     THROWNSMALL,
     THROWNLIGHT,
     XBOWSMALL,
@@ -167,9 +172,10 @@ export enum RangedWeapons {
     XBOWHEAVY,
     BOWLIGHT,
     BOWHEAVY,
-    NONE
+    
 }
 export enum Tiers {
+    NOTMAGIC,
     ADVENTURER,
     CHAMPION,
     EPIC
@@ -183,4 +189,23 @@ export enum ItemType {
     MELEE,
     RANGED,
     OTHER
+}
+
+export enum ItemSubType {
+    NONE,
+    LIGHT,
+    HEAVY,
+    ONEHSMALL,
+    ONEHLIGHT,
+    ONEHHEAVY,
+    TWOHSMALL,
+    TWOHLIGHT,
+    TWOHHEAVY,
+    THROWNSMALL,
+    THROWNLIGHT,
+    XBOWSMALL,
+    XBOWLIGHT,
+    XBOWHEAVY,
+    BOWLIGHT,
+    BOWHEAVY,
 }

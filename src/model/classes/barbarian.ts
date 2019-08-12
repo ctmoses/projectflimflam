@@ -6,20 +6,16 @@ import charclass from './charclass';
 export default class barbarian extends charclass {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
-    armor: ArmorTypes;
-    shield: boolean;
-    weapon: MeleeWeapons;
-    ranged: RangedWeapons;
+    armor: ArmorTypes=ArmorTypes.NONE;
+    shield: boolean=false;
+    weapon: MeleeWeapons=MeleeWeapons.NONE;
+    ranged: RangedWeapons=RangedWeapons.NONE;
 
 
-    constructor(armor: ArmorTypes, shield: boolean, weapon: MeleeWeapons, ranged: RangedWeapons) {
-        super(armor,shield,weapon,ranged);
+    constructor() {
+        super();
         this.bonusstat1 = Attributes.STRENGTH;
         this.bonusstat2 = Attributes.CONSTITUTION;
-        this.armor = armor;
-        this.weapon = weapon;
-        this.ranged = ranged;
-        this.shield = shield;
     }
     calctalents(level:number):number[] {
         if (level <= 4) return [3, 0, 0];
@@ -43,7 +39,7 @@ export default class barbarian extends charclass {
             armor = 13;
             break;
         default:
-            armor = 12;
+            armor = -99;
             break;
         }
         return super.calcac(con,dex,wis,level) + armor;

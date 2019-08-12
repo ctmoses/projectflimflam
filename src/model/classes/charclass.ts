@@ -3,26 +3,32 @@ import {
 } from '@/types';
 
 export default abstract class charclass implements IClass {
-    bonusstat1: Attributes;
-    bonusstat2: Attributes;
-    armor: ArmorTypes;
-    shield: boolean;
-    weapon: MeleeWeapons;
-    ranged: RangedWeapons;
+    bonusstat1: Attributes=Attributes.NONE;
+    bonusstat2: Attributes=Attributes.NONE;
+    armor: ArmorTypes=ArmorTypes.NONE;
+    shield: boolean=false;
+    weapon: MeleeWeapons=MeleeWeapons.NONE;
+    ranged: RangedWeapons=RangedWeapons.NONE;
 
-    constructor(armor: ArmorTypes, shield: boolean, weapon: MeleeWeapons, ranged: RangedWeapons) {
-        this.bonusstat1 = Attributes.NONE;
-        this.bonusstat2 = Attributes.NONE;
-        this.armor = ArmorTypes.NONE;
-        this.weapon = MeleeWeapons.NONE;
-        this.ranged = RangedWeapons.NONE;
-        this.shield = false;
+    constructor() {
     }
 
     abstract calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[];
     abstract baselineHP():number;
     abstract calcrecoveryroll(con:number, level:number, feats?: IFeats[], talents?: ITalents[]): number[];
-    
+
+    setshield(shield:boolean){
+        this.shield=shield;
+    }
+    setmeleeweapon(weapon:MeleeWeapons){
+        this.weapon=weapon;
+    }
+    setrangedweapon(weapon:RangedWeapons){
+        this.ranged=weapon;
+    }
+    setarmor(armor:ArmorTypes){
+        this.armor=armor;
+    }
     calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number{
         return 0;
     }
@@ -126,6 +132,9 @@ export default abstract class charclass implements IClass {
         case MeleeWeapons.TWOHHEAVY:
             dice = 10;
             break;
+        case MeleeWeapons.NONE:
+            dice = 0;
+            break;
         default:
             dice = 8;
             break;
@@ -152,6 +161,9 @@ export default abstract class charclass implements IClass {
         case RangedWeapons.XBOWHEAVY:
         case RangedWeapons.BOWHEAVY:
             dice = 8;
+            break;
+        case RangedWeapons.NONE:
+            dice = 0;
             break;
         default:
             dice = 6;

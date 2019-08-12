@@ -3,10 +3,7 @@ import * as Types from '../../../src/types';
 import * as Spells from '../../../src/model/spell';
 
 test('Fighter Maneuvers', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const fighter = new Fighter(armor, false, weapon, ranged);
+    const fighter = new Fighter();
 
     expect(fighter.calcspells(1)).toEqual([3,0,0,0,0]);
     expect(fighter.calcspells(3)).toEqual([0,4,0,0,0]);
@@ -14,50 +11,39 @@ test('Fighter Maneuvers', () => {
 });
 
 test('Fighter Talents', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const fighter = new Fighter(armor, false, weapon, ranged);
+    const fighter = new Fighter();
+    
 
     expect(fighter.calctalents(1)).toEqual([3,0,0]);
     expect(fighter.calctalents(6)).toEqual([4,0,0]);
 
 });
 test('Fighter BaseHP', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const fighter = new Fighter(armor, false, weapon, ranged);
+    const fighter = new Fighter();
 
     expect(fighter.baselineHP()).toBe(8);
 
 });
 
 test('Fighter AC', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const fighter = new Fighter(armor, false, weapon, ranged);
+    const fighter = new Fighter();
+    fighter.setarmor(Types.ArmorTypes.HEAVY);
 
     expect(fighter.calcac(10,12,14,4)).toBe(20);
 
 });
 
 test('Fighter Recovery Roll', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const fighter = new Fighter(armor, false, weapon, ranged);
+
+    const fighter = new Fighter();
 
     expect(fighter.calcrecoveryroll(14,5)).toEqual([5,10,2]);
 
 });
 
 test('Fighter Recovery', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const fighter = new Fighter(armor, false, weapon, ranged);
+
+    const fighter = new Fighter();
 
     expect(fighter.calcrecoveries()).toEqual(9);
 
@@ -73,10 +59,10 @@ test('Fighter Recovery', () => {
 });
 
 test('Fighter Ranged', () => {
-    const armor: Types.ArmorTypes = Types.ArmorTypes.HEAVY;
-    const weapon = Types.MeleeWeapons.TWOHHEAVY;
-    const ranged = Types.RangedWeapons.BOWLIGHT;
-    const fighter = new Fighter(armor, false, weapon, ranged);
+    const fighter = new Fighter();
+    fighter.setarmor(Types.ArmorTypes.HEAVY);
+    fighter.setmeleeweapon(Types.MeleeWeapons.TWOHHEAVY);
+    fighter.setrangedweapon(Types.RangedWeapons.BOWLIGHT);
 
     expect(fighter.calcrangedmiss(4)).toEqual(0);
     const talent = new Spells.talent(Types.AbilityRefresh.ATWILL, Types.AbilityType.FREE, Types.Tiers.ADVENTURER, false, "Deadeye Archer", "Test", "test");

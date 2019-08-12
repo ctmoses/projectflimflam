@@ -7,20 +7,16 @@ import charclass from './charclass';
 export default class paladin extends charclass {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
-    armor: ArmorTypes;
-    shield: boolean;
-    weapon: MeleeWeapons;
-    ranged: RangedWeapons;
+    armor: ArmorTypes=ArmorTypes.NONE;
+    shield: boolean=false;;
+    weapon: MeleeWeapons=MeleeWeapons.NONE;
+    ranged: RangedWeapons=RangedWeapons.NONE;
 
 
-    constructor(armor: ArmorTypes, shield: boolean, weapon: MeleeWeapons, ranged: RangedWeapons) {
-        super(armor,shield,weapon,ranged);
+    constructor() {
+        super();
         this.bonusstat1 = Attributes.STRENGTH;
         this.bonusstat2 = Attributes.CHARISMA;
-        this.armor = armor;
-        this.weapon = weapon;
-        this.ranged = ranged;
-        this.shield = shield;
     }
     calctalents(level:number):number[] {
         if (level <= 4) return [3, 0, 0];
@@ -78,7 +74,7 @@ export default class paladin extends charclass {
             armor = 16;
             break;
         default:
-            armor = 16;
+            armor = -99;
             break;
         }
         if(talents && this.talenttaken(talents,"Bastion"))

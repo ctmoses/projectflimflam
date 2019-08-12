@@ -8,20 +8,16 @@ import charclass from './charclass';
 export default class sorcerer extends charclass {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
-    armor: ArmorTypes;
-    shield: boolean;
-    weapon: MeleeWeapons;
-    ranged: RangedWeapons;
+    armor: ArmorTypes=ArmorTypes.NONE;
+    shield: boolean=false;;
+    weapon: MeleeWeapons=MeleeWeapons.NONE;
+    ranged: RangedWeapons=RangedWeapons.NONE;
 
 
-    constructor(armor: ArmorTypes, shield: boolean, weapon: MeleeWeapons, ranged: RangedWeapons) {
-        super(armor,shield,weapon,ranged);
+    constructor() {
+        super();
         this.bonusstat1 = Attributes.CHARISMA;
         this.bonusstat2 = Attributes.CONSTITUTION;
-        this.armor = armor;
-        this.weapon = weapon;
-        this.ranged = ranged;
-        this.shield = shield;
     }
     calcnumberoficons(feats?: IFeats[], talents?: ITalents[]):number{
         var mod = 0;
@@ -94,7 +90,7 @@ export default class sorcerer extends charclass {
             armor = 11;
             break;
         default:
-            armor = 10;
+            armor = -99;
             break;
         }
         if(talents && this.talenttaken(talents,"Spell Fist"))

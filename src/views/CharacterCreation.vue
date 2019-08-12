@@ -34,6 +34,68 @@
                 </md-field>
             </div>
 
+            <div class="section">
+                <div class="stats">
+                    <div class="stat" 
+                            v-for="(value, key) in stats"
+                            :key="key">
+                        <md-field >    
+                            <label>{{ key.toUpperCase() }}</label>
+                            <md-input v-model="stats[key]" type="number"></md-input>
+                        </md-field>
+                    </div>
+                </div>
+            </div>
+        <md-button class="md-primary" @click="create">Create</md-button>
+        <div>
+            AC:
+            {{ac}}
+        </div>
+        <div>
+            HP:
+            {{hp}}
+        </div>
+        <div>
+            Initiative:
+            {{init}}
+        </div>
+        <div>
+            MD:
+            {{md}}
+        </div>
+        <div>
+            PD:
+            {{pd}}
+        </div>
+        <div>
+            Melee Hit:
+            {{mhit}}
+        </div>
+        <div>
+            Melee Dmg: <!-- TODO These arent updating when create is pushed for some reason, but they update if you flip a different selection -->
+            <!-- Fixed this by assigning the three variables to zero in the initializer..why does that matter? -->
+            {{mdmgdicemult}}d{{mdmgdice}}+{{mdmgmod}}
+        </div>
+        <div>
+            Recovery Roll:
+            {{recroll}}
+        </div>
+        <div class="section">
+            <div class="stats">
+                <md-checkbox v-model="melee" class="md-primary">Melee Equipped</md-checkbox>         
+                <md-field name="magic-select">
+                    <md-select v-model="mTier"
+                                name="class"
+                                id="class"
+                                :placeholder="'Item Tier'">
+                        <md-option v-for="t in tiers"
+                                    :key="t"
+                                    :value="t">
+                            {{ t }}
+                        </md-option>
+                    </md-select>
+                </md-field>
+            </div>
             <div class="field">
                 <md-field name="melee-select">
                     <md-select v-model="meleeWeapon"
@@ -79,74 +141,10 @@
                 </md-field>
             </div>
         </div>
-
-        <div>
-          <!--  <input type="checkbox" value="shield" v-model="shield"/> -->
-            <md-checkbox v-model="shield" class="md-primary">Shield</md-checkbox>
-            Shield: {{shield}}
-        </div>
-
-        <div class="section">
-            <div class="stats">
-                <div class="stat" 
-                        v-for="(value, key) in stats"
-                        :key="key">
-                    <md-field >    
-                        <label>{{ key.toUpperCase() }}</label>
-                        <md-input v-model="stats[key]" type="number"></md-input>
-                    </md-field>
-                </div>
-            </div>
-        </div>
-        <md-button class="md-primary" @click="create">Create</md-button>
-        <div>
-            AC:
-            {{ac}}
-        </div>
-        <div>
-            HP:
-            {{hp}}
-        </div>
-        <div>
-            Initiative:
-            {{init}}
-        </div>
-        <div>
-            MD:
-            {{md}}
-        </div>
-        <div>
-            PD:
-            {{pd}}
-        </div>
-        <div>
-            Melee Hit:
-            {{mhit}}
-        </div>
-        <div>
-            Melee Dmg: <!-- TODO These arent updating when create is pushed for some reason, but they update if you flip a different selection -->
-            <!-- Fixed this by assigning the three variables to zero in the initializer..why does that matter? -->
-            {{mdmgdicemult}}d{{mdmgdice}}+{{mdmgmod}}
-        </div>
-        <div>
-            Recovery Roll:
-            {{recroll}}
-        </div>
-            <div class="section">
-            <div class="stats">
-            <md-checkbox v-model="melee" class="md-primary">Melee Equipped</md-checkbox>         
-            <md-field name="magic-select">
-                <md-select v-model="mTier"
-                            name="class"
-                            id="class"
-                            :placeholder="'Item Tier'">
-                    <md-option v-for="t in tiers"
-                                :key="t"
-                                :value="t">
-                        {{ t }}
-                    </md-option>
-                </md-select>
-            </md-field>
+            <div>
+            <!--  <input type="checkbox" value="shield" v-model="shield"/> -->
+                <md-checkbox v-model="shield" class="md-primary">Shield</md-checkbox>
+                Shield: {{shield}}
             </div>
         </div>
     </div>
@@ -262,10 +260,10 @@
             const myStats = Object.values(this.stats);
             //TODO Editing stats on the page passes them in as strings and not numbers..but seems to work?
             const myChar = new Models.Character(myClass, myRace, myStats[0], myStats[1], myStats[2], myStats[3], myStats[4], myStats[5], 5);
-            var myMagicItems = new Models.Spell.magicitems(mitemtype,mitemtier,true,"Test","Test");
-            myChar.setMagicItems([myMagicItems]);
+            var myMagicItems = new Models.Spell.items(mitemtype,TYPES.ItemSubType.TWOHHEAVY,mitemtier,true);
+            myChar.setItems([myMagicItems]);
             //const myChar = new Models.Character(myClass, myRace, ...myStats, 1);
-            console.log(myChar);
+            
             this.ac=myChar.ac;
             this.md=myChar.md;
             this.pd=myChar.pd;
@@ -276,6 +274,8 @@
             this.mdmgdicemult=myChar.meleeDmg[0];
             this.mdmgmod=myChar.meleeDmg[2];
             this.recroll=myChar.recRoll;
+
+            console.log(myChar);
         }
 
         setRace(r) {
