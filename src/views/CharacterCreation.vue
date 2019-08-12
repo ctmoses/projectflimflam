@@ -270,7 +270,7 @@
             var ranged= new Models.Spell.items(TYPES.ItemType.RANGED, rangedtype, TYPES.Tiers.EPIC,true);
             this.myChar.setItems([weapon,armor,ranged]);
             //mychar.setitems([weapon,armor,ranged,...])
-                        this.ac=this.myChar.ac;
+            this.ac=this.myChar.ac;
             this.md=this.myChar.md;
             this.pd=this.myChar.pd;
             this.hp=this.myChar.maxHp;
@@ -299,8 +299,6 @@
             const myStats = Object.values(this.stats);
             //Editing stats on the page passes them in as strings and not numbers..but seems to work?
             this.myChar = new Models.Character(myClass, myRace, myStats[0], myStats[1], myStats[2], myStats[3], myStats[4], myStats[5], 5);
-            //var myMagicItems = new Models.Spell.items(mitemtype,TYPES.ItemSubType.TWOHHEAVY,mitemtier,true);
-            //myChar.setItems([myMagicItems]);
             //const myChar = new Models.Character(myClass, myRace, ...myStats, 1);
             
             this.ac=this.myChar.ac;
