@@ -147,10 +147,10 @@ export default class Character implements ICharacter {
                         this.class.setmeleeweapon(MeleeWeapons.ONEHHEAVY);
                         break;
                     case ItemSubType.TWOHSMALL:
-                        this.class.setmeleeweapon(MeleeWeapons.TWOHLIGHT);
+                        this.class.setmeleeweapon(MeleeWeapons.TWOHSMALL);
                         break;
                     case ItemSubType.TWOHLIGHT:
-                        this.class.setmeleeweapon(MeleeWeapons.TWOHSMALL);
+                        this.class.setmeleeweapon(MeleeWeapons.TWOHLIGHT);
                         break;
                     case ItemSubType.TWOHHEAVY:
                         this.class.setmeleeweapon(MeleeWeapons.TWOHHEAVY);

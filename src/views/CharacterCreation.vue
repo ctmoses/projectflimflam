@@ -186,9 +186,102 @@
         hp=0;
         shield=false;
         melee=false;
+        myChar;
+        mTier="";
         equip() {
-            var weapon= new Models.Spell.items(TYPES.ItemType.MELEE, TYPES.ItemSubType.TWOHHEAVY, TYPES.Tiers.EPIC,true)
-            console.log("test");
+            var armortype = 0;
+            var weapontype=0;
+            var rangedtype=0;
+            var wTier=0;
+            switch(this.mTier){
+                case "Not Magic":
+                    wTier=TYPES.Tiers.NOTMAGIC;
+                    break;
+                case "Adventurer":
+                    wTier=TYPES.Tiers.ADVENTURER;
+                    break;
+                case "Champion":
+                    wTier=TYPES.Tiers.CHAMPION;
+                    break;
+                case "Epic":
+                    wTier=TYPES.Tiers.EPIC;
+                    break;
+                
+            }
+            switch(this.armor)
+            {
+                case "Light":
+                    armortype = TYPES.ItemSubType.LIGHT;
+                    break;
+                case "None":
+                    armortype = TYPES.ItemSubType.NONE;
+                    break;
+                case "Heavy":
+                    armortype = TYPES.ItemSubType.HEAVY;
+                    break;
+                    
+            }
+            switch(this.meleeWeapon){
+                case "Small, one-handed - 1d4":
+                    weapontype = TYPES.ItemSubType.ONEHSMALL;
+                    break;
+                case "Light, one-handed - 1d6":
+                    weapontype = TYPES.ItemSubType.ONEHLIGHT;
+                    break;
+                case "Heavy, one-handed - 1d8":
+                    weapontype = TYPES.ItemSubType.ONEHHEAVY;
+                    break;
+                case "Small, two-handed - 1d6":
+                    weapontype = TYPES.ItemSubType.TWOHSMALL;
+                    break;
+                case "Light, two-handed - 1d8":
+                    weapontype = TYPES.ItemSubType.TWOHLIGHT;
+                    break;
+                case "Heavy, two-handed - 1d10":
+                    weapontype = TYPES.ItemSubType.TWOHHEAVY;
+                    break;
+            }
+
+            switch(this.rangedWeapon){
+                case "Small, thrown weapon - 1d4":
+                    rangedtype = TYPES.ItemSubType.THROWNSMALL;
+                    break;
+                case "Light, thrown weapon - 1d6":
+                    rangedtype = TYPES.ItemSubType.THROWNLIGHT;
+                    break;
+                case "Small crossbow - 1d4":
+                    rangedtype = TYPES.ItemSubType.XBOWSMALL;
+                    break;
+                case "Light crossbow - 1d6":
+                    rangedtype = TYPES.ItemSubType.XBOWLIGHT;
+                    break;
+                case "Heavy cross bow - 1d8":
+                    rangedtype = TYPES.ItemSubType.XBOWHEAVY;
+                    break;
+                case "Light bow - 1d6":
+                    rangedtype = TYPES.ItemSubType.BOWLIGHT;
+                    break;
+                case "Heavy bow - 1d8":
+                    rangedtype = TYPES.ItemSubType.BOWHEAVY;
+                    break;
+            }
+            var weapon= new Models.Spell.items(TYPES.ItemType.MELEE, weapontype, wTier,true);
+            var armor= new Models.Spell.items(TYPES.ItemType.ARMOR, armortype, TYPES.Tiers.EPIC,true);
+            var ranged= new Models.Spell.items(TYPES.ItemType.RANGED, rangedtype, TYPES.Tiers.EPIC,true);
+            this.myChar.setItems([weapon,armor,ranged]);
+            //mychar.setitems([weapon,armor,ranged,...])
+                        this.ac=this.myChar.ac;
+            this.md=this.myChar.md;
+            this.pd=this.myChar.pd;
+            this.hp=this.myChar.maxHp;
+            this.init=this.myChar.initiative;
+            this.mhit=this.myChar.meleeToHit;
+            this.mdmgdice=this.myChar.meleeDmg[1];
+            this.mdmgdicemult=this.myChar.meleeDmg[0];
+            this.mdmgmod=this.myChar.meleeDmg[2];
+            this.recdicemult=this.myChar.recRoll[0];
+            this.recdice=this.myChar.recRoll[1];
+            this.recmod=this.myChar.recRoll[2];
         }
         create() {
             var mitemtype = TYPES.ItemType.MELEE;
@@ -196,94 +289,35 @@
             const raceName = Models.constants.RACES.filter(r => r.label === this.race)[0];
             const RaceClass =  Models.Race.RaceFactory(raceName.name);
             const myRace = new RaceClass();
-            var armortype = 0;
-            var weapontype=0;
-            var rangedtype=0;
             const className = Models.constants.CLASSES.filter(c => c.label === this.className)[0];
             const ClassClass = Models[className.label];
             
-            switch(this.armor)
-            {
-                case "Light":
-                    armortype = TYPES.ArmorTypes.LIGHT;
-                    break;
-                case "None":
-                    armortype = TYPES.ArmorTypes.NONE;
-                    break;
-                case "Heavy":
-                    armortype = TYPES.ArmorTypes.HEAVY;
-                    break;
-                    
-            }
-            switch(this.meleeWeapon){
-                case "Small, one-handed - 1d4":
-                    weapontype = TYPES.MeleeWeapons.ONEHSMALL;
-                    break;
-                case "Light, one-handed - 1d6":
-                    weapontype = TYPES.MeleeWeapons.ONEHLIGHT;
-                    break;
-                case "Heavy, one-handed - 1d8":
-                    weapontype = TYPES.MeleeWeapons.ONEHHEAVY;
-                    break;
-                case "Small, two-handed - 1d6":
-                    weapontype = TYPES.MeleeWeapons.TWOHSMALL;
-                    break;
-                case "Light, two-handed - 1d8":
-                    weapontype = TYPES.MeleeWeapons.TWOHLIGHT;
-                    break;
-                case "Heavy, two-handed - 1d10":
-                    weapontype = TYPES.MeleeWeapons.TWOHHEAVY;
-                    break;
-            }
 
-            switch(this.rangedWeapon){
-                case "Small, thrown weapon - 1d4":
-                    rangedtype = TYPES.RangedWeapons.THROWNSMALL;
-                    break;
-                case "Light, thrown weapon - 1d6":
-                    rangedtype = TYPES.RangedWeapons.THROWNLIGHT;
-                    break;
-                case "Small crossbow - 1d4":
-                    rangedtype = TYPES.RangedWeapons.XBOWSMALL;
-                    break;
-                case "Light crossbow - 1d6":
-                    rangedtype = TYPES.RangedWeapons.XBOWLIGHT;
-                    break;
-                case "Heavy cross bow - 1d8":
-                    rangedtype = TYPES.RangedWeapons.XBOWHEAVY;
-                    break;
-                case "Light bow - 1d6":
-                    rangedtype = TYPES.RangedWeapons.BOWLIGHT;
-                    break;
-                case "Heavy bow - 1d8":
-                    rangedtype = TYPES.RangedWeapons.BOWHEAVY;
-                    break;
-            }
 
-            const myClass = new ClassClass(armortype, this.shield, weapontype, rangedtype);
+            const myClass = new ClassClass();
            
             const myStats = Object.values(this.stats);
             //Editing stats on the page passes them in as strings and not numbers..but seems to work?
-            const myChar = new Models.Character(myClass, myRace, myStats[0], myStats[1], myStats[2], myStats[3], myStats[4], myStats[5], 5);
-            var myMagicItems = new Models.Spell.items(mitemtype,TYPES.ItemSubType.TWOHHEAVY,mitemtier,true);
-            myChar.setItems([myMagicItems]);
+            this.myChar = new Models.Character(myClass, myRace, myStats[0], myStats[1], myStats[2], myStats[3], myStats[4], myStats[5], 5);
+            //var myMagicItems = new Models.Spell.items(mitemtype,TYPES.ItemSubType.TWOHHEAVY,mitemtier,true);
+            //myChar.setItems([myMagicItems]);
             //const myChar = new Models.Character(myClass, myRace, ...myStats, 1);
             
-            this.ac=myChar.ac;
-            this.md=myChar.md;
-            this.pd=myChar.pd;
-            this.hp=myChar.maxHp;
-            this.init=myChar.initiative;
-            this.mhit=myChar.meleeToHit;
-            this.mdmgdice=myChar.meleeDmg[1];
-            this.mdmgdicemult=myChar.meleeDmg[0];
-            this.mdmgmod=myChar.meleeDmg[2];
-            this.recdicemult=myChar.recRoll[0];
-            this.recdice=myChar.recRoll[1];
-            this.recmod=myChar.recRoll[2];
+            this.ac=this.myChar.ac;
+            this.md=this.myChar.md;
+            this.pd=this.myChar.pd;
+            this.hp=this.myChar.maxHp;
+            this.init=this.myChar.initiative;
+            this.mhit=this.myChar.meleeToHit;
+            this.mdmgdice=this.myChar.meleeDmg[1];
+            this.mdmgdicemult=this.myChar.meleeDmg[0];
+            this.mdmgmod=this.myChar.meleeDmg[2];
+            this.recdicemult=this.myChar.recRoll[0];
+            this.recdice=this.myChar.recRoll[1];
+            this.recmod=this.myChar.recRoll[2];
             
-            console.log(myChar);
-            return myChar;
+            console.log(this.myChar);
+
         }
 
         setRace(r) {
