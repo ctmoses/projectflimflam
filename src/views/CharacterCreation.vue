@@ -76,13 +76,16 @@
                 <!-- Fixed this by assigning the three variables to zero in the initializer..why does that matter? -->
                 {{mdmgdicemult}}d{{mdmgdice}}+{{mdmgmod}}
             </div>
+             <div>
+                Ranged Dmg: 
+                {{rdmdgdicemult}}d{{rdmgdice}}+{{rdmgmod}}
+            </div>
             <div>
                 Recovery Roll:
                 {{recdicemult}}d{{recdice}}+{{recmod}}
             </div>
             <div class="section">
-                <div class="stats">
-                    <md-checkbox v-model="melee" class="md-primary">Melee Equipped</md-checkbox>         
+                <div class="stats">       
                     <div class="field">
                         <md-field name="melee-select">
                             <md-select v-model="meleeWeapon"
@@ -109,42 +112,87 @@
                             </md-option>
                         </md-select>
                     </md-field>
-                </div>
-                <div class="field">
-                    <md-field name="ranged-select">
-                        <md-select v-model="rangedWeapon"
-                                name="class"
-                                id="class"
-                                :placeholder="'Pick a ranged weapon'">
-                            <md-option v-for="w in rangedWeapons"
-                                    :key="w"
-                                    :value="w">
-                                {{ w }}
-                            </md-option>
-                        </md-select>
-                    </md-field>
-                </div>
+                
+
+
 
                 <div class="field">
-                    <md-field name="armor-select">
-                        <md-select v-model="armor"
-                                name="class"
-                                id="class"
-                                :placeholder="'Pick an armor'">
-                            <md-option v-for="a in armors"
-                                    :key="a"
-                                    :value="a">
-                                {{ a }}
+                        <md-field name="ranged-select">
+                            <md-select v-model="rangedWeapon"
+                                    name="class"
+                                    id="class"
+                                    :placeholder="'Pick a ranged weapon'">
+                                <md-option v-for="w in rangedWeapons"
+                                        :key="w"
+                                        :value="w">
+                                    {{ w }}
+                                </md-option>
+                            </md-select>
+                        </md-field>
+                    </div>
+                    <md-field name="magic-select">
+                        <md-select v-model="rTier"
+                                    name="class"
+                                    id="class"
+                                    :placeholder="'Item Tier'">
+                            <md-option v-for="t in tiers"
+                                        :key="t"
+                                        :value="t">
+                                {{ t }}
+                            </md-option>
+                        </md-select>
+                    </md-field>
+                
+
+
+
+                <div class="field">
+                        <md-field name="armor-select">
+                            <md-select v-model="armor"
+                                    name="class"
+                                    id="class"
+                                    :placeholder="'Pick armor'">
+                                <md-option v-for="w in armors"
+                                        :key="w"
+                                        :value="w">
+                                    {{ w }}
+                                </md-option>
+                            </md-select>
+                        </md-field>
+                    </div>
+                    <md-field name="magic-select">
+                        <md-select v-model="aTier"
+                                    name="class"
+                                    id="class"
+                                    :placeholder="'Item Tier'">
+                            <md-option v-for="t in tiers"
+                                        :key="t"
+                                        :value="t">
+                                {{ t }}
+                            </md-option>
+                        </md-select>
+                    </md-field>
+                
+
+
+                <div class="field">
+                    <md-checkbox v-model="shield" class="md-primary">Shield</md-checkbox>
+                     Shield: {{shield}}
+                    </div>
+                    <md-field name="magic-select">
+                        <md-select v-model="sTier"
+                                    name="class"
+                                    id="class"
+                                    :placeholder="'Item Tier'">
+                            <md-option v-for="t in tiers"
+                                        :key="t"
+                                        :value="t">
+                                {{ t }}
                             </md-option>
                         </md-select>
                     </md-field>
                 </div>
-            </div>
-            <div>
-            <!--  <input type="checkbox" value="shield" v-model="shield"/> -->
-                <md-checkbox v-model="shield" class="md-primary">Shield</md-checkbox>
-                Shield: {{shield}}
-            </div>
+                </div>
             <md-button class="md-primary" @click="equip">Equip</md-button>
         </div>
     </div>
@@ -177,6 +225,9 @@
         mdmgdice=0;
         mdmgdicemult=0;
         mdmgmod=0;
+        rdmgdice=0;
+        rdmdgdicemult=0;
+        rdmgmod=0;
         recdice=0;
         recdicemult=0;
         recmod=0;
@@ -212,7 +263,7 @@
             rangedtype = this.mapRangedString(this.rangedWeapon);
             tier= this.mapTierString(this.rTier);
             var ranged= new Models.Spell.items(TYPES.ItemType.RANGED, rangedtype, tier,true);
-            
+
             tier= this.mapTierString(this.sTier);
             var shield = new Models.Spell.items(TYPES.ItemType.SHIELD, TYPES.ItemSubType.NONE, tier, this.shield);
             
@@ -282,6 +333,9 @@
             this.recdicemult=this.myChar.recRoll[0];
             this.recdice=this.myChar.recRoll[1];
             this.recmod=this.myChar.recRoll[2];
+            this.rdmgdice=this.myChar.rangedDmg[1];
+            this.rdmdgdicemult=this.myChar.rangedDmg[0];
+            this.rdmgmod=this.myChar.rangedDmg[2];
         }
         mapTierString(tier:string):TYPES.Tiers{
             switch(tier){

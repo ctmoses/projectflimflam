@@ -180,7 +180,7 @@ export default class Character implements ICharacter {
                     case ItemSubType.BOWLIGHT:
                         this.class.setrangedweapon(RangedWeapons.BOWLIGHT);
                         break;
-                    case ItemSubType.BOWLIGHT:
+                    case ItemSubType.BOWHEAVY:
                         this.class.setrangedweapon(RangedWeapons.BOWHEAVY);
                         break;
                 }
@@ -391,6 +391,7 @@ export default class Character implements ICharacter {
         this.calcRecoveryRoll();
         this.calcRangedMiss();
         this.calcMeleeDamage();
+        this.calcRangedDamage();
     }
     magicItemMod(type: ItemType):number{
         var mod = 0;

@@ -136,7 +136,7 @@ export default abstract class charclass implements IClass {
             dice = 0;
             break;
         default:
-            dice = 8;
+            dice = -99;
             break;
         }
         const mult = this.calcDamageBonusMult(level);
@@ -163,7 +163,7 @@ export default abstract class charclass implements IClass {
             dice = 0;
             break;
         default:
-            dice = 6;
+            dice = -99;
             break;
         }
         const mult = this.calcDamageBonusMult(level);
