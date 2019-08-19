@@ -5,20 +5,16 @@ import { spell } from '../spell';
 export default class fighter extends charclass {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
-    armor: ArmorTypes;
-    shield: boolean;
-    weapon: MeleeWeapons;
-    ranged: RangedWeapons;
+    armor: ArmorTypes=ArmorTypes.NONE;
+    shield: boolean=false;;
+    weapon: MeleeWeapons=MeleeWeapons.NONE;
+    ranged: RangedWeapons=RangedWeapons.NONE;
 
 
-    constructor(armor: ArmorTypes, shield: boolean, weapon: MeleeWeapons, ranged: RangedWeapons){
-        super(armor,shield,weapon,ranged);
+    constructor(){
+        super();
         this.bonusstat1 = Attributes.STRENGTH;
         this.bonusstat2 = Attributes.CONSTITUTION;
-        this.armor = armor;
-        this.weapon = weapon;
-        this.ranged = ranged;
-        this.shield = shield;
     }
     calctalents(level:number, feats?: IFeats[], talents?: ITalents[]):number[]{
         if(level<6)
@@ -82,7 +78,7 @@ export default class fighter extends charclass {
                 armor = 15;
                 break;
             default:
-                armor=15;
+                armor=-99;
                 break;
         }
         return super.calcac(con,dex,wis,level)+armor;

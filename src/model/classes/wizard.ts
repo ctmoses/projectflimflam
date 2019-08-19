@@ -7,20 +7,17 @@ import charclass from './charclass';
 export default class wizard extends charclass {
     bonusstat1: Attributes;
     bonusstat2: Attributes;
-    armor: ArmorTypes;
-    shield: boolean;
-    weapon: MeleeWeapons;
-    ranged: RangedWeapons;
+    armor: ArmorTypes=ArmorTypes.NONE;
+    shield: boolean=false;;
+    weapon: MeleeWeapons=MeleeWeapons.NONE;
+    ranged: RangedWeapons=RangedWeapons.NONE;
 
 
-    constructor(armor: ArmorTypes, shield: boolean, weapon: MeleeWeapons, ranged: RangedWeapons) {
-        super(armor,shield,weapon,ranged);
+    constructor() {
+        super();
         this.bonusstat1 = Attributes.INTELLIGENCE;
         this.bonusstat2 = Attributes.WISDOM;
-        this.armor = armor;
-        this.weapon = weapon;
-        this.ranged = ranged;
-        this.shield = shield;
+
     }
     calctalents(level:number):number[] {
         return [3, 0, 0];
@@ -80,7 +77,7 @@ export default class wizard extends charclass {
             armor = 11;
             break;
         default:
-            armor = 10;
+            armor = -99;
             break;
         }
         return super.calcac(con,dex,wis,level) + armor;

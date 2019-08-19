@@ -4,7 +4,7 @@ import * as firebase from 'firebase/app';
 
 import Main from './views/Main.vue';
 import Login from './views/Login.vue';
-import CharacterCreation from './components/CharacterCreation.vue';
+import CharacterCreation from './views/CharacterCreation.vue';
 
 import store from '@/store';
 

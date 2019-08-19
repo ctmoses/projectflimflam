@@ -1,5 +1,5 @@
 import {
-    AbilityRefresh, AbilityType, ISpells, ITalents, Tiers, IFeats, IMagicItem, ItemType, IIcon, IBackground,
+    AbilityRefresh, AbilityType, ISpells, ITalents, Tiers, IFeats, ItemType, IIcon, IBackground, IItem, ItemSubType,
 } from '@/types';
 
 
@@ -60,18 +60,20 @@ export class feat implements IFeats {
         this.name = name;
     }
 }
-export class magicitems implements IMagicItem {
+export class items implements IItem {
     type:ItemType;
     tier: Tiers;
     equipped: boolean;
     name: string;
     power: string;
-    constructor(itemType:ItemType, tier: Tiers, equipped: boolean, name: string, power: string) {
+    subtype:ItemSubType;
+    constructor(itemType:ItemType, subType: ItemSubType, tier: Tiers, equipped: boolean, name: string="", power: string="") {
         this.type = itemType;
         this.tier = tier;
         this.equipped = equipped;
         this.name=name;
         this.power=power;
+        this.subtype=subType;
     }
     equip() {
         this.equipped = true;
